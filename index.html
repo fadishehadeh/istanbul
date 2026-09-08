@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>İstanbul · 11–18 Sep</title>
+<meta name="description" content="Personal Istanbul trip companion — itinerary, restaurants, malls, bazaars and Bosphorus guide.">
+
+<link rel="manifest" href="manifest.webmanifest">
+<meta name="theme-color" content="#f4f8fa" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#081c26" media="(prefers-color-scheme: dark)">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="İstanbul">
+<link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png">
+<link rel="icon" href="assets/icons/icon-192.png" sizes="192x192">
+<link rel="stylesheet" href="assets/css/app.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar-in">
+    <div class="brand">
+      <span class="brand-mark" aria-hidden="true"></span>
+      <span>
+        <b>İstanbul</b>
+        <small id="tripRange">11 – 18 September</small>
+      </span>
+    </div>
+    <div class="topbar-actions">
+      <button id="installBtn" class="ghost-btn" hidden>Install</button>
+      <button id="themeBtn" class="icon-btn" aria-label="Toggle theme">◐</button>
+    </div>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- ============ TODAY ============ -->
+  <section class="view" id="view-today">
+    <div class="hero" id="hero">
+      <div class="hero-body">
+        <p class="hero-kicker" id="heroKicker">Your trip</p>
+        <h1 class="hero-title" id="heroTitle">İstanbul</h1>
+        <p class="hero-sub" id="heroSub"></p>
+      </div>
+      <div class="hero-count" id="heroCount"></div>
+    </div>
+
+    <div class="quick-grid">
+      <a class="quick" id="qHotel" href="#" target="_blank" rel="noopener">
+        <span class="quick-ic">🏨</span><span class="quick-t">Hotel</span><span class="quick-s">Open in Maps</span>
+      </a>
+      <button class="quick" data-goto="plan"><span class="quick-ic">🗓️</span><span class="quick-t">Full plan</span><span class="quick-s">8 days</span></button>
+      <button class="quick" data-goto="places"><span class="quick-ic">📍</span><span class="quick-t">Places</span><span class="quick-s" id="placeCount">—</span></button>
+      <button class="quick" data-goto="guide"><span class="quick-ic">🧭</span><span class="quick-t">Survival</span><span class="quick-s">Transport &amp; tips</span></button>
+    </div>
+
+    <div id="todayBlock"></div>
+
+    <section class="block">
+      <h2 class="block-h">From your front door</h2>
+      <ul class="notes" id="hotelNotes"></ul>
+    </section>
+  </section>
+
+  <!-- ============ PLAN ============ -->
+  <section class="view" id="view-plan" hidden>
+    <div class="view-head">
+      <h1>The plan</h1>
+      <p>Eight days, routed around the T1 tram at your hotel door. Tap any day to open it; tick items as you go.</p>
+    </div>
+    <div id="dayList" class="daylist"></div>
+    <div class="reset-row"><button class="ghost-btn danger" id="resetTicks">Clear all ticks</button></div>
+  </section>
+
+  <!-- ============ PLACES ============ -->
+  <section class="view" id="view-places" hidden>
+    <div class="view-head">
+      <h1>Places</h1>
+      <p>Everything worth your time, sorted by what it actually is.</p>
+    </div>
+
+    <div class="search-wrap">
+      <input type="search" id="search" placeholder="Search places, areas, dishes…" autocomplete="off">
+    </div>
+
+    <div class="chips" id="catChips"></div>
+
+    <div class="filter-row">
+      <label class="mini-toggle"><input type="checkbox" id="onlySaved"> Saved only</label>
+      <label class="mini-toggle"><input type="checkbox" id="hideVisited"> Hide visited</label>
+      <span class="result-count" id="resultCount"></span>
+    </div>
+
+    <div id="placeList" class="placelist"></div>
+  </section>
+
+  <!-- ============ SAVED ============ -->
+  <section class="view" id="view-saved" hidden>
+    <div class="view-head">
+      <h1>Your list</h1>
+      <p>Saved spots, what you've ticked off, your own additions and notes.</p>
+    </div>
+
+    <section class="block">
+      <h2 class="block-h">Add your own place</h2>
+      <form id="addForm" class="addform">
+        <input id="addName" placeholder="Name" required>
+        <input id="addArea" placeholder="Area / neighbourhood">
+        <select id="addCat"></select>
+        <textarea id="addNote" placeholder="Why you want to go, who recommended it, anything else…" rows="2"></textarea>
+        <button type="submit" class="primary-btn">Add to my list</button>
+      </form>
+    </section>
+
+    <section class="block">
+      <h2 class="block-h">Saved <span class="count-pill" id="savedCount">0</span></h2>
+      <div id="savedList" class="placelist"></div>
+    </section>
+
+    <section class="block">
+      <h2 class="block-h">Been there <span class="count-pill" id="visitedCount">0</span></h2>
+      <div id="visitedList" class="placelist"></div>
+    </section>
+
+    <section class="block">
+      <h2 class="block-h">Trip notes</h2>
+      <textarea id="tripNotes" class="notepad" rows="6" placeholder="Confirmation numbers, taxi receipts, who told you about that place…"></textarea>
+      <p class="saved-hint" id="notesHint">Saved on this device</p>
+    </section>
+  </section>
+
+  <!-- ============ GUIDE ============ -->
+  <section class="view" id="view-guide" hidden>
+    <div class="view-head">
+      <h1>Survival guide</h1>
+      <p>The practical things, offline, so they work when your data doesn't.</p>
+    </div>
+
+    <div class="seg" id="guideSeg">
+      <button class="seg-btn is-on" data-pane="essentials">Essentials</button>
+      <button class="seg-btn" data-pane="phrases">Turkish</button>
+      <button class="seg-btn" data-pane="packing">Packing</button>
+      <button class="seg-btn" data-pane="budget">Spend</button>
+    </div>
+
+    <div id="pane-essentials" class="pane"></div>
+
+    <div id="pane-phrases" class="pane" hidden></div>
+
+    <div id="pane-packing" class="pane" hidden>
+      <div id="packList" class="checklist"></div>
+      <div class="reset-row"><button class="ghost-btn danger" id="resetPack">Reset packing list</button></div>
+    </div>
+
+    <div id="pane-budget" class="pane" hidden>
+      <div class="budget-head">
+        <div class="budget-total"><span id="spendTotal">0</span> <small>TL logged</small></div>
+        <p class="muted">Rough running tally. Stored only on this phone.</p>
+      </div>
+      <form id="spendForm" class="addform row">
+        <input id="spendWhat" placeholder="What for?" required>
+        <input id="spendAmt" type="number" inputmode="decimal" step="1" min="0" placeholder="TL" required>
+        <button type="submit" class="primary-btn">Log</button>
+      </form>
+      <div id="spendList" class="spendlist"></div>
+    </div>
+  </section>
+
+</main>
+
+<nav class="tabbar" id="tabbar">
+  <button class="tab is-on" data-view="today"><span>🏛️</span>Today</button>
+  <button class="tab" data-view="plan"><span>🗓️</span>Plan</button>
+  <button class="tab" data-view="places"><span>📍</span>Places</button>
+  <button class="tab" data-view="saved"><span>⭐</span>List</button>
+  <button class="tab" data-view="guide"><span>🧭</span>Guide</button>
+</nav>
+
+<div id="toast" class="toast" hidden></div>
+
+<script src="assets/js/data.js"></script>
+<script src="assets/js/itinerary.js"></script>
+<script src="assets/js/app.js"></script>
+</body>
+</html>
