@@ -6,7 +6,7 @@
   const KEY = "ist2026";
   const defaults = {
     theme: "light", saved: [], visited: [], ticks: {}, packing: [],
-    spend: [], notes: "", custom: [], cat: "all", pre: []
+    spend: [], notes: "", custom: [], cat: "all", pre: [], fadiCat: "all"
   };
   let S;
   try { S = Object.assign({}, defaults, JSON.parse(localStorage.getItem(KEY) || "{}")); }
@@ -641,44 +641,64 @@
     });
   }
 
-  /* ================= FADI — the personal tab ================= */
+  /* ================= FADI — the personal tab =================
+     Collapsed rows under category chips: tap a row to open its details,
+     tap again to close. Matches how the Places tab already behaves. */
   function renderFadi() {
     $("#fadiTitle").textContent = FADI.title;
     $("#fadiBlurb").textContent = FADI.blurb;
 
     const sections = FADI.sections || [];
-    const count = sections.reduce((a, s) => a + s.items.length, 0);
+    const total = sections.reduce((a, s) => a + s.items.length, 0);
 
-    if (!count) {
+    if (!total) {
       $("#fadiBody").innerHTML =
         '<div class="empty fadi-empty">' +
           "<b>Nothing here yet</b>" +
-          "<span>Send me places, links, notes, screenshots — anything — and it gets sorted into sections here. " +
-          "Each one can carry a map link, a note and a tag, and lives alongside the rest of the app offline.</span>" +
+          "<span>Send me places, links, notes or screenshots and they get sorted into categories here.</span>" +
         "</div>";
       return;
     }
 
     const done = S.fadi || (S.fadi = []);
-    $("#fadiBody").innerHTML = sections.map((sec, si) =>
-      '<section class="block">' +
-        '<h2 class="block-h">' + (sec.icon ? sec.icon + " " : "") + esc(sec.label) +
-          '<span class="count-pill">' + sec.items.length + "</span></h2>" +
-        (sec.note ? '<p class="sec-note">' + esc(sec.note) + "</p>" : "") +
-        '<div class="placelist">' + sec.items.map((it, ii) => {
-          const id = (sec.id || si) + "-" + ii;
+    const cat = S.fadiCat || "all";
+    const shown = cat === "all" ? sections : sections.filter((s) => s.id === cat);
+    const doneIn = (sec) => sec.items.filter((it, i) => done.indexOf((sec.id) + "-" + i) > -1).length;
+
+    /* category chips */
+    let html = '<div class="chips" id="fadiChips">' +
+      '<button class="chip' + (cat === "all" ? " is-on" : "") + '" data-cat="all">All ' + total + "</button>" +
+      sections.map((sec) =>
+        '<button class="chip' + (cat === sec.id ? " is-on" : "") + '" data-cat="' + esc(sec.id) + '">' +
+          sec.icon + " " + esc(sec.label) + " " + sec.items.length + "</button>").join("") +
+    "</div>";
+
+    /* rows */
+    html += shown.map((sec) => {
+      const d = doneIn(sec);
+      return '<section class="block">' +
+        '<h2 class="block-h">' + sec.icon + " " + esc(sec.label) +
+          '<span class="count-pill">' + (d ? d + " / " + sec.items.length : sec.items.length) + "</span></h2>" +
+        (cat !== "all" && sec.note ? '<p class="sec-note">' + esc(sec.note) + "</p>" : "") +
+        '<div class="frows">' + sec.items.map((it, ii) => {
+          const id = sec.id + "-" + ii;
           const on = done.indexOf(id) > -1;
-          return '<article class="fitem' + (on ? " done" : "") + '">' +
-            '<button class="fitem-tick" data-id="' + esc(id) + '" aria-label="Mark done">' + (on ? "✓" : "") + "</button>" +
-            '<div class="fitem-main">' +
-              '<div class="fitem-top"><b>' + esc(it.t) + "</b>" +
-                (it.tag ? '<span class="fitem-tag">' + esc(it.tag) + "</span>" : "") + "</div>" +
-              (it.area || it.day ? '<div class="fitem-meta">' +
-                [it.area, it.day].filter(Boolean).map(esc).join(" · ") + "</div>" : "") +
+          return '<article class="frow' + (on ? " done" : "") + '" data-id="' + esc(id) + '">' +
+            '<button class="frow-head">' +
+              '<span class="frow-tick" data-tick="' + esc(id) + '" role="checkbox" aria-checked="' + on + '">' + (on ? "✓" : "") + "</span>" +
+              '<span class="frow-txt">' +
+                '<span class="frow-name">' + esc(it.t) + "</span>" +
+                '<span class="frow-sub">' + esc(it.area || "") + "</span>" +
+              "</span>" +
+              (it.tag ? '<span class="fitem-tag">' + esc(it.tag) + "</span>" : "") +
+              '<span class="frow-caret">▾</span>' +
+            "</button>" +
+            '<div class="frow-body">' +
               (it.d ? '<p class="fitem-d">' + esc(it.d) + "</p>" : "") +
               ((it.hours || it.entry || it.best) ? '<dl class="kv fitem-kv">' +
                 (it.hours ? "<dt>Hours</dt><dd>" + esc(it.hours) + "</dd>" : "") +
                 (it.entry ? "<dt>Entry</dt><dd>" + esc(it.entry) + "</dd>" : "") +
+                (it.book  ? "<dt>Book</dt><dd>"  + esc(it.book)  + "</dd>" : "") +
                 (it.best  ? "<dt>Best</dt><dd>"  + esc(it.best)  + "</dd>" : "") +
               "</dl>" : "") +
               ((it.map || it.url) ? '<div class="place-actions">' +
@@ -688,12 +708,26 @@
             "</div>" +
           "</article>";
         }).join("") + "</div>" +
-      "</section>").join("");
+      "</section>";
+    }).join("");
 
-    $$("#fadiBody .fitem-tick").forEach((b) => b.addEventListener("click", function () {
-      const id = this.getAttribute("data-id"), at = S.fadi.indexOf(id);
-      if (at > -1) S.fadi.splice(at, 1); else S.fadi.push(id);
-      save(); renderFadi();
+    $("#fadiBody").innerHTML = html;
+
+    $$("#fadiChips .chip").forEach((b) => b.addEventListener("click", function () {
+      S.fadiCat = this.getAttribute("data-cat"); save(); renderFadi();
+      $("#view-fadi").scrollIntoView({ block: "start" });
+    }));
+
+    $$("#fadiBody .frow-head").forEach((h) => h.addEventListener("click", function (e) {
+      // the tick is inside the header, so let it act on its own
+      const t = e.target.closest("[data-tick]");
+      if (t) {
+        const id = t.getAttribute("data-tick"), at = S.fadi.indexOf(id);
+        if (at > -1) S.fadi.splice(at, 1); else S.fadi.push(id);
+        save(); renderFadi();
+        return;
+      }
+      this.parentNode.classList.toggle("is-open");
     }));
   }
 

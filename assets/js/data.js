@@ -1015,7 +1015,8 @@ const TRANSPORT = {
      area:  neighbourhood, if it is a physical place
      map:   search string — adds an "Open in Maps" button
      url:   any external link — adds an "Open link" button
-     tag:   short label shown as a pill, e.g. "must do", "Darine's pick"
+     tag:   short label shown as a pill, e.g. "must do", "worth booking"
+     book:  how you buy/reserve, and what payment they take
      day:   which trip day it belongs to, if any
    }
 --------------------------------------------------------------------------- */
@@ -1180,6 +1181,28 @@ const FADI = {
       map: "Eskibağ Teras Büyükada" }
   ]},
 
+  /* ===================== NIGHTS & EXPERIENCES ===================== */
+  { id: "experiences", label: "Experiences", icon: "🎆",
+    note: "Ticketed things rather than places to wander into, so booking matters. Both of these sell online and neither takes cash at the door.",
+    items: [
+
+    { t: "Astra Lumina", area: "Turkcell Platinum Park, Ayazağa, Sarıyer", tag: "After dark",
+      hours: "Evening sessions only — it is a night walk, so the first slot is after sunset, around 20:00 in September. Timed entry.",
+      entry: "Ticketed",
+      book: "Book a timed session online before you go — Biletix, Biletinial or Bubilet all sell it, and slots go. Card payment. Confirmed still running through 2026.",
+      d: "A 1.1 km walk through forest turned into light, sound and projection — the first European run of the Moment Factory night-walk series. Takes about an hour at a slow pace.",
+      best: "A different kind of evening, and it needs no Turkish. Ayazağa is up by Maslak: M2 metro to İTÜ-Ayazağa, or twenty-five minutes by car. Wear shoes for a woodland path in the dark.",
+      map: "Astra Lumina Turkcell Platinum Park Ayazağa Sarıyer" },
+
+    { t: "DDM — Dijital Deneyim Merkezi", area: "Sütlüce, Golden Horn", tag: "Closed Mon",
+      hours: "10:00 – 18:00, closed Mondays",
+      entry: "Ticketed · free for under-6s, over-65s and disabled visitors with a companion",
+      book: "Online at dijitaldeneyimmerkezi.com, or from the kiosk at the entrance. NO CASH — credit card, debit card or İstanbulkart only. Worth knowing before you turn up with lira.",
+      d: "The city council's 2,000 m² digital museum: rooms of immersive projection and interactive installations, with a Japan-themed section behind that torii gate. Very different from anything else in the city.",
+      best: "Sütlüce is on the Golden Horn, a few minutes from Tersane İstanbul — which is already on your Thursday. Do the two together. Not Monday.",
+      map: "Dijital Deneyim Merkezi Sütlüce İstanbul" }
+  ]},
+
   /* ===================== THE ASIAN SIDE ===================== */
   { id: "asian", label: "The Asian side", icon: "🌉",
     note: "Neighbourhoods rather than single addresses — these are places to walk, not tick off. Almost all of them are within twenty minutes of the Üsküdar or Kadıköy ferry, so this whole section works without the car. Nakkaştepe is up in Gardens; Çamlıca and the Maiden's Tower are also in the main Places tab.",
@@ -1212,6 +1235,7 @@ const FADI = {
     { t: "Beylerbeyi Palace", area: "Beylerbeyi, Üsküdar · Asian side", tag: "Closed Mon",
       hours: "About 09:00–18:00, closed Mondays — check before you go",
       entry: "Ticketed",
+      book: "At the gate or online via Milli Saraylar. Same ticket family as Dolmabahçe — the Müzekart is not valid.",
       d: "The sultans' summer palace, on the water directly under the 15 Temmuz bridge. Smaller than Dolmabahçe, far less crowded, and with the same marble-and-crystal excess. The garden gate framing the bridge is the shot everyone takes.",
       best: "Not Monday — that is your Asian-side day in the current plan, so this needs moving or swapping. Beylerbeyi Parkı next door is open regardless.",
       map: "Beylerbeyi Sarayı Üsküdar" },
@@ -1221,6 +1245,14 @@ const FADI = {
       d: "Kadıköy's seaside quarter — the red nostalgic tram, bookshops, record shops, a long grassy shore park and the 1917 pier out over the Marmara. Young, unhurried, and the least touristic place on this list.",
       best: "Already in your Monday, with tea at the Moda pier before sunset.",
       map: "Moda Kadıköy" },
+
+    { t: "Küçüksu Kasrı", area: "Küçüksu, Beykoz · Asian side", tag: "Closed Mon",
+      hours: "Roughly 09:00–17:00, closed Mondays like the other national palaces — confirm before you go",
+      entry: "Ticketed · run by Milli Saraylar",
+      book: "Buy at the gate, or online through millisaraylar.gov.tr. Card is fine; the Müzekart does not cover the national palaces.",
+      d: "A small 1857 imperial pavilion on the water between Anadolu Hisarı and Kandilli — a summer lodge rather than a palace, so it is one ornate floor you can see properly in half an hour. Rococo ceilings, a marble jetty on the Bosphorus, and almost nobody there.",
+      best: "The right size when you do not want another Dolmabahçe. It sits between Pembe Yalı and Kandilli Parkı, both already on your list, so all three are one stop. Not Monday.",
+      map: "Küçüksu Kasrı Beykoz" },
 
     { t: "Beykoz Siloları", area: "Çubuklu, Beykoz · Asian side", tag: "Sunset",
       hours: "Museum inside the silos closes at 18:00 — but the roof terrace and café stay open until 21:00. That gap is the point: go for the roof, not the museum.",
@@ -1244,6 +1276,7 @@ const FADI = {
     { t: "Kız Kulesi (Maiden's Tower)", area: "Salacak, Üsküdar · Asian side", tag: "Ticketed",
       hours: "About 09:00–19:00 for the tower · shuttle boat from Salacak or Kabataş",
       entry: "Ticketed for the tower · free to look at",
+      book: "Timed tickets online at kizkulesi.gov.tr, including the shuttle boat. Walk-ups queue for whatever slot is left.",
       d: "The tower on its own islet, restored and reopened with a café at the top. Photographed from every angle in the city.",
       best: "Honestly — the view of it from the Üsküdar shore at sunset beats the view from it. Do the promenade; go out to the tower only if you want the café.",
       map: "Kız Kulesi Salacak Üsküdar" }
