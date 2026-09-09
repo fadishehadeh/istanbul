@@ -900,6 +900,95 @@ const ESSENTIALS = [
     body:"Usually 24–28°C in the day and 17–19°C at night, mostly dry with the odd short shower. Pack a light layer for evening ferries and one pair of shoes you can walk 15km in." }
 ];
 
+/* ---------------------------------------------------------------------------
+   TRANSPORT — stops, lines and frequencies around the hotel in Fındıklı.
+
+   Deliberately frequencies and first/last services rather than invented
+   minute-by-minute timetables: İstanbul switches to a winter schedule around
+   late September, mid-trip, and a wrong departure time is worse than none.
+   The one real timetable here is the Princes' Islands line, which is fixed
+   and publicly listed. Live links at the bottom for the rest.
+--------------------------------------------------------------------------- */
+const TRANSPORT = {
+
+  stops: [
+    { name: "Fındıklı — T1 tram", walk: "Outside the front door", icon: "🚊",
+      note: "Your stop. Westbound platform for the whole old city; eastbound is one stop to Kabataş, the end of the line.",
+      map: "Fındıklı Tramvay Durağı" },
+    { name: "Fındıklı — bus, Meclisi Mebusan Cad.", walk: "Outside the front door", icon: "🚌",
+      note: "Northbound for Kabataş, Dolmabahçe and Beşiktaş; southbound for Tophane and Karaköy.",
+      map: "Fındıklı otobüs durağı Meclisi Mebusan Caddesi" },
+    { name: "Kabataş — tram, funicular, ferry, bus", walk: "7 min east along the shore", icon: "⛴️",
+      note: "The hub you will use most. T1 terminus, F1 funicular up to Taksim, ferries to Kadıköy, Üsküdar and the Princes' Islands, and the Bosphorus shore buses.",
+      map: "Kabataş İskelesi" },
+    { name: "Tophane — T1 tram", walk: "7 min west", icon: "🚊",
+      note: "Marginally closer than Fındıklı for İstanbul Modern, Galataport and the Kılıç Ali Paşa hammam.",
+      map: "Tophane Tramvay Durağı" },
+    { name: "Karaköy — tram and ferry pier", walk: "12 min west", icon: "⛴️",
+      note: "Ferries to Kadıköy and Üsküdar, and the short Bosphorus boats. Walk on over the Galata Bridge for Eminönü.",
+      map: "Karaköy İskelesi" },
+    { name: "Beşiktaş — ferry pier and bus hub", walk: "15 min north, or 3 stops on any northbound bus", icon: "⛴️",
+      note: "Best pier for Üsküdar and Kadıköy when Kabataş is busy, and the departure point for many shore buses.",
+      map: "Beşiktaş İskelesi" }
+  ],
+
+  rail: [
+    { line: "T1", colour: "#0a7", name: "Kabataş ↔ Bağcılar tram",
+      hours: "06:00 – 00:00", freq: "Every 2–4 min at peak, about every 6 min otherwise",
+      note: "The single most useful line for you — it stops outside the hotel and needs no changes.",
+      stops: "Kabataş · Fındıklı · Tophane · Karaköy · Eminönü · Sirkeci · Gülhane · Sultanahmet · Çemberlitaş · Beyazıt-Kapalıçarşı · Laleli-Üniversite · Aksaray · … · Zeytinburnu · Bağcılar" },
+    { line: "F1", colour: "#c60", name: "Kabataş ↔ Taksim funicular",
+      hours: "06:00 – 00:00", freq: "Every 5–10 min",
+      note: "A 2.5-minute ride that saves the twelve-minute uphill walk to Taksim. Tap in with the same İstanbulkart.",
+      stops: "Kabataş · Taksim" },
+    { line: "M2", colour: "#093", name: "Yenikapı ↔ Hacıosman metro",
+      hours: "06:00 – 00:00", freq: "Every 3–8 min",
+      note: "Pick it up at Taksim after the funicular. This is how you reach the malls and the business districts.",
+      stops: "Taksim · Osmanbey (Nişantaşı) · Şişli-Mecidiyeköy (Cevahir) · Gayrettepe (Zorlu) · Levent (Kanyon, Metrocity) · 4. Levent (Sapphire) · Seyrantepe (Vadistanbul) · İTÜ-Ayazağa (UNIQ) · Hacıosman" }
+  ],
+
+  buses: [
+    { group: "Stopping outside the hotel", lines: "22 · 22B · 26 · 26A · 26B · 27E · 27SE · 28 · 28T · 29C · 40 · 41E · 58N · DT1",
+      note: "Meclisi Mebusan Caddesi is a busy shore road, so something comes along every couple of minutes. Check the destination on the front — the same street carries very different routes." },
+    { group: "North, up the Bosphorus shore", lines: "22 · 25E · 40 · 40T",
+      note: "From Kabataş along the water to Beşiktaş, Ortaköy, Kuruçeşme, Bebek, Emirgan, İstinye and Sarıyer. This is your Sunday: Emirgan breakfast, Bebek, Rumeli Hisarı." },
+    { group: "Airport",  lines: "Havaist HVIST-4 / IST-1",
+      note: "Havaist runs Taksim ↔ İstanbul Airport, roughly every 30 minutes, about 90 minutes end to end. With luggage a taxi from the hotel is worth the extra." }
+  ],
+
+  ferries: [
+    { route: "Kabataş → Kadıköy", pier: "Kabataş, 7 min walk", time: "About 20 min",
+      freq: "Roughly every 20–30 min", hours: "First around 07:00, last around 22:00–23:00",
+      note: "Your everyday crossing to the Asian side. Sit outside at the back." },
+    { route: "Kabataş / Beşiktaş → Üsküdar", pier: "Kabataş or Beşiktaş", time: "About 15 min",
+      freq: "Frequent through the day", hours: "First around 07:00, last around 22:00",
+      note: "Passes the Maiden's Tower and Dolmabahçe. The best boat for sunset photographs back at the old city." },
+    { route: "Karaköy → Kadıköy / Üsküdar", pier: "Karaköy, 12 min walk", time: "20–25 min",
+      freq: "Every 20–30 min", hours: "Roughly 07:00 – 21:00",
+      note: "A useful alternative if you are already down at Galataport." },
+    { route: "Eminönü → Kadıköy / Üsküdar", pier: "Eminönü, T1 tram", time: "20 min",
+      freq: "Very frequent, the busiest crossing in the city", hours: "Roughly 06:30 – 23:00",
+      note: "Combine with the Spice Bazaar or the Galata Bridge on the same trip." },
+    { route: "Eminönü → Full Bosphorus tour", pier: "Eminönü, boat pier no. 3", time: "About 6 hours return",
+      freq: "Once daily", hours: "Departs about 10:35, back around 17:00",
+      note: "All the way to Anadolu Kavağı at the Black Sea mouth, with a stop for lunch. Around 53–59 ₺ with an İstanbulkart." }
+  ],
+
+  islands: {
+    title: "Kabataş → Princes' Islands",
+    note: "Calls at Kınalıada, Burgazada, Heybeliada and Büyükada in that order. Büyükada is about 90 minutes. Roughly 30 ₺ with an İstanbulkart.",
+    departures: ["06:50", "08:20", "09:30", "10:40", "12:15", "13:45", "15:15", "17:00", "18:30", "20:00", "21:30"],
+    warn: "Published times — confirm at the pier on the day, and check the last boat back the moment you land."
+  },
+
+  links: [
+    { label: "Şehir Hatları — official ferry timetables", url: "https://sehirhatlari.istanbul/en/timetables" },
+    { label: "İETT — bus routes and live times",        url: "https://www.iett.istanbul/en" },
+    { label: "Moovit — live İstanbul transit",           url: "https://moovitapp.com/istanbul-1563/poi/en" },
+    { label: "Metro İstanbul — metro, tram, funicular",  url: "https://www.metro.istanbul/en" }
+  ]
+};
+
 const PACKING = [
   "Passport, plus a photo of it on your phone",
   "Flight and hotel confirmations saved offline",

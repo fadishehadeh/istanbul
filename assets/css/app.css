@@ -532,3 +532,38 @@ html[data-theme="dark"] .mini-btn.is-on { color: #06222e; }
 .prayer b { font-variant-numeric: tabular-nums; font-size: 15px; }
 .prayer.minor { opacity: .6; font-size: 12.5px; }
 .prayer.is-next { border-color: var(--brand); background: color-mix(in srgb, var(--brand) 8%, var(--bg-soft)); }
+
+/* transport */
+.seg { grid-auto-flow: column; overflow-x: auto; scrollbar-width: none; }
+.seg::-webkit-scrollbar { display: none; }
+.seg-btn { white-space: nowrap; padding-left: 12px; padding-right: 12px; }
+
+.stop, .line { padding: 12px 0; border-top: 1px solid var(--line-2); }
+.stop:first-of-type, .line:first-of-type { border-top: 0; padding-top: 10px; }
+.stop-top { display: flex; justify-content: space-between; align-items: baseline; gap: 10px; }
+.stop-top b, .line b { font-size: 14px; font-weight: 650; }
+.stop-walk { font-size: 12px; color: var(--brand); font-weight: 620; margin-top: 2px; }
+.stop-note { font-size: 12.8px; color: var(--ink-2); margin-top: 5px; }
+.line-top { display: flex; align-items: center; gap: 9px; }
+.line-badge {
+  color: #fff; font-size: 11px; font-weight: 700; letter-spacing: .04em;
+  border-radius: 5px; padding: 2px 7px; flex: none;
+}
+.line-meta { font-size: 12px; color: var(--ink-3); margin-top: 4px; }
+.line-stops {
+  font-size: 11.8px; color: var(--ink-2); margin-top: 7px; padding: 8px 10px;
+  background: var(--bg-soft); border: 1px solid var(--line); border-radius: 9px; line-height: 1.6;
+}
+.bus-lines {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 12.5px; color: var(--ink); margin-top: 5px; line-height: 1.7;
+}
+.departures { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+.dep {
+  font-size: 13px; font-weight: 650; font-variant-numeric: tabular-nums;
+  padding: 6px 10px; border-radius: 9px; border: 1px solid var(--line);
+  background: var(--bg-soft); color: var(--ink);
+}
+.dep.gone { opacity: .38; text-decoration: line-through; }
+.dep.next { background: var(--brand); color: #fff; border-color: transparent; }
+html[data-theme="dark"] .dep.next { color: #06222e; }

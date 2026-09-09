@@ -570,6 +570,107 @@
     });
   }
 
+  /* ================= TRANSPORT ================= */
+  function transitUrl(dest) {
+    return "https://www.google.com/maps/dir/?api=1&travelmode=transit" +
+      "&origin=" + encodeURIComponent(TRIP.hotel.address) +
+      "&destination=" + encodeURIComponent(dest + ", İstanbul");
+  }
+
+  function renderTransport() {
+    const T = TRANSPORT;
+
+    $("#pane-transport").innerHTML = '<div class="info">' +
+
+      /* journey planner */
+      '<div class="info-card"><h3><span>🧭</span>Get me there from the hotel</h3>' +
+        '<p class="muted">Opens live public-transport directions from Meclisi Mebusan Cad. 61 — needs a signal.</p>' +
+        '<form id="tripForm" class="addform row" style="margin-top:12px">' +
+          '<input id="tripDest" placeholder="Where to? e.g. İstinye Park" required>' +
+          '<button type="submit" class="primary-btn">Route</button>' +
+        "</form>" +
+      "</div>" +
+
+      /* stops */
+      '<div class="info-card"><h3><span>📍</span>Your stops</h3>' +
+        T.stops.map((s) =>
+          '<div class="stop">' +
+            '<div class="stop-top"><b>' + esc(s.icon) + " " + esc(s.name) + "</b>" +
+              '<a class="inline-link" target="_blank" rel="noopener" href="' + mapUrl(s.map) + '">Map</a></div>' +
+            '<div class="stop-walk">' + esc(s.walk) + "</div>" +
+            '<div class="stop-note">' + esc(s.note) + "</div>" +
+          "</div>").join("") +
+      "</div>" +
+
+      /* rail */
+      '<div class="info-card"><h3><span>🚊</span>Tram, funicular, metro</h3>' +
+        T.rail.map((r) =>
+          '<div class="line">' +
+            '<div class="line-top"><span class="line-badge" style="background:' + r.colour + '">' + esc(r.line) + "</span>" +
+              "<b>" + esc(r.name) + "</b></div>" +
+            '<div class="line-meta">' + esc(r.hours) + " · " + esc(r.freq) + "</div>" +
+            '<div class="stop-note">' + esc(r.note) + "</div>" +
+            '<div class="line-stops">' + esc(r.stops) + "</div>" +
+          "</div>").join("") +
+      "</div>" +
+
+      /* buses */
+      '<div class="info-card"><h3><span>🚌</span>Buses</h3>' +
+        T.buses.map((b) =>
+          '<div class="line">' +
+            "<b>" + esc(b.group) + "</b>" +
+            '<div class="bus-lines">' + esc(b.lines) + "</div>" +
+            '<div class="stop-note">' + esc(b.note) + "</div>" +
+          "</div>").join("") +
+      "</div>" +
+
+      /* ferries */
+      '<div class="info-card"><h3><span>⛴️</span>Ferries</h3>' +
+        T.ferries.map((f) =>
+          '<div class="line">' +
+            "<b>" + esc(f.route) + "</b>" +
+            '<div class="line-meta">' + esc(f.time) + " · " + esc(f.freq) + "</div>" +
+            '<div class="line-meta">' + esc(f.hours) + " · from " + esc(f.pier) + "</div>" +
+            '<div class="stop-note">' + esc(f.note) + "</div>" +
+          "</div>").join("") +
+      "</div>" +
+
+      /* islands timetable — the one fixed schedule */
+      '<div class="info-card"><h3><span>🏝️</span>' + esc(T.islands.title) + "</h3>" +
+        '<p class="muted">' + esc(T.islands.note) + "</p>" +
+        '<div class="departures" id="departures">' +
+          T.islands.departures.map((d) => '<span class="dep" data-t="' + d + '">' + d + "</span>").join("") +
+        "</div>" +
+        '<p class="warn">' + esc(T.islands.warn) + "</p>" +
+      "</div>" +
+
+      /* live links */
+      '<div class="info-card"><h3><span>🔗</span>Live times</h3>' +
+        '<p class="muted">Frequencies above are reliable; exact minutes change with the season — İstanbul moves to its winter timetable in late September, during your trip. Check these on the day.</p>' +
+        '<div class="calls" style="margin-top:12px">' +
+          T.links.map((l) =>
+            '<a class="call" target="_blank" rel="noopener" href="' + esc(l.url) + '"><span>' + esc(l.label) + "</span><b>Open</b></a>").join("") +
+        "</div>" +
+      "</div>" +
+    "</div>";
+
+    $("#tripForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const d = $("#tripDest").value.trim();
+      if (d) window.open(transitUrl(d), "_blank", "noopener");
+    });
+
+    /* highlight the next island departure */
+    const now = new Date(), mins = now.getHours() * 60 + now.getMinutes();
+    let marked = false;
+    $$("#departures .dep").forEach((el) => {
+      const p = el.getAttribute("data-t").split(":");
+      const t = (+p[0]) * 60 + (+p[1]);
+      if (t < mins) el.classList.add("gone");
+      else if (!marked) { el.classList.add("next"); marked = true; }
+    });
+  }
+
   /* ================= TOOLS ================= */
   function renderTools() {
     const r = cachedRates();
@@ -830,6 +931,7 @@
   renderGuide();
   renderDocs();
   renderTools();
+  renderTransport();
 
   // Docs always leads the Guide tab — it either shows your documents or
   // offers to import them.
