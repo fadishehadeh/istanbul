@@ -2,3 +2,6 @@ Thumbs.db
 .DS_Store
 node_modules/
 *.log
+
+# private travel documents — booking refs, policy and passport numbers
+assets/js/documents.js

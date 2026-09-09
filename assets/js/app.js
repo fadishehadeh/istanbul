@@ -305,6 +305,95 @@
     wirePlaces(vs);
   }
 
+  /* ================= DOCUMENTS (optional, local-only file) ================= */
+  const hasDocs = typeof DOCS !== "undefined" && DOCS;
+
+  function kv(rows) {
+    return '<dl class="kv">' + rows.filter(Boolean).map((r) =>
+      "<dt>" + esc(r[0]) + "</dt><dd>" + (r[2] ? r[1] : esc(r[1])) + "</dd>").join("") + "</dl>";
+  }
+
+  function renderDocs() {
+    if (!hasDocs) return;
+    $("#docsSegBtn").hidden = false;
+
+    const d = DOCS;
+    let html = "";
+
+    /* flights */
+    if (d.flights) {
+      html += '<div class="info-card"><h3><span>✈️</span>Flights</h3>' +
+        d.flights.legs.map((l) =>
+          '<div class="leg">' +
+            '<div class="leg-top"><b>' + esc(l.no) + "</b><span>" + esc(l.date) + "</span></div>" +
+            '<div class="leg-row">' +
+              '<div class="leg-end"><b>' + esc(l.dep) + "</b><span>" + esc(l.from) + "</span></div>" +
+              '<div class="leg-mid"><i></i><span>' + esc(l.duration) + "</span></div>" +
+              '<div class="leg-end right"><b>' + esc(l.arr) + "</b><span>" + esc(l.to) + "</span></div>" +
+            "</div>" +
+            '<div class="leg-note">' + esc(l.aircraft) + "</div>" +
+          "</div>").join("") +
+        kv([
+          ["Booking reference", '<b class="mono">' + esc(d.flights.ref) + "</b>", true],
+          ["Airline", d.flights.airline],
+          ["Baggage", d.flights.baggage],
+          ["Fare rules", d.flights.fare]
+        ]) + "</div>";
+    }
+
+    /* hotel */
+    if (d.hotel) {
+      const h = d.hotel;
+      html += '<div class="info-card"><h3><span>🏨</span>' + esc(h.name) + "</h3>" +
+        kv([
+          ["Address", esc(h.address) + ' · <a class="inline-link" target="_blank" rel="noopener" href="' + mapUrl(h.map || h.name) + '">Maps</a>', true],
+          ["Confirmation", '<b class="mono">' + esc(h.ref) + "</b>", true],
+          ["Guest", h.guest],
+          ["Check in", h.checkIn],
+          ["Check out", h.checkOut + (h.nights ? " · " + h.nights + " nights" : "")],
+          h.booked ? ["Paid with", h.booked] : null
+        ]) +
+        (h.note ? '<p class="warn">' + esc(h.note) + "</p>" : "") + "</div>";
+    }
+
+    /* insurance */
+    if (d.insurance) {
+      const i = d.insurance;
+      html += '<div class="info-card"><h3><span>🛡️</span>Travel insurance</h3>' +
+        kv([
+          ["Insurer", i.provider],
+          ["Assistance", i.assistance],
+          ["Valid", i.valid],
+          ["Cover", i.cover]
+        ]) +
+        '<dl class="kv">' + i.policies.map((p) =>
+          "<dt>" + esc(p.name) + '</dt><dd><b class="mono">' + esc(p.no) + "</b></dd>").join("") + "</dl>" +
+        '<div class="calls">' + i.phones.map((p) =>
+          '<a class="call" href="tel:' + esc(p.tel) + '"><span>' + esc(p.label) + "</span><b>" + esc(p.value) + "</b></a>").join("") +
+          (i.email ? '<a class="call" href="mailto:' + esc(i.email) + '"><span>Claims email</span><b>' + esc(i.email) + "</b></a>" : "") +
+        "</div>" +
+        (i.critical ? '<p class="warn">' + esc(i.critical) + "</p>" : "") + "</div>";
+    }
+
+    /* travellers */
+    if (d.travellers && d.travellers.length) {
+      html += '<div class="info-card"><h3><span>🛂</span>Travellers</h3>' +
+        '<dl class="kv">' + d.travellers.map((t) =>
+          "<dt>" + esc(t.name) + '</dt><dd><b class="mono">' + esc(t.passport) + "</b></dd>").join("") + "</dl>" +
+        '<p class="muted">Passport numbers only — kept here because the insurance helpline asks for one before they will open a case.</p></div>';
+    }
+
+    /* emergency numbers */
+    if (d.emergency && d.emergency.length) {
+      html += '<div class="info-card"><h3><span>🆘</span>Emergency numbers</h3><div class="calls">' +
+        d.emergency.map((e) =>
+          '<a class="call" href="tel:' + esc(e.tel) + '"><span>' + esc(e.label) + "</span><b>" + esc(e.value) + "</b></a>").join("") +
+        "</div></div>";
+    }
+
+    $("#pane-docs").innerHTML = '<div class="info">' + html + "</div>";
+  }
+
   /* ================= GUIDE ================= */
   function renderGuide() {
     $("#pane-essentials").innerHTML = '<div class="info">' + ESSENTIALS.map((e) =>
@@ -432,6 +521,17 @@
   renderPlaces();
   renderSaved();
   renderGuide();
+  renderDocs();
+
+  // Docs is the first guide pane when the private file is present; otherwise
+  // it does not exist at all and Essentials leads.
+  if (hasDocs) {
+    $("#pane-docs").hidden = false;
+    $("#pane-essentials").hidden = true;
+  } else {
+    $("#docsSegBtn").classList.remove("is-on");
+    $('#guideSeg [data-pane="essentials"]').classList.add("is-on");
+  }
 
   const start = (location.hash || "").replace("#", "");
   go(["today", "plan", "places", "saved", "guide"].indexOf(start) > -1 ? start : "today");

@@ -26,6 +26,16 @@ Cloudflare Pages and GitHub Pages work identically.
 
 Once installed it runs with no signal — useful on the tram and on the ferries.
 
+## Private travel documents
+
+`assets/js/documents.js` holds booking references, insurance policy numbers and passport numbers. **It is gitignored and never pushed to this repo.** It only exists on the local machine and in the distributed zip.
+
+The app checks for it at runtime: if the file is missing, the Documents tab simply doesn't appear and everything else works normally. That's what happens on any deploy built from this repo.
+
+To set it up on another machine, copy `assets/js/documents.example.js` to `assets/js/documents.js` and fill it in.
+
+Anything served over a public URL is readable by anyone who has that URL. Don't deploy `documents.js` anywhere you wouldn't hand to a stranger.
+
 ## Files
 
 ```

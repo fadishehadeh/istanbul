@@ -365,6 +365,44 @@ html[data-theme="dark"] .badge-new { color: #06222e; }
 .info-card h3 { font-size: 14.5px; display: flex; gap: 9px; align-items: center; margin-bottom: 6px; }
 .info-card p { font-size: 13.2px; color: var(--ink-2); }
 
+/* documents */
+.kv { margin: 10px 0 0; display: grid; grid-template-columns: minmax(96px, 34%) 1fr; gap: 7px 12px; }
+.kv dt { font-size: 11.5px; color: var(--ink-3); text-transform: uppercase; letter-spacing: .05em; font-weight: 650; }
+.kv dd { margin: 0; font-size: 13.2px; color: var(--ink-2); }
+.mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; letter-spacing: .04em; color: var(--ink); font-size: 13.5px; }
+.inline-link { color: var(--brand); font-weight: 620; }
+
+.leg { border: 1px solid var(--line); border-radius: var(--r); padding: 12px 14px; margin-bottom: 9px; background: var(--bg-soft); }
+.leg-top { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 10px; }
+.leg-top b { font-size: 14px; letter-spacing: .03em; }
+.leg-top span { font-size: 11.5px; color: var(--ink-3); }
+.leg-row { display: flex; align-items: center; gap: 10px; }
+.leg-end { min-width: 0; }
+.leg-end.right { text-align: right; margin-left: auto; }
+.leg-end b { display: block; font-size: 19px; letter-spacing: -.02em; line-height: 1.1; }
+.leg-end span { font-size: 11.5px; color: var(--ink-3); }
+.leg-mid { flex: 1; text-align: center; min-width: 60px; }
+.leg-mid i { display: block; height: 1px; background: var(--line); position: relative; }
+.leg-mid i::after { content: "✈"; position: absolute; left: 50%; top: -8px; transform: translateX(-50%); background: var(--bg-soft); padding: 0 5px; font-size: 11px; color: var(--ink-3); font-style: normal; }
+.leg-mid span { font-size: 10.5px; color: var(--ink-3); }
+.leg-note { margin-top: 9px; font-size: 11.5px; color: var(--ink-3); }
+
+.calls { display: grid; gap: 7px; margin-top: 12px; }
+.call {
+  display: flex; align-items: center; justify-content: space-between; gap: 10px;
+  padding: 11px 13px; border: 1px solid var(--line); border-radius: var(--r);
+  background: var(--bg-soft); text-decoration: none;
+}
+.call span { font-size: 12.2px; color: var(--ink-2); }
+.call b { font-size: 13.5px; color: var(--brand); white-space: nowrap; }
+
+.warn {
+  margin-top: 12px; padding: 11px 13px; border-radius: var(--r); font-size: 12.5px;
+  background: color-mix(in srgb, var(--accent) 10%, var(--bg-soft));
+  border: 1px solid color-mix(in srgb, var(--accent) 30%, transparent);
+  color: var(--ink-2);
+}
+
 .phrase {
   display: flex; align-items: baseline; gap: 12px; padding: 12px 15px;
   background: var(--card); border: 1px solid var(--line); border-radius: var(--r); box-shadow: var(--shadow);
