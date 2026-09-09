@@ -488,20 +488,34 @@
         ]) + "</div>";
     }
 
-    /* hotel */
-    if (d.hotel) {
-      const h = d.hotel;
-      html += '<div class="info-card"><h3><span>🏨</span>' + esc(h.name) + "</h3>" +
+    /* pre-flight checks */
+    if (d.checks && d.checks.length) {
+      html += '<div class="info-card"><h3><span>🔍</span>Cross-check</h3>' +
+        d.checks.map((c) =>
+          '<div class="check-row lvl-' + esc(c.level) + '">' +
+            "<b>" + (c.level === "bad" ? "⚠️ " : c.level === "warn" ? "❗ " : "✅ ") + esc(c.title) + "</b>" +
+            "<span>" + esc(c.body) + "</span>" +
+          "</div>").join("") + "</div>";
+    }
+
+    /* hotels — arrival night, then the week */
+    const hotels = d.hotels || (d.hotel ? [d.hotel] : []);
+    hotels.forEach((h) => {
+      html += '<div class="info-card"><h3><span>🏨</span>' + esc(h.name) +
+        (h.tag ? ' <span class="hotel-tag">' + esc(h.tag) + "</span>" : "") + "</h3>" +
         kv([
           ["Address", esc(h.address) + ' · <a class="inline-link" target="_blank" rel="noopener" href="' + mapUrl(h.map || h.name) + '">Maps</a>', true],
-          ["Confirmation", '<b class="mono">' + esc(h.ref) + "</b>", true],
+          ["Confirmation", '<b class="mono">' + esc(h.ref) + "</b>" + (h.pin ? ' · PIN <b class="mono">' + esc(h.pin) + "</b>" : ""), true],
           ["Guest", h.guest],
           ["Check in", h.checkIn],
-          ["Check out", h.checkOut + (h.nights ? " · " + h.nights + " nights" : "")],
+          ["Check out", h.checkOut + (h.nights ? " · " + h.nights + (h.nights === 1 ? " night" : " nights") : "")],
+          h.room ? ["Room", h.room] : null,
           h.booked ? ["Paid with", h.booked] : null
         ]) +
+        (h.phone ? '<div class="calls" style="margin-top:12px"><a class="call" href="tel:' + esc(h.phone.tel) +
+          '"><span>Call the hotel</span><b>' + esc(h.phone.value) + "</b></a></div>" : "") +
         (h.note ? '<p class="warn">' + esc(h.note) + "</p>" : "") + "</div>";
-    }
+    });
 
     /* hire car */
     if (d.car) {

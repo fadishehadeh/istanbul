@@ -2,11 +2,14 @@
 
    Built around the real bookings:
    - TK827 departs Beirut 22:15 Fri 11 Sep, lands İstanbul 00:15 Sat 12 Sep
-   - Hotel check-in Sat 12 Sep, check-out Fri 18 Sep (6 nights)
+   - Garenta hire car collected at IST on arrival, returned there Fri 18 Sep
+   - Night 1 at İstanbul Dora, Dolapdere — Zimmer does not take them until
+     14:00 on the Saturday, so Saturday includes a hotel move at midday
+   - Zimmer Bosphorus, Fındıklı, Sat 12 Sep to Fri 18 Sep (6 nights)
    - TK824 departs İstanbul 12:25 Fri 18 Sep
 
    So there is no daytime Friday in İstanbul at either end. Saturday starts
-   late after a 2am check-in, and Friday is airport-only.
+   late after a 2am check-in across town, and Friday is airport-only.
 
    Weighted away from the first-timer circuit: markets, wholesale districts,
    new complexes and food, with the classics left in Places for reference.
@@ -26,24 +29,27 @@ const ITINERARY = [
       { time: "00:15", title: "Land at İstanbul Airport (IST)", note: "Now Saturday. Passport control can take 30–45 minutes at this hour." },
       { time: "00:45", title: "GET YOUR PASSPORT STAMPED", note: "Do this before you leave the arrivals hall. Garenta will not release the car on a foreign licence without the entry stamp for your most recent arrival, and İstanbul's e-gates frequently do not stamp. Ask the officer directly, or request an official Entry Record. Everything below depends on it." },
       { time: "01:15", title: "Collect the hire car — Garenta, ref 0N7C4X", note: "Desk is in the Arrivals Terminal. Bring the credit card in your own name, your licence and ID. They will hold ₺6,000 as a deposit. Check the HGS toll transponder is fitted and ask how they bill crossings. Photograph every existing scratch before you drive off." },
-      { time: "01:45", title: "Drive to Fındıklı", note: "About 45 minutes on empty roads — the one time of day this drive is easy. Roughly 45 km via the O-7 and the coast. Confirm with the hotel in advance where you can park; Meclisi Mebusan Caddesi has no realistic street parking." },
-      { time: "02:00", title: "Check in at Zimmer Bosphorus", note: "Meclisi Mebusan Cad. 61, Fındıklı. The booking is confirmed for a Saturday 12 September check-in, so arriving at 2am is exactly right — confirmation code 1051754682. Sleep." }
+      { time: "01:45", title: "Drive to Dolapdere", note: "About 40 minutes on empty roads — the one hour of the day this drive is easy. Roughly 40 km via the O-7. Not Fındıklı tonight: Zimmer does not take you until Saturday afternoon." },
+      { time: "02:15", title: "Check in at İstanbul Dora Hotel", note: "Dolapdere Cad. 33, Şişli. Confirmation 5751.020.465, PIN 1552. Their stated check-in window ends at midnight, so call ahead and confirm someone will be on the desk — the booking is non-refundable. They have no car park either, so settle that on the same call. Then sleep." }
     ],
     swap: "Change some money at the airport only if you need taxi cash — the rate is poor. 1,500 TL is plenty to get you to the hotel and through breakfast; do the real exchange in Eminönü later in the week."
   },
 
   {
     n: 2, date: "2026-09-12", dow: "Saturday", title: "Slow start, all on foot",
-    car: { use: false, text: "Leave it parked. Everything today is inside a fifteen-minute walk and Beyoğlu parking is misery." },
-    subtitle: "You checked in at 2am. Today stays inside a fifteen-minute walk of the hotel.",
-    tags: ["Easy", "Walkable", "No tickets"],
+    car: { use: false, text: "One short drive at midday to move hotels, then park it for the day — everything after that is on foot." },
+    subtitle: "You checked in at 2am in Dolapdere. Move to Fındıklı at midday, then everything is on foot.",
+    tags: ["Hotel move", "Easy", "Walkable"],
     items: [
-      { time: "11:00", title: "Late breakfast: Van Kahvaltı Evi", note: "Ten minutes uphill into Cihangir. Eastern-style spread — otlu peynir, kaymak and honey, murtuğa. The right first meal.", place: "van-kahvalti" },
-      { time: "12:30", title: "İstanbulkart from Kabataş", note: "Seven minutes down to the pier. Buy two cards, load 500 TL each. Covers tram, metro, funicular, bus, ferry and the Eyüp cable car all week." },
-      { time: "13:15", title: "Çukurcuma antiques", note: "The lanes right behind the hotel — antique dealers, vintage furniture, bric-à-brac, and the Museum of Innocence if you want it. Aimless is the point.", place: "cukurcuma" },
-      { time: "15:00", title: "İstanbul Modern", note: "Eight minutes along the water at Galataport. The Renzo Piano building is new since most visits — go up to the roof terrace and the reflecting pool facing the old city.", place: "istanbul-modern" },
-      { time: "16:30", title: "Galataport promenade", note: "1.2km of new waterfront that did not exist a few years ago. Cruise ships dock underneath it.", place: "galataport" },
-      { time: "18:00", title: "Coffee at Norm, then up to Galata", note: "Small, serious, filter-forward. Fuel for the hill.", place: "norm-coffee" },
+      { time: "09:30", title: "Breakfast at the Dora", note: "It is included, and you will want it. Check-out is 12:00–12:30, so there is no rush." },
+      { time: "12:15", title: "Check out and drive to Fındıklı", note: "Dolapdere down to the shore is fifteen minutes. Zimmer's confirmation is 1051754682; check-in is 14:00, so drop the bags and go if you are early." },
+      { time: "13:00", title: "Late breakfast: Van Kahvaltı Evi", note: "Ten minutes uphill into Cihangir from Zimmer. Eastern-style spread — otlu peynir, kaymak and honey, murtuğa.", place: "van-kahvalti" },
+      { time: "14:00", title: "Check in at Zimmer Bosphorus", note: "Meclisi Mebusan Cad. 61. Ask where the car goes for the week while you are at the desk." },
+      { time: "14:45", title: "İstanbulkart from Kabataş", note: "Seven minutes down to the pier. Buy two cards, load 500 TL each. Covers tram, metro, funicular, bus, ferry and the Eyüp cable car all week." },
+      { time: "15:15", title: "Çukurcuma antiques", note: "The lanes right behind the hotel — antique dealers, vintage furniture, bric-à-brac, and the Museum of Innocence if you want it. Aimless is the point.", place: "cukurcuma" },
+      { time: "16:15", title: "İstanbul Modern", note: "Eight minutes along the water at Galataport. The Renzo Piano building is new since most visits — go up to the roof terrace and the reflecting pool facing the old city.", place: "istanbul-modern" },
+      { time: "17:45", title: "Galataport promenade", note: "1.2km of new waterfront that did not exist a few years ago. Cruise ships dock underneath it.", place: "galataport" },
+      { time: "18:30", title: "Coffee at Norm, then up to Galata", note: "Small, serious, filter-forward. Fuel for the hill.", place: "norm-coffee" },
       { time: "20:00", title: "Dinner: Karaköy Lokantası", note: "Twelve minutes' walk. Book before you fly — Saturday fills. Order the çökertme kebabı.", place: "karakoy-lokantasi" },
       { time: "22:00", title: "Baklava at Karaköy Güllüoğlu", note: "Open till 23:00, two minutes away. Warm fıstıklı at the counter.", place: "karakoy-gulluoglu" }
     ],
