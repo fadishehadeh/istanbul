@@ -561,7 +561,8 @@
           i.zone ? ["Where it applies", i.zone] : null,
           i.limits ? ["Limits", i.limits] : null,
           i.premium ? ["Premium", i.premium] : null,
-          i.issued ? ["Issued", i.issued] : null
+          i.issued ? ["Issued", i.issued] : null,
+          i.superseded ? ["Replaces", i.superseded] : null
         ]) +
         '<dl class="kv">' + i.policies.map((p) =>
           "<dt>" + esc(p.name) + '</dt><dd><b class="mono">' + esc(p.no) + "</b></dd>").join("") + "</dl>" +
