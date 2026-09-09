@@ -483,9 +483,13 @@
         kv([
           ["Booking reference", '<b class="mono">' + esc(d.flights.ref) + "</b>", true],
           ["Airline", d.flights.airline],
+          d.flights.cabin ? ["Cabin", d.flights.cabin] : null,
           ["Baggage", d.flights.baggage],
-          ["Fare rules", d.flights.fare]
-        ]) + "</div>";
+          ["Fare rules", d.flights.fare],
+          d.flights.booked ? ["Issued", d.flights.booked] : null
+        ]) +
+        (d.flights.rules ? '<ul class="rulelist">' + d.flights.rules.map((r) =>
+          "<li>" + esc(r) + "</li>").join("") + "</ul>" : "") + "</div>";
     }
 
     /* pre-flight checks */
@@ -512,6 +516,7 @@
           h.room ? ["Room", h.room] : null,
           h.booked ? ["Paid with", h.booked] : null
         ]) +
+        (h.extras ? kv(h.extras) : "") +
         (h.phone ? '<div class="calls" style="margin-top:12px"><a class="call" href="tel:' + esc(h.phone.tel) +
           '"><span>Call the hotel</span><b>' + esc(h.phone.value) + "</b></a></div>" : "") +
         (h.note ? '<p class="warn">' + esc(h.note) + "</p>" : "") + "</div>";
@@ -527,11 +532,15 @@
           ["Vehicle", c.vehicle],
           ["Pick up", esc(c.pickUp.when) + "<br>" + esc(c.pickUp.where), true],
           ["Drop off", esc(c.dropOff.when) + "<br>" + esc(c.dropOff.where), true],
+          c.period ? ["Period", c.period] : null,
+          c.hours ? ["Desk hours", c.hours] : null,
           ["Mileage", c.mileage],
           ["Deposit", c.deposit],
           ["Bring", c.bring],
-          ["Paid", c.paid]
+          ["Paid", c.paid],
+          c.paidUsd ? ["In USD", c.paidUsd] : null
         ]) +
+        (c.extras ? kv(c.extras) : "") +
         '<div class="calls" style="margin-top:12px">' +
           '<a class="call" href="tel:' + esc(c.phone.tel) + '"><span>Rental desk, IST</span><b>' + esc(c.phone.value) + "</b></a>" +
           '<a class="call" target="_blank" rel="noopener" href="' + mapUrl(c.address) + '"><span>Desk location</span><b>Map</b></a>' +
@@ -545,9 +554,14 @@
       html += '<div class="info-card"><h3><span>🛡️</span>Travel insurance</h3>' +
         kv([
           ["Insurer", i.provider],
+          i.product ? ["Policy type", i.product] : null,
           ["Assistance", i.assistance],
           ["Valid", i.valid],
-          ["Cover", i.cover]
+          ["Cover", i.cover],
+          i.zone ? ["Where it applies", i.zone] : null,
+          i.limits ? ["Limits", i.limits] : null,
+          i.premium ? ["Premium", i.premium] : null,
+          i.issued ? ["Issued", i.issued] : null
         ]) +
         '<dl class="kv">' + i.policies.map((p) =>
           "<dt>" + esc(p.name) + '</dt><dd><b class="mono">' + esc(p.no) + "</b></dd>").join("") + "</dl>" +
@@ -555,15 +569,26 @@
           '<a class="call" href="tel:' + esc(p.tel) + '"><span>' + esc(p.label) + "</span><b>" + esc(p.value) + "</b></a>").join("") +
           (i.email ? '<a class="call" href="mailto:' + esc(i.email) + '"><span>Claims email</span><b>' + esc(i.email) + "</b></a>" : "") +
         "</div>" +
-        (i.critical ? '<p class="warn">' + esc(i.critical) + "</p>" : "") + "</div>";
+        (i.critical ? '<p class="warn danger-warn">' + esc(i.critical) + "</p>" : "") +
+        (i.ready ? '<p class="muted" style="margin-top:12px"><b>Have this ready when you call:</b></p><ul class="rulelist">' +
+          i.ready.map((r) => "<li>" + esc(r) + "</li>").join("") + "</ul>" : "") + "</div>";
     }
 
     /* travellers */
     if (d.travellers && d.travellers.length) {
       html += '<div class="info-card"><h3><span>🛂</span>Travellers</h3>' +
-        '<dl class="kv">' + d.travellers.map((t) =>
-          "<dt>" + esc(t.name) + '</dt><dd><b class="mono">' + esc(t.passport) + "</b></dd>").join("") + "</dl>" +
-        '<p class="muted">Passport numbers only — kept here because the insurance helpline asks for one before they will open a case.</p></div>';
+        d.travellers.map((t) =>
+          '<div class="line"><b>' + esc(t.name) + "</b>" +
+          kv([
+            ["Passport", '<b class="mono">' + esc(t.passport) + "</b>", true],
+            t.passportExpires ? ["Expires", t.passportExpires + (t.passportIssued ? " (issued " + t.passportIssued + ")" : "")] : null,
+            ["Date of birth", t.dob],
+            t.ticket ? ["Ticket no.", '<b class="mono">' + esc(t.ticket) + "</b>", true] : null,
+            t.policy ? ["Insurance policy", '<b class="mono">' + esc(t.policy) + "</b>", true] : null
+          ]) +
+          (t.note ? '<div class="stop-note">' + esc(t.note) + "</div>" : "") +
+          "</div>").join("") +
+        '<p class="muted">Lebanese passports are visa-free for Türkiye. Kept here because the insurance helpline asks for a passport number before they will open a case.</p></div>';
     }
 
     /* emergency numbers */

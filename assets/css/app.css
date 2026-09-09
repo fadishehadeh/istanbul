@@ -598,3 +598,8 @@ html[data-theme="dark"] .dep.next { color: #06222e; }
   color: var(--ink-3); border: 1px solid var(--line); border-radius: 5px; padding: 1px 6px;
   vertical-align: middle;
 }
+
+/* document rule lists */
+.rulelist { margin: 10px 0 0; padding-left: 18px; }
+.rulelist li { font-size: 12.6px; color: var(--ink-2); margin-bottom: 5px; }
+.info-card .line .kv { margin-top: 7px; }
