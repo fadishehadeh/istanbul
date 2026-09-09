@@ -20,6 +20,8 @@
   const esc = (s) => String(s == null ? "" : s).replace(/[&<>"']/g, (c) =>
     ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
   const mapUrl = (q) => "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(q + ", İstanbul");
+  // Photos: links out to an image search rather than hosting anyone's pictures
+  const photoUrl = (q) => "https://www.google.com/search?tbm=isch&q=" + encodeURIComponent(q + " İstanbul");
 
   let toastT;
   function toast(msg) {
@@ -703,6 +705,7 @@
               "</dl>" : "") +
               ((it.map || it.url) ? '<div class="place-actions">' +
                 (it.map ? '<a class="act map" target="_blank" rel="noopener" href="' + mapUrl(it.map) + '">Open in Maps</a>' : "") +
+                (it.map ? '<a class="act photos" target="_blank" rel="noopener" href="' + photoUrl(it.map) + '">📷 Photos</a>' : "") +
                 (it.url ? '<a class="act" target="_blank" rel="noopener" href="' + esc(it.url) + '">Open link</a>' : "") +
               "</div>" : "") +
             "</div>" +

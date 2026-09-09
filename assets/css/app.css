@@ -694,3 +694,5 @@ html[data-theme="dark"] .dep.next { color: #06222e; }
 .fitem-kv dd { font-size: 12.3px; }
 .frow-body .place-actions { margin-top: 12px; }
 .fadi-empty b { display: block; font-size: 15px; color: var(--ink); margin-bottom: 6px; }
+
+.act.photos { color: var(--brand); border-color: color-mix(in srgb, var(--brand) 30%, var(--line)); }
