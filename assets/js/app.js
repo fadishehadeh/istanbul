@@ -305,19 +305,136 @@
     wirePlaces(vs);
   }
 
-  /* ================= DOCUMENTS (optional, local-only file) ================= */
-  const hasDocs = typeof DOCS !== "undefined" && DOCS;
+  /* ================= DOCUMENTS =================
+     Two possible sources, in this order:
+       1. S.docs  — imported once on this device, lives in localStorage only
+       2. DOCS    — the gitignored assets/js/documents.js, if it is present
+     On a public deploy neither exists until you import, so the served files
+     never carry booking, policy or passport numbers. */
+
+  function b64encode(str) {
+    const bytes = new TextEncoder().encode(str);
+    let bin = "";
+    bytes.forEach((b) => { bin += String.fromCharCode(b); });
+    return btoa(bin).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+  }
+  function b64decode(b64) {
+    const s = b64.replace(/-/g, "+").replace(/_/g, "/");
+    const bin = atob(s + "===".slice((s.length + 3) % 4));
+    const bytes = Uint8Array.from(bin, (c) => c.charCodeAt(0));
+    return new TextDecoder().decode(bytes);
+  }
+
+  // One-time import link:  …/#docs=<base64url JSON>
+  (function importFromHash() {
+    const m = (location.hash || "").match(/[#&]docs=([A-Za-z0-9\-_]+)/);
+    if (!m) return;
+    try {
+      const obj = JSON.parse(b64decode(m[1]));
+      S.docs = obj; save();
+      history.replaceState(null, "", location.pathname + "#guide");
+      setTimeout(() => toast("Travel documents saved to this device"), 300);
+    } catch (e) {
+      history.replaceState(null, "", location.pathname + "#guide");
+      setTimeout(() => toast("That import link was not readable"), 300);
+    }
+  })();
+
+  const docsData = () => S.docs || (typeof DOCS !== "undefined" ? DOCS : null);
 
   function kv(rows) {
     return '<dl class="kv">' + rows.filter(Boolean).map((r) =>
       "<dt>" + esc(r[0]) + "</dt><dd>" + (r[2] ? r[1] : esc(r[1])) + "</dd>").join("") + "</dl>";
   }
 
-  function renderDocs() {
-    if (!hasDocs) return;
-    $("#docsSegBtn").hidden = false;
+  let bioReady = false;
+  Vault.biometricAvailable().then((v) => { bioReady = v; });
 
-    const d = DOCS;
+  function renderDocs() {
+    /* 1. Nothing stored yet — offer import */
+    if (!Vault.exists()) { renderDocsImport(); return; }
+    /* 2. Stored but locked */
+    if (!Vault.isUnlocked()) { renderDocsLocked(); return; }
+    /* 3. Open */
+    renderDocsOpen(Vault.data());
+  }
+
+  function pane(html) { $("#pane-docs").innerHTML = '<div class="info">' + html + "</div>"; }
+
+  function renderDocsImport() {
+    const pre = docsData();   // local documents.js or a legacy plain import
+    pane('<div class="info-card">' +
+      "<h3><span>🔐</span>Set up your travel documents</h3>" +
+      "<p>Flights, hotel, insurance and emergency numbers, encrypted on this device. They are never part of the published site — nobody else can read them, and neither can the server.</p>" +
+      '<form id="docsImportForm" class="addform" style="margin-top:14px">' +
+        (pre ? '<p class="muted">Documents found on this device. Choose a PIN to encrypt them.</p>'
+             : '<textarea id="docsImportText" rows="4" placeholder="Paste your travel document code here…"></textarea>') +
+        '<input id="docsPin" type="password" inputmode="numeric" autocomplete="new-password" placeholder="Choose a PIN (6+ characters)" minlength="4" required>' +
+        '<button type="submit" class="primary-btn">Encrypt &amp; save</button>' +
+      "</form>" +
+      '<p class="saved-hint">The PIN is the only recovery route — there is no reset. Add your fingerprint next for day-to-day unlocking.</p>' +
+    "</div>");
+
+    $("#docsImportForm").addEventListener("submit", async function (e) {
+      e.preventDefault();
+      const pin = $("#docsPin").value;
+      if (!pin || pin.length < 4) { toast("PIN needs at least 4 characters"); return; }
+
+      let obj = pre;
+      if (!obj) {
+        const raw = ($("#docsImportText").value || "").trim();
+        if (!raw) { toast("Paste your document code first"); return; }
+        try { obj = JSON.parse(raw); }
+        catch (e1) {
+          try { obj = JSON.parse(b64decode(raw.replace(/^.*[#&]docs=/, ""))); }
+          catch (e2) { toast("Could not read that — check you copied all of it"); return; }
+        }
+      }
+      try {
+        await Vault.create(obj, pin);
+        if (S.docs) { delete S.docs; save(); }   // drop any earlier plaintext copy
+        renderDocs();
+        toast("Encrypted and saved to this device");
+      } catch (err) { toast("Could not encrypt — " + err.message); }
+    });
+  }
+
+  function renderDocsLocked() {
+    const bio = Vault.hasBiometric();
+    pane('<div class="info-card locked-card">' +
+      "<h3><span>🔒</span>Documents locked</h3>" +
+      "<p>Encrypted on this device. Unlock to see your flights, hotel, insurance and emergency numbers.</p>" +
+      (bio ? '<button class="primary-btn wide" id="bioUnlock" style="margin-top:14px">👆 Unlock with fingerprint</button>' : "") +
+      '<form id="pinForm" class="addform" style="margin-top:10px">' +
+        '<input id="pinInput" type="password" inputmode="numeric" autocomplete="current-password" placeholder="' + (bio ? "or enter your PIN" : "Enter your PIN") + '" required>' +
+        '<button type="submit" class="ghost-btn">Unlock</button>' +
+      "</form>" +
+      '<div class="reset-row"><button class="ghost-btn danger" id="wipeDocs">Forget documents on this device</button></div>' +
+    "</div>");
+
+    const bu = $("#bioUnlock");
+    if (bu) bu.addEventListener("click", async function () {
+      this.disabled = true; this.textContent = "Waiting for fingerprint…";
+      try { await Vault.unlockWithBiometric(); renderDocs(); }
+      catch (err) {
+        this.disabled = false; this.textContent = "👆 Unlock with fingerprint";
+        toast(err && err.name === "NotAllowedError" ? "Fingerprint cancelled" : "Fingerprint unlock failed — use your PIN");
+      }
+    });
+
+    $("#pinForm").addEventListener("submit", async function (e) {
+      e.preventDefault();
+      try { await Vault.unlockWithPin($("#pinInput").value); renderDocs(); }
+      catch (err) { toast(err.message === "BAD_PIN" ? "Wrong PIN" : "Could not unlock"); }
+    });
+
+    $("#wipeDocs").addEventListener("click", () => {
+      if (!confirm("Forget your travel documents on this device? You will need your import code to set them up again.")) return;
+      Vault.destroy(); renderDocs(); toast("Removed from this device");
+    });
+  }
+
+  function renderDocsOpen(d) {
     let html = "";
 
     /* flights */
@@ -391,7 +508,45 @@
         "</div></div>";
     }
 
-    $("#pane-docs").innerHTML = '<div class="info">' + html + "</div>";
+    const hasBio = Vault.hasBiometric();
+    html += '<div class="info-card"><h3><span>🔐</span>Security</h3>' +
+      '<p class="muted">Encrypted on this device with AES-GCM. The key is never stored unwrapped, and nothing is sent to the server.</p>' +
+      '<div class="calls" style="margin-top:12px">' +
+        (hasBio
+          ? '<button class="act" id="bioOff">Turn off fingerprint unlock</button>'
+          : (bioReady ? '<button class="act map" id="bioOn">👆 Add fingerprint unlock</button>'
+                      : '<span class="muted">This device or browser does not offer fingerprint unlock for web apps — your PIN is the way in.</span>')) +
+        '<button class="act" id="lockNow">Lock now</button>' +
+      "</div>" +
+      '<div class="reset-row"><button class="ghost-btn danger" id="wipeDocs">Forget documents on this device</button></div>' +
+    "</div>";
+
+    pane(html);
+
+    const on = $("#bioOn");
+    if (on) on.addEventListener("click", async function () {
+      this.disabled = true; this.textContent = "Waiting for fingerprint…";
+      try { await Vault.enableBiometric(); renderDocs(); toast("Fingerprint unlock enabled"); }
+      catch (err) {
+        this.disabled = false; this.textContent = "👆 Add fingerprint unlock";
+        toast(err.message === "PRF_UNSUPPORTED"
+          ? "This browser can't derive a key from your fingerprint — PIN only"
+          : (err && err.name === "NotAllowedError" ? "Cancelled" : "Could not enable fingerprint unlock"));
+      }
+    });
+
+    const off = $("#bioOff");
+    if (off) off.addEventListener("click", async () => {
+      if (!confirm("Turn off fingerprint unlock? Your PIN will still work.")) return;
+      await Vault.disableBiometric(); renderDocs(); toast("Fingerprint unlock removed");
+    });
+
+    $("#lockNow").addEventListener("click", () => { Vault.lock(); renderDocs(); toast("Locked"); });
+
+    $("#wipeDocs").addEventListener("click", () => {
+      if (!confirm("Forget your travel documents on this device? You will need your import code to set them up again.")) return;
+      Vault.destroy(); renderDocs(); toast("Removed from this device");
+    });
   }
 
   /* ================= GUIDE ================= */
@@ -523,15 +678,10 @@
   renderGuide();
   renderDocs();
 
-  // Docs is the first guide pane when the private file is present; otherwise
-  // it does not exist at all and Essentials leads.
-  if (hasDocs) {
-    $("#pane-docs").hidden = false;
-    $("#pane-essentials").hidden = true;
-  } else {
-    $("#docsSegBtn").classList.remove("is-on");
-    $('#guideSeg [data-pane="essentials"]').classList.add("is-on");
-  }
+  // Docs always leads the Guide tab — it either shows your documents or
+  // offers to import them.
+  $("#pane-docs").hidden = false;
+  $("#pane-essentials").hidden = true;
 
   const start = (location.hash || "").replace("#", "");
   go(["today", "plan", "places", "saved", "guide"].indexOf(start) > -1 ? start : "today");

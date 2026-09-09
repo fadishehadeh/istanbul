@@ -1,7 +1,7 @@
 /* İstanbul Trip Companion — service worker
    Precaches the whole app so it works with no signal in Turkey. */
 
-const VERSION = "ist-2026-09-v3";
+const VERSION = "ist-2026-09-v4";
 const ASSETS = [
   "./",
   "./index.html",
@@ -9,6 +9,7 @@ const ASSETS = [
   "./assets/css/app.css",
   "./assets/js/data.js",
   "./assets/js/itinerary.js",
+  "./assets/js/vault.js",
   "./assets/js/app.js",
   "./assets/icons/icon-192.png",
   "./assets/icons/icon-512.png",

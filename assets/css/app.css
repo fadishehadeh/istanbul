@@ -480,3 +480,9 @@ html[data-theme="dark"] .badge-new { color: #06222e; }
 @media (prefers-reduced-motion: reduce) {
   * { animation: none !important; transition: none !important; }
 }
+
+/* document vault */
+.primary-btn.wide { width: 100%; padding: 14px; font-size: 15px; }
+.locked-card { text-align: center; }
+.locked-card .kv, .locked-card .addform { text-align: left; }
+.locked-card h3 { justify-content: center; }
