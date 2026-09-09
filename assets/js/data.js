@@ -1091,6 +1091,30 @@ const FADI = {
       best: "A stop on the drive north, not a destination.",
       map: "Hikmet Bayrak Muhtar Parkı Sarıyer" },
 
+    { t: "Yıldız Parkı", area: "Beşiktaş · European side", tag: "Closest forest",
+      hours: "Roughly 08:00 until late evening", entry: "Free · the köşk cafés charge for what you order",
+      d: "A hundred hectares of wooded hillside above Beşiktaş — the old imperial garden — with streams, ponds and two Ottoman pavilions, Malta Köşkü and Çadır Köşkü, now serving tea and breakfast under the trees. Steep, green and quiet.",
+      best: "The most underrated thing this close to Fındıklı, and barely twenty minutes away. Walk up through the park to Malta Köşkü and take tea on the terrace. Mornings.",
+      map: "Yıldız Parkı Beşiktaş" },
+
+    { t: "Emirgan Korusu", area: "Emirgan, Sarıyer · European side", tag: "Big park",
+      hours: "Daily, dawn to dusk", entry: "Free · parking charged",
+      d: "The largest of the Bosphorus groves — 47 hectares of woodland and lawn climbing from the shore, with three restored köşks and a pond. Famous for tulips in April; in September it is simply a big quiet wood above the water.",
+      best: "Already beside Emirgan Sütiş on your Sunday. Breakfast at the water, then walk straight up into the trees.",
+      map: "Emirgan Korusu Sarıyer" },
+
+    { t: "Aşiyan Parkı", area: "Bebek, Sarıyer · European side", tag: "Quiet",
+      hours: "Open ground", entry: "Free",
+      d: "A small terraced garden on the hill above Bebek, beside a poet's house and a hillside cemetery. Benches under the trees looking straight down at the Rumeli fortress and the bridge. Almost nobody up here.",
+      best: "Ten minutes' climb from the Bebek waterfront, which is already on your Sunday. Late afternoon light.",
+      map: "Aşiyan Parkı Bebek" },
+
+    { t: "Hıdiv Kasrı grove", area: "Çubuklu, Beykoz · Asian side", tag: "View + tea",
+      hours: "Grove open daily; the mansion café keeps its own hours", entry: "Free to the grounds",
+      d: "An art-nouveau villa built for the Khedive of Egypt, standing in its own wooded park on a bluff high above the Bosphorus. The garden terrace has one of the widest views on the Asian shore, and you can sit there over tea without going inside.",
+      best: "Next door to Beykoz Siloları in Çubuklu — the grove in the afternoon, the silo roof at sunset, one stop.",
+      map: "Hıdiv Kasrı Çubuklu Beykoz" },
+
     { t: "Karaköy Sahil Parkı", area: "Haliç / Karaköy · European side", tag: "12 min walk",
       hours: "Open ground — no gate", entry: "Free",
       d: "New waterfront park on the Golden Horn with running and cycling lanes, lawns and the whole old-city skyline — Süleymaniye, the Blue Mosque, Yeni Cami — lit up across the water. The closest one to your hotel by a distance.",
@@ -1105,9 +1129,15 @@ const FADI = {
   ]},
 
   /* ===================== BOSPHORUS RESTAURANTS ===================== */
-  { id: "restaurants", label: "Bosphorus restaurants", icon: "🍽️",
-    note: "Ten waterfront and terrace places. I have not invented opening hours for these — restaurant hours change constantly and a wrong one costs you an evening. Each opens its Maps listing, which carries the current hours and number. What I have given you instead is where it is, what it is for, and how far it is from Fındıklı.",
+  { id: "restaurants", label: "Restaurants & cafés", icon: "🍽️",
+    note: "Waterfront and terrace places. The ones tagged Dressy or Polished are white-tablecloth — skip those if you want the plain version; Villages & village food below is the opposite end of the scale. I have not invented opening hours for these — restaurant hours change constantly and a wrong one costs you an evening. Each opens its Maps listing, which carries the current hours and number. What I have given you instead is where it is, what it is for, and how far it is from Fındıklı.",
     items: [
+
+    { t: "Poff&Stroop", area: "Galata Tower, Beyoğlu · 14 min walk", tag: "Walk there",
+      hours: "Daytime into the evening — check the listing", entry: "Cheap",
+      d: "A Dutch stroopwafel shop on the lane below Galata Tower: a warm waffle split down the middle, half plain and half buried in crushed topping, handed over in a paper cone. Several flavours, eaten standing in the street.",
+      best: "Not a meal — a five-minute stop while you are already up at Galata. Walkable from the hotel, so it costs you nothing to fold into an evening.",
+      map: "Poff&Stroop Galata Kulesi Beyoğlu" },
 
     { t: "The Gracee İstanbul", area: "Departs Galataport · 8 min walk", tag: "Closest",
       d: "A restaurant on a boat that sails from Galataport, so you eat while moving up the Bosphorus rather than looking at it from a fixed table. Breakfast and dinner sailings.",
@@ -1119,7 +1149,7 @@ const FADI = {
       best: "Sunset. The nearest of these to your hotel that is not on a boat.",
       map: "Mesai Istanbul Beyoğlu" },
 
-    { t: "Huqqabaz", area: "Rumeli Hisarı · European shore, 25 min", tag: "Breakfast",
+    { t: "Huqqabaz", area: "Rumeli Hisarı · European shore, 25 min", tag: "Polished",
       d: "Waterfront terrace directly under the FSM bridge, from the Huqqa group. Big Turkish breakfasts and all-day menu, polished and busy.",
       best: "Breakfast on your Sunday — it is on the shore road you are already driving, near Rumeli Hisarı and Duatepe.",
       map: "Huqqabaz Rumeli Hisarı" },
@@ -1139,12 +1169,12 @@ const FADI = {
       best: "Morning. Combine with Mihrabat and Kandilli, which are minutes away.",
       map: "Pembe Yalı Anadolu Hisarı" },
 
-    { t: "Borsa Kandilli", area: "Kandilli, Üsküdar · Asian shore, 30 min", tag: "Classic",
+    { t: "Borsa Kandilli", area: "Kandilli, Üsküdar · Asian shore, 30 min", tag: "Dressy",
       d: "The Kandilli branch of a Turkish restaurant institution going back to 1927. Proper Turkish cooking, white tablecloths, and a terrace at the bend of the Bosphorus.",
       best: "Lunch with the view, or a dinner where the food matters as much as the terrace.",
       map: "Borsa Restaurant Kandilli" },
 
-    { t: "Ajia Beykoz", area: "Kanlıca, Beykoz · Asian shore, 35 min", tag: "Splurge",
+    { t: "Ajia Beykoz", area: "Kanlıca, Beykoz · Asian shore, 35 min", tag: "Dressy",
       d: "The restaurant of the A'jia boutique hotel, on a restored yalı at the water's edge. Fine dining, candlelit tables a metre from the Bosphorus, European lights opposite.",
       best: "The special dinner. Book well ahead and ask for a waterside table.",
       map: "Ajia Hotel Restaurant Kanlıca Beykoz" },
@@ -1179,6 +1209,72 @@ const FADI = {
       d: "A wooden terrace high on Büyükada facing west over the Marmara, built for the sunset.",
       best: "Only works as part of a full island day, which is not currently in your plan — the ferry from Kabataş takes about 90 minutes each way. Worth swapping a day for if you want it.",
       map: "Eskibağ Teras Büyükada" }
+  ]},
+
+  /* ============ BOSPHORUS VILLAGES & VILLAGE FOOD ============ */
+  { id: "villages", label: "Villages & village food", icon: "🎣",
+    note: "Fishing villages, forest breakfast and cheap food eaten standing at the water. The opposite end of the scale from the white-tablecloth places. Almost all of it needs the car, which is exactly why the crowds do not reach it.",
+    items: [
+
+    { t: "Garipçe", area: "Sarıyer · Black Sea mouth, 1h", tag: "Almost unknown",
+      hours: "A village — any time. The fish places run lunch into the evening.", entry: "Free",
+      d: "Thirty-odd houses, a stone harbour and a couple of fish shacks, sitting directly underneath the Yavuz Sultan Selim bridge where the Bosphorus meets the Black Sea. Fishermen mending nets, cats, and nothing else.",
+      best: "Eat whatever came in that morning at a plastic table by the harbour wall. Needs the car — there is effectively no other way in.",
+      map: "Garipçe Sarıyer İstanbul" },
+
+    { t: "Rumeli Feneri", area: "Sarıyer · Black Sea mouth, 1h", tag: "Lighthouse",
+      hours: "Village — any time", entry: "Free",
+      d: "The northern tip of the European side: an 1856 lighthouse, the ruins of an Ottoman fort on the headland, and fish restaurants built onto the rocks where the strait opens into open sea. Wild and windy.",
+      best: "Ten minutes from Garipçe, so do both. Late lunch, then stay for the light going down over the Black Sea.",
+      map: "Rumeli Feneri Sarıyer" },
+
+    { t: "Rumeli Kavağı", area: "Sarıyer · upper Bosphorus, 50 min", tag: "Cheap fish",
+      hours: "Lunch into the evening", entry: "Free",
+      d: "A working fishing village with a row of unpretentious fish restaurants along the quay. Plastic chairs, paper tablecloths, whatever was landed that morning, at a fraction of what the same fish costs down in Bebek.",
+      best: "The honest version of a Bosphorus fish lunch. On the way to or from Rumeli Feneri.",
+      map: "Rumeli Kavağı Sarıyer" },
+
+    { t: "Polonezköy", area: "Beykoz forest · 45 min", tag: "Forest breakfast",
+      hours: "Breakfast houses from about 08:00 into the afternoon", entry: "Free · the nature park charges a small entry",
+      d: "A Polish village founded by exiles in 1842, deep in the Beykoz woods, still carrying Polish surnames on its gravestones. People come for enormous garden breakfasts under the trees and walks in the forest afterwards.",
+      best: "A long slow morning rather than a stop. Nobody expects a Polish village inside İstanbul, and it is entirely a car trip.",
+      map: "Polonezköy Beykoz" },
+
+    { t: "Anadolu Hisarı & Göksu", area: "Beykoz · Asian shore, 35 min", tag: "Peaceful",
+      hours: "Any time", entry: "Free",
+      d: "The oldest Ottoman fortress on the Bosphorus, where the Göksu and Küçüksu streams run into the strait — the meadows the Ottomans called the Sweet Waters of Asia. Wooden houses, rowing boats on the creek, tea at the water.",
+      best: "Pembe Yalı and Küçüksu Kasrı are both right here, so this is one stop for three things. Late afternoon.",
+      map: "Anadolu Hisarı Göksu Beykoz" },
+
+    { t: "Kanlıca yoğurdu", area: "Kanlıca pier, Beykoz · 35 min", tag: "One thing only",
+      hours: "Daytime, at the pier", entry: "Pocket change",
+      d: "Kanlıca has sold one thing for a century: thick strained yoghurt in a small dish, with icing sugar you tip over it yourself. You eat it standing at the ferry pier watching the boats. That is the whole experience.",
+      best: "A five-minute stop, not a meal. Mihrabat Korusu is on the hill directly above the village — do them together.",
+      map: "Kanlıca İskelesi Beykoz" },
+
+    { t: "Sarıyer böreği & the fish market", area: "Sarıyer · European shore, 40 min", tag: "Cheap & real",
+      hours: "Börekçis from early morning; the fish market runs through the day", entry: "Pocket change",
+      d: "Sarıyer is known across İstanbul for one pastry — a flaky börek sold by weight from shops that have made nothing else for generations. The fish market beside it sells the morning catch, and small places around it will cook what you buy.",
+      best: "Börek on the way north, fish on the way back. This and Beyaz Park are the same trip.",
+      map: "Sarıyer Börekçisi Sarıyer İstanbul" },
+
+    { t: "Riva", area: "Beykoz · Black Sea coast, 1h", tag: "Beach",
+      hours: "Any time · beach places are seasonal, mid-September still works", entry: "Free",
+      d: "A Black Sea village at a river mouth on the Asian side, with a long sand beach, a ruined Genoese castle on the bluff and fish restaurants along the water. Istanbullus go; foreign visitors essentially do not.",
+      best: "A whole day with the car if the weather holds. Polonezköy is on the way, so the two pair naturally.",
+      map: "Riva Beykoz İstanbul" },
+
+    { t: "Hür Süper Mario (Emin Usta)", area: "Karaköy · 12 min walk", tag: "Walk there",
+      hours: "Daytime into the evening — check the listing", entry: "Cheap · cash-friendly",
+      d: "A balık ekmek place by Arap Camii on the Karaköy waterfront, widely argued to be the best fish sandwich in the city. Plastic chairs and paper tablecloths at the water, mackerel off the grill, plus mackerel kebab and calamari if you want more than a sandwich. Fermeneciler Cd. No:9.",
+      best: "The best thing on this whole list relative to effort — it is a twelve-minute walk from Zimmer and costs almost nothing. Lunch, sitting outside, old city across the water. Go on the Saturday when you are already walking Karaköy.",
+      map: "Hür Süper Mario Emin Usta Fermeneciler Caddesi Karaköy" },
+
+    { t: "Balık ekmek at Eminönü", area: "Eminönü · T1 tram", tag: "Street food",
+      hours: "Through the day into the evening", entry: "Pocket change",
+      d: "Grilled mackerel in half a loaf with onion and salt, handed over from boats rocking at the quay beside the Galata Bridge. Squeeze the lemon and eat it standing at the rail. The cheapest famous meal in the city and still entirely genuine.",
+      best: "Already on your Wednesday — the bazaar day finishes at Eminönü. Do this instead of a restaurant.",
+      map: "Eminönü balık ekmek Galata Köprüsü" }
   ]},
 
   /* ===================== NIGHTS & EXPERIENCES ===================== */

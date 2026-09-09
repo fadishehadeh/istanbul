@@ -36,111 +36,116 @@ const ITINERARY = [
   },
 
   {
-    n: 2, date: "2026-09-12", dow: "Saturday", title: "Slow start, all on foot",
-    car: { use: false, text: "One short drive at midday to move hotels, then park it for the day — everything after that is on foot." },
-    subtitle: "You checked in at 2am in Dolapdere. Move to Fındıklı at midday, then everything is on foot.",
-    tags: ["Hotel move", "Easy", "Walkable"],
+    n: 2, date: "2026-09-12", dow: "Saturday", title: "Move hotels, then your own doorstep",
+    car: { use: false, text: "One short drive at midday to change hotels, then park it. Everything after that is on foot." },
+    subtitle: "You landed at 2am across town. Move to Fındıklı at midday and spend the rest of the day within walking distance.",
+    tags: ["Hotel move", "Walkable", "Easy"],
     items: [
-      { time: "09:30", title: "Breakfast at the Dora", note: "It is included, and you will want it. Check-out is 12:00–12:30, so there is no rush." },
-      { time: "12:15", title: "Check out and drive to Fındıklı", note: "Dolapdere down to the shore is fifteen minutes. Check-in is 14:00, so drop the bags and go if you are early." },
-      { time: "13:00", title: "Late breakfast: Van Kahvaltı Evi", note: "Ten minutes uphill into Cihangir from Zimmer. Eastern-style spread — otlu peynir, kaymak and honey, murtuğa.", place: "van-kahvalti" },
-      { time: "14:00", title: "Check in at Zimmer Bosphorus", note: "Meclisi Mebusan Cad. 61. Ask where the car goes for the week while you are at the desk." },
-      { time: "14:45", title: "İstanbulkart from Kabataş", note: "Seven minutes down to the pier. Buy two cards, load 500 TL each. Covers tram, metro, funicular, bus, ferry and the Eyüp cable car all week." },
-      { time: "15:15", title: "Çukurcuma antiques", note: "The lanes right behind the hotel — antique dealers, vintage furniture, bric-à-brac, and the Museum of Innocence if you want it. Aimless is the point.", place: "cukurcuma" },
-      { time: "16:15", title: "İstanbul Modern", note: "Eight minutes along the water at Galataport. The Renzo Piano building is new since most visits — go up to the roof terrace and the reflecting pool facing the old city.", place: "istanbul-modern" },
-      { time: "17:45", title: "Galataport promenade", note: "1.2km of new waterfront that did not exist a few years ago. Cruise ships dock underneath it.", place: "galataport" },
-      { time: "18:30", title: "Coffee at Norm, then up to Galata", note: "Small, serious, filter-forward. Fuel for the hill.", place: "norm-coffee" },
-      { time: "20:00", title: "Dinner: Karaköy Lokantası", note: "Twelve minutes' walk. Book before you fly — Saturday fills. Order the çökertme kebabı.", place: "karakoy-lokantasi" },
-      { time: "22:00", title: "Baklava at Karaköy Güllüoğlu", note: "Open till 23:00, two minutes away. Warm fıstıklı at the counter.", place: "karakoy-gulluoglu" }
+      { time: "09:30", title: "Breakfast at the Dora", note: "Included, and you will want it. Check-out is 12:00–12:30, so no rush." },
+      { time: "12:15", title: "Check out, drive down to Fındıklı", note: "Dolapdere to the shore is fifteen minutes. Zimmer takes you at 14:00 — drop the bags and go if you are early. Ask at the desk where the car lives for the week." },
+      { time: "14:30", title: "Lunch: Hür Süper Mario, Karaköy", note: "Twelve minutes on foot. Plastic chairs at the water by Arap Camii, mackerel straight off the grill, old city across the Horn. Widely argued to be the best fish sandwich in İstanbul and it costs almost nothing.", map: "Hür Süper Mario Emin Usta Fermeneciler Caddesi Karaköy" },
+      { time: "15:30", title: "Karaköy Sahil Parkı", note: "New waterfront park on the Golden Horn — lawns, a promenade, and the whole old-city skyline opposite. Nobody had this a few years ago.", map: "Karaköy Sahil Parkı Haliç" },
+      { time: "16:30", title: "Drive up to Yıldız Parkı", note: "Twenty minutes north. A hundred hectares of wooded imperial garden above Beşiktaş — streams, ponds, and steep paths under old trees. The closest real forest to your hotel and almost nobody knows to come.", map: "Yıldız Parkı Beşiktaş" },
+      { time: "17:30", title: "Tea at Malta Köşkü", note: "An Ottoman pavilion inside the park, tables on the terrace under the trees. Tea and something sweet, an hour of doing nothing.", map: "Malta Köşkü Yıldız Parkı Beşiktaş" },
+      { time: "19:15", title: "Sunset from the Beşiktaş shore", note: "Walk down out of the park to the water. Sunset is about 19:20 all week." },
+      { time: "20:30", title: "Dinner in Karaköy", note: "Back near the hotel. Karaköy Lokantası if you want a proper sit-down, or stay plain and walk the backstreets until something looks right." }
     ],
-    swap: "If you wake up earlier than expected: Ulus Pazarı in Beşiktaş runs Saturdays only, 08:00–17:00, and is where export garment overruns surface at market-stall prices. The Beşiktaş Saturday market is walkable from the hotel along the shore."
+    swap: "If you wake early despite the 2am arrival: Ulus Pazarı in Beşiktaş runs Saturdays only, 08:00–17:00, and is a genuine local market rather than a tourist one."
   },
 
   {
-    n: 3, date: "2026-09-13", dow: "Sunday", title: "Bosphorus, and the Sunday flea market",
-    car: { use: true, text: "The car's best day. The Bosphorus shore road north is exactly what it's for." },
-    subtitle: "Feriköy Antika is Sunday-only, and it is the one market you cannot move to another day.",
-    tags: ["Sunday only", "Bosphorus", "Antiques"],
+    n: 3, date: "2026-09-13", dow: "Sunday", title: "To the Black Sea and back",
+    car: { use: true, text: "The whole point of having the car. Nothing today is reachable any other way." },
+    subtitle: "Drive the European shore to the very top, where the Bosphorus opens into the Black Sea. Fishing villages and a lighthouse.",
+    tags: ["Best day", "Car", "Dry forecast"],
     items: [
-      { time: "09:00", title: "Feriköy Antika Pazarı", note: "SUNDAYS ONLY. Vinyl, cameras, Ottoman ephemera, watches, coins, under one canopy. Before 11:00 for the good stuff — dealers pick it over early.", place: "ferikoy-antika" },
-      { time: "11:30", title: "Breakfast on the water: Emirgan Sütiş", note: "Twenty-five minutes up the European shore. Serpme kahvaltı under the Fatih Sultan Mehmet Bridge.", place: "emirgan-sutis" },
-      { time: "13:30", title: "Bebek → Rumeli Hisarı shore walk", note: "Twenty minutes of promenade past yalı mansions and rowers, at the narrowest point of the strait.", place: "bebek-hisari-walk" },
-      { time: "15:30", title: "Short Bosphorus cruise", note: "Two hours up to the second bridge and back. All of the view, none of the evening gone.", place: "short-bosphorus" },
-      { time: "18:00", title: "Ortaköy — Sunday is its best day", note: "The craft market is fully out on a Sunday. Mosque, bridge, boats.", place: "ortakoy" },
-      { time: "19:15", title: "Sunset, then kumpir", note: "Stand to the left of the mosque for the shot, then the loaded-potato alley behind it.", place: "ortakoy-kumpir" },
-      { time: "21:00", title: "Home along the shore", note: "Fifteen minutes back down the water to Fındıklı by taxi or bus." }
+      { time: "08:30", title: "Feriköy Antika Pazarı", note: "SUNDAYS ONLY, and the one market that cannot move to another day. Vinyl, cameras, Ottoman ephemera, watches. Before 11:00 or the dealers have picked it over. An hour is enough.", place: "ferikoy-antika" },
+      { time: "10:15", title: "Drive north up the shore road", note: "Follow the water the whole way — Bebek, Rumeli Hisarı, Emirgan, Sarıyer. About an hour to the top with stops." },
+      { time: "10:45", title: "Sarıyer böreği on the way", note: "Sarıyer is known across the city for one pastry, sold by weight from shops that have made nothing else for generations. Second breakfast, standing up.", map: "Sarıyer Börekçisi Sarıyer İstanbul" },
+      { time: "12:00", title: "Garipçe", note: "Thirty houses, a stone harbour and a couple of fish shacks, sitting directly beneath the Yavuz Sultan Selim bridge. Fishermen mending nets and nothing else. After ten visits this is the İstanbul you have not seen.", map: "Garipçe Sarıyer İstanbul" },
+      { time: "13:30", title: "Lunch at Rumeli Feneri", note: "Ten minutes on. An 1856 lighthouse, an Ottoman fort in ruins on the headland, and fish restaurants built onto the rocks where the strait becomes open sea. Eat whatever came in this morning.", map: "Rumeli Feneri Sarıyer" },
+      { time: "16:00", title: "Beyaz Park, Sarıyer", note: "Back down the shore. A quiet tea garden with tables at the water, local rather than touristic, reasonable prices for a Bosphorus seat. Sit for an hour and watch the tankers come down.", map: "Beyaz Park Sarıyer İstanbul" },
+      { time: "17:30", title: "Emirgan Korusu", note: "Forty-seven hectares of woodland climbing from the shore, three restored köşks and a pond. In September it is simply a big quiet wood above the water.", map: "Emirgan Korusu Sarıyer" },
+      { time: "18:45", title: "SoTepe, Baltalimanı", note: "A coffee terrace on the hill between Emirgan and Rumeli Hisarı — lawn, string lights, the strait below and the bridge lighting up. Proper coffee, not a view tax.", map: "SoTepe Baltalimanı Sarıyer" },
+      { time: "20:30", title: "Home along the water", note: "Thirty minutes down the shore road to Fındıklı, with the whole strait lit on your left." }
     ],
-    swap: "If you would rather sit still: the Şehir Hatları full-day cruise leaves Eminönü about 10:35 and returns around 17:00, running all the way to the Black Sea mouth for the price of a coffee. It costs you the flea market though."
+    swap: "If the flea market does not appeal, leave at 08:00 instead and add Rumeli Kavağı for a second, cheaper fish stop on the way up — plastic chairs on the quay, a fraction of Bebek prices."
   },
 
   {
-    n: 4, date: "2026-09-14", dow: "Monday", title: "Asian side — food, murals, and the gasworks",
-    car: { use: false, text: "Ferry to Kadıköy and leave the car at the hotel — parking there is worse than the crossing is long." },
-    subtitle: "Kadıköy properly, plus Müze Gazhane, which is the best new thing on that side of the water.",
-    tags: ["Food day", "Ferries", "New"],
+    n: 4, date: "2026-09-14", dow: "Monday", title: "The Asian shore, village by village",
+    car: { use: true, text: "Over the bridge and down the Asian shore. Everything shut on a Monday is avoided by design." },
+    subtitle: "Yoghurt at a pier, two hilltop groves, a sleepy fortress village, and the best sunset in the city.",
+    tags: ["Bosphorus", "Gardens", "Sunset"],
     items: [
-      { time: "09:30", title: "Ferry: Kabataş → Kadıköy", note: "Seven minutes to the pier, twenty on the water. Tea, gulls, the whole skyline. Sit outside at the back.", place: "kabatas-kadikoy" },
-      { time: "10:15", title: "Kadıköy market streets", note: "Graze rather than plan — cheese, pickles, olives, dried fruit. Özcan Turşucusu for a shot of pickle juice.", place: "kadikoy-carsi" },
-      { time: "11:00", title: "Fazıl Bey, then Şekerci Cafer Erol", note: "Coffee roasted since 1923, then lokum and marzipan from an 1807 shop. Buy your sweets here, not at the Spice Bazaar — better and cheaper.", place: "seker-cafer-erol" },
-      { time: "12:30", title: "Lunch: Çiya Sofrası", note: "Before 13:00. Regional Anatolian dishes that rotate daily and exist nowhere else. Point at everything; you pay by weight.", place: "ciya-sofrasi" },
-      { time: "14:00", title: "Yeldeğirmeni mural walk", note: "Kadıköy's arts quarter — building-sized murals, galleries, record shops. About forty minutes on foot.", place: "yeldegirmeni" },
-      { time: "15:30", title: "Müze Gazhane", note: "An 1892 gasworks turned into a 32,000 m² public campus — museums, a huge library, theatre halls and cafés around the old gas tanks. Free, and almost no foreign visitors.", place: "muze-gazhane" },
-      { time: "17:45", title: "Tea at Tarihi Moda İskelesi", note: "A restored 1917 pier out over the Marmara. Rail-side table about 45 minutes before sunset.", place: "moda-iskele" },
-      { time: "19:30", title: "Ferry back into the sunset", note: "Kadıköy → Kabataş with the old city lighting up on your left." },
-      { time: "20:45", title: "Something light in Cihangir", note: "You will have eaten all day. Ten minutes from the hotel." }
+      { time: "09:30", title: "Drive over to Kanlıca", note: "Thirty-five minutes over the FSM bridge. Note the HGS toll is billed back to you by Garenta." },
+      { time: "10:00", title: "Kanlıca yoğurdu at the pier", note: "One dish, sold here for a century: thick strained yoghurt with icing sugar you tip over yourself, eaten standing at the ferry pier. Five minutes, pocket change, and entirely genuine.", map: "Kanlıca İskelesi Beykoz" },
+      { time: "10:45", title: "Mihrabat Korusu", note: "On the bluff directly above the village. Pine woods opening onto a cleared terrace over the FSM bridge — widely held to be the best viewpoint on the Asian side. Free on foot, about 100 TL to park.", map: "Mihrabat Korusu Kanlıca Beykoz" },
+      { time: "12:15", title: "Hıdiv Kasrı grove", note: "Next door in Çubuklu. An art-nouveau villa built for the Khedive of Egypt in its own wooded park on a bluff, with a garden terrace and one of the widest views on this shore. You can sit outside without going in.", map: "Hıdiv Kasrı Çubuklu Beykoz" },
+      { time: "14:00", title: "Lunch at Çengelköy", note: "Down the shore to a village of wooden houses and moored fishing boats, with the white towers of the Kuleli school along the water. Plain fish places at the quay.", map: "Çengelköy Üsküdar" },
+      { time: "16:00", title: "Anadolu Hisarı & Göksu", note: "The oldest Ottoman fortress on the strait, where two streams run in — the meadows the Ottomans called the Sweet Waters of Asia. Rowing boats on the creek, tea at the water, genuinely sleepy.", map: "Anadolu Hisarı Göksu Beykoz" },
+      { time: "18:00", title: "Beykoz Siloları — the roof", note: "Arrive as the museum inside closes at 18:00; the roof terrace and café stay open until 21:00, which is the whole trick. Restored grain silos facing WEST from the Asian shore, so the sun sets over the water in front of you rather than behind you.", map: "Beykoz Siloları Çubuklu Beykoz" },
+      { time: "19:20", title: "Sunset from the silo roof", note: "This is the one people are calling the best sunset in İstanbul right now, and it is new enough not to be crowded." },
+      { time: "21:00", title: "Back over the bridge", note: "Forty minutes home. Nothing you wanted today was closed on a Monday — the palaces and museums were, which is why none are here." }
     ],
-    swap: "Rain plan: Emaar Square Mall and its aquarium are twenty minutes from Kadıköy, or the Rahmi Koç Museum on the Golden Horn — a submarine you can walk through. Note İstanbul Modern and Dolmabahçe are both closed today."
+    swap: "Rain plan: everything today is outdoors. If it turns, swap with Thursday — the Golden Horn day is largely indoor."
   },
 
   {
-    n: 5, date: "2026-09-15", dow: "Tuesday", title: "Malls, properly",
-    car: { use: true, text: "Every stop today has an underground car park. Nişantaşı, Zorlu, İstinye Park." },
-    subtitle: "Luxury street on foot in the morning, then the two best malls in the country.",
-    tags: ["Shopping", "Tax-free", "Sunset dinner"],
+    n: 5, date: "2026-09-15", dow: "Tuesday", title: "Üsküdar on foot, and the sunset walk",
+    car: { use: false, text: "Leave it at the hotel. Ferry across and walk — parking in Üsküdar and Kadıköy is worse than the crossing is long." },
+    subtitle: "The ferry, a painted village, a hilltop park, and the best sunset walk in the city — looking west at the old city.",
+    tags: ["Ferry", "Walkable", "Sunset walk"],
     items: [
-      { time: "10:00", title: "Nişantaşı on foot", note: "Abdi İpekçi → Teşvikiye → Akkavak Sokak. Flagships on the main street, Turkish designers on the side streets. City's Nişantaşı is the indoor backup if it turns.", place: "nisantasi" },
-      { time: "13:00", title: "Lunch in Nişantaşı", note: "Kantin for modern Turkish, or any of the café terraces on Atiye Sokak." },
-      { time: "14:30", title: "Zorlu Center", note: "Fifteen minutes away. Luxury wing, Apple Store, best mall architecture in the city. Check what is on at Zorlu PSM while you are there.", place: "zorlu" },
-      { time: "16:00", title: "İstinye Park — the main event", note: "Luxury wing, all the good Turkish brands, and an open-air bazaar section. Do the tax-free forms at the ground-floor desk before you leave.", place: "istinye-park" },
-      { time: "19:30", title: "Sunset at Ulus 29", note: "Ten minutes from İstinye Park, hillside terrace looking down the Bosphorus at both bridges.", place: "ulus-29" },
-      { time: "21:00", title: "Dinner with the view", note: "Stay at Ulus 29 / Sunset Grill, or drop to Bebek for seafood on the water." }
+      { time: "09:30", title: "Ferry Kabataş → Üsküdar", note: "Seven minutes to the pier, fifteen on the water past the Maiden's Tower. Tap the İstanbulkart, sit outside at the back.", place: "kabatas-uskudar" },
+      { time: "10:15", title: "Kuzguncuk", note: "A former Jewish, Greek and Armenian village swallowed by the city but still intact — one street of painted wooden houses, a synagogue, a church and a mosque within a few hundred metres, and a market garden behind. Quieter and more lived-in than Balat.", map: "Kuzguncuk Üsküdar" },
+      { time: "11:30", title: "Kaftan Sokak", note: "A painted stepped street dropping toward the water, every wall and stair tread in blocks of colour. Ten minutes, not an outing.", map: "Kaftan Sokak Sultantepe Üsküdar" },
+      { time: "12:15", title: "Nakkaştepe Millet Parkı", note: "Up the hill above Kuzguncuk — a hilltop park on a former quarry with wide lawns and the strait laid out below. Open 24 hours, free, and big enough that it never feels full.", map: "Nakkaştepe Millet Bahçesi Kuzguncuk Üsküdar" },
+      { time: "14:00", title: "Lunch at Çengelköy or back in Üsküdar", note: "Plain places at the water. Nothing that needs booking." },
+      { time: "15:30", title: "Fethipaşa Korusu", note: "A 19th-century Ottoman grove on the hill above Üsküdar, terraced down toward the water with a restored köşk. Open 08:30–23:00, free to enter, and the closest of the Asian groves to the ferry.", map: "Fethi Paşa Korusu Üsküdar" },
+      { time: "17:45", title: "Üsküdar Sahili — walk south to Salacak", note: "The best sunset walk in İstanbul and it costs nothing. The Maiden's Tower offshore, and the entire old-city skyline — Topkapı, Hagia Sophia, the Blue Mosque — directly across the water in front of you. Carpet-and-cushion tea gardens along the rail.", map: "Üsküdar Sahili Salacak" },
+      { time: "19:20", title: "Sunset over the old city", note: "You are facing west from the Asian shore, so the sun goes down behind the minarets. Sit on a cushion with a tea and let it happen." },
+      { time: "21:00", title: "Ferry home", note: "Üsküdar back to Kabataş with the city lit on both sides. Check the last boat when you land in the morning." }
     ],
-    swap: "Tuesday is also Kadıköy Salı Pazarı — one of the largest street markets in the city, clothes and textiles across an enormous covered ground. If you would rather bargain than browse, take that instead and move the malls to Thursday."
+    swap: "Beylerbeyi Palace and Küçüksu Kasrı are both open today and both are on this shore — add either if you want one building. Küçüksu is the smaller and stranger of the two."
   },
 
   {
-    n: 6, date: "2026-09-16", dow: "Wednesday", title: "Where the bazaars actually buy",
-    car: { use: false, text: "Absolutely not. Fatih, Tahtakale and the bazaar on the T1 tram from your door." },
-    subtitle: "Wholesale, not souvenirs. Plus the biggest weekly market in İstanbul, which only runs today.",
-    tags: ["Wednesday only", "Wholesale", "Bring cash"],
+    n: 6, date: "2026-09-16", dow: "Wednesday", title: "The old city nobody photographs",
+    car: { use: false, text: "Absolutely not. Fatih and the bazaar quarter by car is a bad afternoon. T1 tram from outside the hotel." },
+    subtitle: "The biggest weekly market in the city, a Byzantine church almost nobody enters, and the wholesale streets behind the bazaar.",
+    tags: ["Wednesday only", "Unusual", "Bring cash"],
     items: [
-      { time: "09:00", title: "Fatih Çarşamba Pazarı", note: "WEDNESDAYS. The largest weekly market in the city, spilling through the streets around Fatih Mosque. Vast, cheap, entirely local. A conservative neighbourhood — dress accordingly.", place: "carsamba-pazari" },
-      { time: "11:30", title: "Tahtakale", note: "The wholesale engine room behind the Spice Bazaar — coffee, nuts, kitchen equipment, packaging. This is where the bazaar shops buy their stock at a third of the price. Dies after 17:00.", place: "tahtakale" },
-      { time: "12:45", title: "Hasırcılar Caddesi", note: "The street beside the Spice Bazaar where locals buy the same spices, cheese and dried fruit without the markup. Skip the bazaar itself unless you want the photograph.", place: "hasircilar" },
-      { time: "13:30", title: "Lunch: Sur Ocakbaşı", note: "Ten minutes uphill in Küçükpazar. Southeastern grill, no tourists, absurdly good lamb. Cash.", place: "sur-ocakbasi" },
-      { time: "15:00", title: "Cevahir Bedesten", note: "The walled antique core at the centre of the Grand Bazaar, where the dealers themselves buy. Head straight there and ignore the outer lanes.", place: "cevahir-bedesten" },
-      { time: "16:30", title: "Nuruosmaniye Caddesi", note: "The elegant street off the bazaar's Nuruosmaniye gate — serious carpet, jewellery and calligraphy dealers in proper shops. Fixed high prices and real expertise.", place: "nuruosmaniye" },
-      { time: "18:15", title: "Süleymaniye terrace at sunset", note: "Free, calm, and the best view of the Golden Horn in the city. Ten minutes from the bazaar.", place: "suleymaniye" },
-      { time: "20:00", title: "Dinner: Hamdi, Eminönü", note: "Book the TOP-FLOOR terrace explicitly. Then the T1 tram straight home from Eminönü.", place: "hamdi" }
+      { time: "09:00", title: "Fatih Çarşamba Pazarı", note: "WEDNESDAYS. The largest weekly market in İstanbul, spilling through the streets around Fatih Mosque. Vast, cheap, entirely local, and nothing about it is staged for visitors. A conservative quarter — dress accordingly.", place: "carsamba-pazari" },
+      { time: "11:30", title: "Zeyrek Mosque (Pantokrator)", note: "The vast Byzantine monastery church of the Pantokrator, recently restored and usually empty. One of the most important buildings in the city and you will likely have it to yourself.", map: "Zeyrek Camii Molla Zeyrek Fatih" },
+      { time: "12:30", title: "Lunch: Sur Ocakbaşı", note: "Ten minutes downhill in Küçükpazar. Southeastern grill in a working quarter, no tourists, absurdly good lamb. Cash, no alcohol, no fuss.", place: "sur-ocakbasi" },
+      { time: "14:00", title: "Tahtakale", note: "The wholesale engine room behind the Spice Bazaar — coffee, nuts, kitchen equipment, packaging. This is where the bazaar shops buy their stock. Dies after 17:00.", place: "tahtakale" },
+      { time: "15:30", title: "Hasırcılar Caddesi", note: "The street beside the Spice Bazaar where locals buy the same spices, cheese and dried fruit without the markup. Skip the bazaar itself unless you want the photograph.", place: "hasircilar" },
+      { time: "16:30", title: "Büyük Valide Han rooftop", note: "A crumbling 1651 caravanserai where a man on the roof charges a few lira for the most photogenic rooftop in the old city. Ask for 'çatı' at the entrance. Not for anyone nervous about stairs.", place: "buyuk-valide-han" },
+      { time: "18:15", title: "Süleymaniye terrace at sunset", note: "Twelve minutes uphill. Sinan's masterpiece, free, calm, and the terrace behind it has the best view of the Golden Horn in the city. Go for the terrace even if you skip the interior.", place: "suleymaniye" },
+      { time: "19:45", title: "Balık ekmek at Eminönü", note: "Downhill to the quay. Grilled mackerel in half a loaf, handed over from boats rocking at the rail beside the Galata Bridge. Squeeze the lemon, eat standing. The cheapest famous meal in İstanbul.", map: "Eminönü balık ekmek Galata Köprüsü" },
+      { time: "20:45", title: "T1 home", note: "Eminönü straight back to Fındıklı, no changes." }
     ],
-    swap: "If you want to go deeper on buying: Horhor in Aksaray is six floors of serious antiques with no foreign buyers, and the Zeytinburnu leather district is a direct T1 ride from your hotel."
+    swap: "Want the truly obscure version? Yedikule Bostanları — market gardens still farmed inside the 5th-century land walls, continuously for around 1,500 years. Direct on the T1 to Zeytinburnu, then a short walk, and virtually no visitors."
   },
 
   {
-    n: 7, date: "2026-09-17", dow: "Thursday", title: "The İstanbul that is new since your last trip",
-    car: { use: true, text: "Tersane, Arter and Bomontiada are all awkward on public transport and easy by car." },
-    subtitle: "Thursday is deliberate — both Arter and the Çinili Hamam museum are free today.",
-    tags: ["New & reborn", "Free Thursdays", "Book the hammam"],
+    n: 7, date: "2026-09-17", dow: "Thursday", title: "The Golden Horn, end to end",
+    car: { use: true, text: "Useful today — the Horn strings together in one drive and the stops are spread out." },
+    subtitle: "A restored hammam, the colour streets, an industrial museum, and a cable car to tea above the whole Golden Horn.",
+    tags: ["Free Thursday", "Rain-proof", "Last full day"],
     items: [
-      { time: "09:30", title: "Zeyrek Çinili Hamam & Museum", note: "A Mimar Sinan bathhouse from the 1540s, reopened 2024 after thirteen years of restoration, sitting on a Byzantine cistern. Museum entry is free on Thursdays. Book a bathing session ahead if you want one.", place: "cinili-hamam" },
-      { time: "11:30", title: "Balat & Fener on the way across", note: "Kiremit Caddesi and Merdivenli Yokuş. Late-morning light is the good light.", place: "balat-fener" },
-      { time: "13:00", title: "Lunch in Balat", note: "Any of the courtyard cafés on Vodina Caddesi. Unhurried and cheap." },
-      { time: "14:30", title: "Tersane İstanbul", note: "The Ottoman Imperial Shipyard reborn as a 242,000 m² waterfront district — Foster + Partners fashion pavilions, museums, a marina, a long promenade. Still opening in phases.", place: "tersane-istanbul" },
-      { time: "16:30", title: "Arter", note: "Free on Thursdays. A purpose-built contemporary art museum in Dolapdere with a top-floor terrace, twenty minutes from your hotel and never crowded.", place: "arter" },
-      { time: "18:30", title: "Bomontiada", note: "The 1890 brewery turned into a courtyard of galleries, restaurants, the Ara Güler Museum and the Babylon music venue. Check the listings — if something is on, stay for it.", place: "bomontiada" },
-      { time: "20:30", title: "Dinner: Mikla, or stay at Bomontiada", note: "Mikla is the splurge — new Anatolian on the best restaurant roof in the city, two seas from one table. Book two to three weeks ahead.", place: "mikla" }
+      { time: "09:30", title: "Zeyrek Çinili Hamam museum", note: "A Mimar Sinan bathhouse from the 1540s, reopened in 2024 after thirteen years of restoration, sitting on a Byzantine cistern. The museum is FREE on Thursdays, which is why today.", place: "cinili-hamam" },
+      { time: "11:00", title: "Balat & Fener", note: "Kiremit Caddesi and Merdivenli Yokuş for the painted houses and staircase streets. Late-morning light is the good light.", place: "balat-fener" },
+      { time: "13:00", title: "Lunch in Balat", note: "Courtyard cafés on Vodina Caddesi. Unhurried and cheap." },
+      { time: "14:30", title: "DDM — Dijital Deneyim Merkezi, Sütlüce", note: "The city's 2,000 m² digital museum: rooms of immersive projection and interactive work. Open 10:00–18:00, closed Mondays. NO CASH — card or İstanbulkart only. Indoors, so it is your rain cover if the 47% forecast lands.", map: "Dijital Deneyim Merkezi Sütlüce İstanbul" },
+      { time: "16:00", title: "santralistanbul", note: "A 1914 power station on the Horn turned into an energy museum — turbine halls, control rooms and switchgear you walk straight through. Industrial, strange, and almost empty.", map: "santralistanbul Eyüpsultan" },
+      { time: "17:30", title: "Eyüp teleferik up to Pierre Loti", note: "A cable car over a hillside Ottoman cemetery to a tea terrace above the entire Golden Horn. Pay with the İstanbulkart. The ride is half the point.", place: "eyup-teleferik" },
+      { time: "18:15", title: "Tea at Pierre Loti", note: "Sit on the terrace with the Horn below you and the old city stretching away. Last proper view of the trip.", place: "pierre-loti" },
+      { time: "20:00", title: "Dinner: back down to Karaköy", note: "Twenty-five minutes home. Keep it plain — you fly tomorrow morning and the good version of this trip does not end in a tasting menu." },
+      { time: "22:00", title: "Pack tonight", note: "Check-out is 08:15 and the drive to IST is the worst traffic of the week. Do not leave it to the morning." }
     ],
-    swap: "Pack tonight, not tomorrow morning. If you would rather have a quiet last evening: Kılıç Ali Paşa Hamamı is a 1580 Sinan bathhouse seven minutes from the hotel, and your legs will have earned it."
+    swap: "If the rain holds off, Tersane İstanbul is on the same stretch of water — the Ottoman Imperial Shipyard rebuilt as a waterfront district, and worth an hour at sunset instead of Pierre Loti."
   },
 
   {

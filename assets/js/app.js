@@ -132,7 +132,8 @@
         '<div class="tl-time">' + esc(it.time) + "</div>" +
         '<div class="tl-t">' + esc(it.title) + "</div>" +
         '<div class="tl-n">' + esc(it.note) + "</div>" +
-        (p ? '<a class="tl-link" target="_blank" rel="noopener" href="' + mapUrl(p.name + " " + p.area) + '">📍 ' + esc(p.name) + "</a>" : "") +
+        (p ? '<a class="tl-link" target="_blank" rel="noopener" href="' + mapUrl(p.name + " " + p.area) + '">📍 ' + esc(p.name) + "</a>"
+           : it.map ? '<a class="tl-link" target="_blank" rel="noopener" href="' + mapUrl(it.map) + '">📍 Open in Maps</a>' : "") +
       "</li>";
     }).join("") + "</ul>";
   }
