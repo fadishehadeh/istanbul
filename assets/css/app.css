@@ -567,3 +567,20 @@ html[data-theme="dark"] .mini-btn.is-on { color: #06222e; }
 .dep.gone { opacity: .38; text-decoration: line-through; }
 .dep.next { background: var(--brand); color: #fff; border-color: transparent; }
 html[data-theme="dark"] .dep.next { color: #06222e; }
+
+/* per-day car guidance */
+.carnote {
+  margin: 0 0 14px; padding: 11px 13px; border-radius: var(--r); font-size: 12.6px;
+  color: var(--ink-2); border: 1px solid var(--line); background: var(--bg-soft);
+}
+.carnote b { display: block; font-size: 12px; letter-spacing: .04em; margin-bottom: 3px; }
+.carnote.yes { background: color-mix(in srgb, var(--good) 9%, var(--bg-soft)); border-color: color-mix(in srgb, var(--good) 28%, transparent); }
+.carnote.yes b { color: var(--good); }
+.carnote.no  { background: color-mix(in srgb, var(--brand) 8%, var(--bg-soft)); border-color: color-mix(in srgb, var(--brand) 26%, transparent); }
+.carnote.no b { color: var(--brand); }
+.today-card .carnote { margin-top: 12px; }
+.warn.danger-warn {
+  background: color-mix(in srgb, var(--danger) 11%, var(--bg-soft));
+  border-color: color-mix(in srgb, var(--danger) 34%, transparent);
+  color: var(--ink); font-weight: 550;
+}

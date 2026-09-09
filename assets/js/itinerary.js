@@ -17,13 +17,16 @@
 const ITINERARY = [
   {
     n: 1, date: "2026-09-11", dow: "Friday", title: "Fly out — TK827",
+    car: { use: true, text: "Pick the car up at IST after you land. Get the passport stamp FIRST — Garenta needs it for a foreign licence." },
     subtitle: "Beirut 22:15, İstanbul 00:15. Nothing happens today except getting there.",
     tags: ["Travel day", "Late arrival", "TK827"],
     items: [
       { time: "19:00", title: "Leave for Beirut airport", note: "TK827 departs 22:15 from Rafic Hariri International. Aim to be at the terminal by 19:45 — three hours out for an international departure." },
       { time: "22:15", title: "TK827 — Beirut → İstanbul", note: "Turkish Airlines, Airbus A350-900, Economy (class U). Flight time 2 hours. Checked baggage 30 kg each, cabin 8 kg. Booking reference WJUTVX." },
-      { time: "00:15", title: "Land at İstanbul Airport (IST)", note: "Now Saturday. Passport control at IST can take 30–45 minutes at this hour. Baggage reclaim after that." },
-      { time: "01:15", title: "Transfer to Fındıklı", note: "At this hour take a taxi — roughly 45 minutes with empty roads, about 1,000–1,400 TL. Use the official taxi rank or book BiTaksi. Havaist buses do run through the night but add an hour and a transfer." },
+      { time: "00:15", title: "Land at İstanbul Airport (IST)", note: "Now Saturday. Passport control can take 30–45 minutes at this hour." },
+      { time: "00:45", title: "GET YOUR PASSPORT STAMPED", note: "Do this before you leave the arrivals hall. Garenta will not release the car on a foreign licence without the entry stamp for your most recent arrival, and İstanbul's e-gates frequently do not stamp. Ask the officer directly, or request an official Entry Record. Everything below depends on it." },
+      { time: "01:15", title: "Collect the hire car — Garenta, ref 0N7C4X", note: "Desk is in the Arrivals Terminal. Bring the credit card in your own name, your licence and ID. They will hold ₺6,000 as a deposit. Check the HGS toll transponder is fitted and ask how they bill crossings. Photograph every existing scratch before you drive off." },
+      { time: "01:45", title: "Drive to Fındıklı", note: "About 45 minutes on empty roads — the one time of day this drive is easy. Roughly 45 km via the O-7 and the coast. Confirm with the hotel in advance where you can park; Meclisi Mebusan Caddesi has no realistic street parking." },
       { time: "02:00", title: "Check in at Zimmer Bosphorus", note: "Meclisi Mebusan Cad. 61, Fındıklı. The booking is confirmed for a Saturday 12 September check-in, so arriving at 2am is exactly right — confirmation code 1051754682. Sleep." }
     ],
     swap: "Change some money at the airport only if you need taxi cash — the rate is poor. 1,500 TL is plenty to get you to the hotel and through breakfast; do the real exchange in Eminönü later in the week."
@@ -31,6 +34,7 @@ const ITINERARY = [
 
   {
     n: 2, date: "2026-09-12", dow: "Saturday", title: "Slow start, all on foot",
+    car: { use: false, text: "Leave it parked. Everything today is inside a fifteen-minute walk and Beyoğlu parking is misery." },
     subtitle: "You checked in at 2am. Today stays inside a fifteen-minute walk of the hotel.",
     tags: ["Easy", "Walkable", "No tickets"],
     items: [
@@ -48,6 +52,7 @@ const ITINERARY = [
 
   {
     n: 3, date: "2026-09-13", dow: "Sunday", title: "Bosphorus, and the Sunday flea market",
+    car: { use: true, text: "The car's best day. The Bosphorus shore road north is exactly what it's for." },
     subtitle: "Feriköy Antika is Sunday-only, and it is the one market you cannot move to another day.",
     tags: ["Sunday only", "Bosphorus", "Antiques"],
     items: [
@@ -64,6 +69,7 @@ const ITINERARY = [
 
   {
     n: 4, date: "2026-09-14", dow: "Monday", title: "Asian side — food, murals, and the gasworks",
+    car: { use: false, text: "Ferry to Kadıköy and leave the car at the hotel — parking there is worse than the crossing is long." },
     subtitle: "Kadıköy properly, plus Müze Gazhane, which is the best new thing on that side of the water.",
     tags: ["Food day", "Ferries", "New"],
     items: [
@@ -82,6 +88,7 @@ const ITINERARY = [
 
   {
     n: 5, date: "2026-09-15", dow: "Tuesday", title: "Malls, properly",
+    car: { use: true, text: "Every stop today has an underground car park. Nişantaşı, Zorlu, İstinye Park." },
     subtitle: "Luxury street on foot in the morning, then the two best malls in the country.",
     tags: ["Shopping", "Tax-free", "Sunset dinner"],
     items: [
@@ -97,6 +104,7 @@ const ITINERARY = [
 
   {
     n: 6, date: "2026-09-16", dow: "Wednesday", title: "Where the bazaars actually buy",
+    car: { use: false, text: "Absolutely not. Fatih, Tahtakale and the bazaar on the T1 tram from your door." },
     subtitle: "Wholesale, not souvenirs. Plus the biggest weekly market in İstanbul, which only runs today.",
     tags: ["Wednesday only", "Wholesale", "Bring cash"],
     items: [
@@ -114,6 +122,7 @@ const ITINERARY = [
 
   {
     n: 7, date: "2026-09-17", dow: "Thursday", title: "The İstanbul that is new since your last trip",
+    car: { use: true, text: "Tersane, Arter and Bomontiada are all awkward on public transport and easy by car." },
     subtitle: "Thursday is deliberate — both Arter and the Çinili Hamam museum are free today.",
     tags: ["New & reborn", "Free Thursdays", "Book the hammam"],
     items: [
@@ -130,13 +139,15 @@ const ITINERARY = [
 
   {
     n: 8, date: "2026-09-18", dow: "Friday", title: "Check out and fly — TK824",
+    car: { use: true, text: "Drop at IST by 09:30 for the 12:25 flight — not the 18:30 the booking says." },
     subtitle: "The flight is 12:25, so this is a morning of logistics. Do the shopping the night before.",
     tags: ["Departure", "Tight morning", "TK824"],
     items: [
       { time: "07:00", title: "Breakfast at the hotel", note: "No time for anywhere else. Bags packed and downstairs." },
       { time: "08:15", title: "Check out", note: "Check-out is today. Confirmation 1051754682. Do a drawer-and-safe sweep — passports, chargers, adapters." },
-      { time: "08:30", title: "Leave for İstanbul Airport", note: "Allow 60 minutes and add a buffer — Friday morning traffic on the coast road is the worst of the week. Taxi is the only sensible option with luggage." },
-      { time: "09:45", title: "At the terminal", note: "Aim to be airside by 10:30. Turkish Airlines check-in, then passport control, which is the slow part at IST." },
+      { time: "08:15", title: "Fuel up, then drive to IST", note: "Return it full or they charge a premium. Allow 75 minutes: Friday morning on the coast road is the worst traffic of the week, and you are driving it at the worst hour. Fill up near the airport, not in town." },
+      { time: "09:30", title: "Return the car to Garenta", note: "Your booking runs to 18:30, but the flight is 12:25 — hand it back now. Returning early costs nothing. Get the condition check signed off and keep the receipt; the ₺6,000 deposit releases afterwards." },
+      { time: "10:00", title: "At the terminal", note: "Aim to be airside by 10:45. Turkish Airlines check-in, then passport control, which is the slow part at IST." },
       { time: "12:25", title: "TK824 — İstanbul → Beirut", note: "Airbus A321neo, Economy (class U). Flight time 1h 55m. Lands Beirut 14:20. Booking reference WJUTVX." }
     ],
     swap: "Do NOT plan Hagia Sophia or any mosque this morning — they close to visitors around Friday midday prayer, and you will be at the airport anyway. If you want one last thing, Karaköy Güllüoğlu opens at 07:00 and vacuum-packs baklava for the flight; it is twelve minutes from the hotel."

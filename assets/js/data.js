@@ -981,6 +981,21 @@ const TRANSPORT = {
     warn: "Published times — confirm at the pier on the day, and check the last boat back the moment you land."
   },
 
+  driving: [
+    { icon: "🛑", title: "Where NOT to take the car",
+      body: "Sultanahmet, Eminönü, the Grand Bazaar and Tahtakale — the streets are medieval, parking is effectively nonexistent, and the T1 tram from outside your hotel goes there directly. İstiklal and central Beyoğlu are pedestrianised. Kadıköy is far better reached by ferry than by driving around the Bosphorus Bridge. Balat's lanes are too narrow to enjoy." },
+    { icon: "✅", title: "Where the car earns its keep",
+      body: "İstinye Park, Zorlu and the other malls — all with big underground car parks. The Bosphorus shore road north to Emirgan, Bebek and Sarıyer. Çamlıca on the Asian side. Fişekhane, Tema World and Tersane, all of which are a pain on public transport. And it makes a real day trip possible: Belgrad Forest is 40 minutes, Şile and Ağva on the Black Sea about 90." },
+    { icon: "🎫", title: "HGS — tolls are electronic only",
+      body: "Every bridge and motorway in Türkiye is cashless. There are no toll booths to pay at. Hire cars carry an HGS transponder and the company bills you afterwards, usually with a service fee per crossing. Confirm at the desk that HGS is fitted and ask how they charge — driving through without one earns a fine." },
+    { icon: "🅿️", title: "Parking",
+      body: "İSPARK is the municipal operator — blue signs, pay at the machine or in their app. Around Fındıklı and Cihangir street parking is very tight; ask the hotel what they offer before you arrive at 2am with a car. Malls and the big new complexes all have free or cheap car parks." },
+    { icon: "🚦", title: "Traffic",
+      body: "Avoid 08:00–10:00 and 17:00–20:00 anywhere near the centre, and treat Friday evening as the worst of the week. The coast road past your hotel clogs badly. Conversely, the drive in from the airport at 1am will be clear and quick." },
+    { icon: "⛽", title: "Fuel and limits",
+      body: "Petrol, and stations are full-service — the attendant fills it, you pay them. Limits are 50 in town and up to 120 on motorways, enforced by a lot of cameras. Drive on the right. 112 for any emergency." }
+  ],
+
   links: [
     { label: "Şehir Hatları — official ferry timetables", url: "https://sehirhatlari.istanbul/en/timetables" },
     { label: "İETT — bus routes and live times",        url: "https://www.iett.istanbul/en" },

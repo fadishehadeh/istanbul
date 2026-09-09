@@ -102,6 +102,7 @@
           '<div class="today-day">' + esc(label) + "</div>" +
           '<h2 class="today-title">' + esc(day.title) + "</h2>" +
           '<p class="today-sub">' + esc(day.subtitle) + "</p>" +
+          carHtml(day) +
         "</div>" +
         '<div class="today-body">' + timelineHtml(day) + "</div>" +
       "</div>";
@@ -109,6 +110,13 @@
 
     const notes = $("#hotelNotes");
     notes.innerHTML = TRIP.hotel.notes.map((n) => "<li>" + esc(n) + "</li>").join("");
+  }
+
+  function carHtml(day) {
+    if (!day.car) return "";
+    return '<div class="carnote ' + (day.car.use ? "yes" : "no") + '">' +
+      "<b>" + (day.car.use ? "🚗 Take the car" : "🚊 Leave the car") + "</b>" +
+      esc(day.car.text) + "</div>";
   }
 
   /* ================= PLAN ================= */
@@ -170,6 +178,7 @@
         '<div class="day-panel">' +
           '<p class="day-sub">' + esc(day.subtitle) + "</p>" +
           '<div class="tagrow">' + day.tags.map((t) => '<span class="tag">' + esc(t) + "</span>").join("") + "</div>" +
+          carHtml(day) +
           timelineHtml(day) +
           '<div class="swap"><b>Swap / backup</b>' + esc(day.swap) + "</div>" +
         "</div>" +
@@ -494,6 +503,28 @@
         (h.note ? '<p class="warn">' + esc(h.note) + "</p>" : "") + "</div>";
     }
 
+    /* hire car */
+    if (d.car) {
+      const c = d.car;
+      html += '<div class="info-card"><h3><span>🚗</span>' + esc(c.company) + " hire car</h3>" +
+        (c.critical ? '<p class="warn danger-warn">' + esc(c.critical) + "</p>" : "") +
+        kv([
+          ["Reference", '<b class="mono">' + esc(c.ref) + "</b>", true],
+          ["Vehicle", c.vehicle],
+          ["Pick up", esc(c.pickUp.when) + "<br>" + esc(c.pickUp.where), true],
+          ["Drop off", esc(c.dropOff.when) + "<br>" + esc(c.dropOff.where), true],
+          ["Mileage", c.mileage],
+          ["Deposit", c.deposit],
+          ["Bring", c.bring],
+          ["Paid", c.paid]
+        ]) +
+        '<div class="calls" style="margin-top:12px">' +
+          '<a class="call" href="tel:' + esc(c.phone.tel) + '"><span>Rental desk, IST</span><b>' + esc(c.phone.value) + "</b></a>" +
+          '<a class="call" target="_blank" rel="noopener" href="' + mapUrl(c.address) + '"><span>Desk location</span><b>Map</b></a>' +
+        "</div>" +
+        (c.warn ? '<p class="warn">' + esc(c.warn) + "</p>" : "") + "</div>";
+    }
+
     /* insurance */
     if (d.insurance) {
       const i = d.insurance;
@@ -642,6 +673,13 @@
           T.islands.departures.map((d) => '<span class="dep" data-t="' + d + '">' + d + "</span>").join("") +
         "</div>" +
         '<p class="warn">' + esc(T.islands.warn) + "</p>" +
+      "</div>" +
+
+      /* driving */
+      '<div class="info-card"><h3><span>🚗</span>Driving &amp; parking</h3>' +
+        T.driving.map((d) =>
+          '<div class="line"><b>' + d.icon + " " + esc(d.title) + "</b>" +
+          '<div class="stop-note">' + esc(d.body) + "</div></div>").join("") +
       "</div>" +
 
       /* live links */
