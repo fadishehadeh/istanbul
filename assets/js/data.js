@@ -1148,6 +1148,13 @@ const FADI = {
       best: "The special dinner. Book well ahead and ask for a waterside table.",
       map: "Ajia Hotel Restaurant Kanlıca Beykoz" },
 
+    { t: "Beyaz Park", area: "Sarıyer · European shore, 40 min", tag: "Tea garden",
+      hours: "A day-into-evening tea garden — check the listing before a late run",
+      entry: "No entry charge · you pay for what you order",
+      d: "A quiet çay bahçesi and restaurant with tables directly on the Bosphorus at the northern end of the European shore, where the strait widens toward the Black Sea. Prices are reasonable for a waterfront seat, and it is a local place rather than a tourist one — which is the whole point of it.",
+      best: "The northern extension of your Sunday: carry on past Emirgan instead of turning back at Bebek. Sit for an hour with tea and watch the tankers come down. With the car it is a straight run up the shore road; on public transport it is M2 to Hacıosman, then the 25 bus.",
+      map: "Beyaz Park Sarıyer İstanbul" },
+
     { t: "Poyraz Balık", area: "Poyrazköy, Beykoz · far north, 1h+", tag: "Far",
       d: "A fishing village at the Black Sea mouth of the Bosphorus, under the Yavuz Sultan Selim bridge. Simple fish restaurants at the water with a sunset that justifies the drive.",
       best: "A whole afternoon and evening, not a detour. Only with the car, and only on a clear day.",
