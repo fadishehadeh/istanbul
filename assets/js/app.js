@@ -13,6 +13,8 @@
   catch (e) { S = Object.assign({}, defaults); }
 
   const save = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} };
+
+  let myPos = null;   // [lat, lng] once you tap "Near me"; never stored
   const $  = (s, r) => (r || document).querySelector(s);
   const $$ = (s, r) => Array.prototype.slice.call((r || document).querySelectorAll(s));
   const esc = (s) => String(s == null ? "" : s).replace(/[&<>"']/g, (c) =>
@@ -191,6 +193,11 @@
     const c = catById[p.cat] || { icon: "📍", label: "Place" };
     const isSaved = S.saved.indexOf(p.id) > -1;
     const isVisited = S.visited.indexOf(p.id) > -1;
+    const st = openState(p);
+    const dist = myPos ? (function () {
+      const co = coordsFor(p);
+      return co ? walkText(haversine(myPos, co)) : null;
+    })() : null;
     return '<article class="place' + (isVisited ? " visited" : "") + '" data-id="' + esc(p.id) + '">' +
       '<div class="place-head">' +
         '<span class="place-ic">' + c.icon + "</span>" +
@@ -200,6 +207,8 @@
             "<span>" + esc(c.label) + "</span>" +
             (p.area ? '<span class="dot-sep">' + esc(p.area) + "</span>" : "") +
             '<span class="dot-sep">' + priceStr(p.price) + "</span>" +
+            (dist ? '<span class="badge-dist">' + esc(dist) + "</span>" : "") +
+            (st.state !== "unknown" ? '<span class="badge-open ' + st.state + '">' + esc(st.why) + "</span>" : "") +
             (p.isNew ? '<span class="badge-new">recently opened</span>' : "") +
             (p.alcohol ? '<span class="badge-alc">serves alcohol</span>' : "") +
             (p.mine ? '<span class="badge-mine">yours</span>' : "") +
@@ -269,17 +278,29 @@
   function renderPlaces() {
     const q = ($("#search").value || "").trim().toLowerCase();
     const onlySaved = $("#onlySaved").checked, hideVisited = $("#hideVisited").checked;
+    const openOnly = $("#openNow").checked;
 
     let list = allPlaces();
     if (S.cat !== "all") list = list.filter((p) => p.cat === S.cat);
     if (onlySaved) list = list.filter((p) => S.saved.indexOf(p.id) > -1);
     if (hideVisited) list = list.filter((p) => S.visited.indexOf(p.id) === -1);
+    // "Open now" removes only what is definitely shut — places whose hours
+    // can't be read stay, flagged, rather than silently disappearing.
+    if (openOnly) list = list.filter((p) => openState(p).state !== "closed");
     if (q) {
       list = list.filter((p) => [p.name, p.area, p.why, p.tip, p.from, (catById[p.cat] || {}).label]
         .join(" ").toLowerCase().indexOf(q) > -1);
     }
 
-    $("#resultCount").textContent = list.length + (list.length === 1 ? " place" : " places");
+    if (myPos) {
+      list = list.map((p) => {
+        const co = coordsFor(p);
+        return { p: p, d: co ? haversine(myPos, co) : Infinity };
+      }).sort((a, b) => a.d - b.d).map((x) => x.p);
+    }
+
+    $("#resultCount").textContent = list.length + (list.length === 1 ? " place" : " places") +
+      (myPos ? " · nearest first" : "");
     const el = $("#placeList");
     el.innerHTML = list.length
       ? list.map((p) => placeCard(p)).join("")
@@ -549,6 +570,107 @@
     });
   }
 
+  /* ================= TOOLS ================= */
+  function renderTools() {
+    const r = cachedRates();
+    const age = r ? Math.round((Date.now() - r.at) / 3600000) : null;
+
+    $("#pane-tools").innerHTML = '<div class="info">' +
+
+      /* ---- currency ---- */
+      '<div class="info-card"><h3><span>💱</span>Currency</h3>' +
+        '<div class="conv">' +
+          '<div class="conv-row"><input id="cvTL" type="number" inputmode="decimal" placeholder="0"><span>₺ TL</span></div>' +
+          '<div class="conv-row"><input id="cvEUR" type="number" inputmode="decimal" placeholder="0"><span>€ EUR</span></div>' +
+          '<div class="conv-row"><input id="cvUSD" type="number" inputmode="decimal" placeholder="0"><span>$ USD</span></div>' +
+        "</div>" +
+        '<p class="saved-hint" id="rateNote">' +
+          (r ? "1 € = " + r.eur.toFixed(2) + " ₺ · 1 $ = " + r.usd.toFixed(2) + " ₺ · " +
+               (age < 1 ? "just updated" : age + "h old") + (r.source === "manual" ? " (entered by you)" : "")
+             : "No rate yet — connect once, or enter one below.") +
+        "</p>" +
+        '<form id="rateForm" class="addform row" style="margin-top:10px">' +
+          '<input id="rateInput" type="number" inputmode="decimal" step="0.01" placeholder="TL per 1 €">' +
+          '<button type="button" class="ghost-btn" id="rateFetch">Update</button>' +
+          '<button type="submit" class="ghost-btn">Set</button>' +
+        "</form>" +
+      "</div>" +
+
+      /* ---- haggling ---- */
+      '<div class="info-card"><h3><span>🤝</span>Haggling</h3>' +
+        '<p class="muted">In the Grand Bazaar, Spice Bazaar and Mahmutpaşa the first price is usually two to three times the real one. Not in malls, restaurants or supermarkets.</p>' +
+        '<form id="hagForm" class="addform row" style="margin-top:12px">' +
+          '<input id="hagAsk" type="number" inputmode="decimal" placeholder="They asked (₺)" required>' +
+          '<button type="submit" class="primary-btn">Work it out</button>' +
+        "</form>" +
+        '<div id="hagOut"></div>' +
+      "</div>" +
+
+      /* ---- prayer times ---- */
+      '<div class="info-card"><h3><span>🕌</span>Prayer times — İstanbul</h3>' +
+        '<div id="prayerNext" class="next-prayer"></div>' +
+        '<div id="prayerList" class="prayers"></div>' +
+        '<p class="saved-hint">Calculated on the device (Diyanet convention: Fajr 18°, Isha 17°), so it works with no signal. Expect it to be within a minute or two of the mosque — check locally if you need it exact.</p>' +
+        '<p class="warn">Mosques close to visitors for about 30 minutes around each of these, and for longer around Friday midday.</p>' +
+      "</div>" +
+    "</div>";
+
+    /* currency wiring */
+    const tl = $("#cvTL"), eu = $("#cvEUR"), us = $("#cvUSD");
+    function convert(from) {
+      const rr = cachedRates();
+      if (!rr) { toast("Set a rate first"); return; }
+      const v = parseFloat(from.value);
+      if (isNaN(v)) { [tl, eu, us].forEach((i) => { if (i !== from) i.value = ""; }); return; }
+      const inTL = from === tl ? v : (from === eu ? v * rr.eur : v * rr.usd);
+      if (from !== tl) tl.value = Math.round(inTL);
+      if (from !== eu) eu.value = (inTL / rr.eur).toFixed(2);
+      if (from !== us) us.value = (inTL / rr.usd).toFixed(2);
+    }
+    [tl, eu, us].forEach((i) => i.addEventListener("input", () => convert(i)));
+
+    $("#rateFetch").addEventListener("click", async function () {
+      this.textContent = "…";
+      const got = await fetchRates();
+      this.textContent = "Update";
+      if (got && got.source === "live") { renderTools(); toast("Rate updated"); }
+      else toast("No signal — enter a rate by hand");
+    });
+    $("#rateForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const v = parseFloat($("#rateInput").value);
+      if (isNaN(v) || v <= 0) { toast("Enter TL per 1 euro"); return; }
+      const prev = cachedRates();
+      storeRates({ eur: v, usd: prev && prev.usd && prev.eur ? v * (prev.usd / prev.eur) : v / 1.08,
+                   at: Date.now(), source: "manual" });
+      renderTools(); toast("Rate saved");
+    });
+
+    /* haggling wiring */
+    $("#hagForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+      const ask = parseFloat($("#hagAsk").value);
+      if (isNaN(ask) || ask <= 0) return;
+      const rr = cachedRates();
+      const eurOf = (n) => rr ? " (≈ €" + (n / rr.eur).toFixed(0) + ")" : "";
+      $("#hagOut").innerHTML =
+        '<dl class="kv" style="margin-top:14px">' +
+          "<dt>Open at</dt><dd><b>" + Math.round(ask * 0.4) + " ₺</b>" + eurOf(ask * 0.4) + "</dd>" +
+          "<dt>Settle near</dt><dd><b>" + Math.round(ask * 0.55) + " ₺</b>" + eurOf(ask * 0.55) + "</dd>" +
+          "<dt>Walk away above</dt><dd><b>" + Math.round(ask * 0.7) + " ₺</b>" + eurOf(ask * 0.7) + "</dd>" +
+        "</dl>" +
+        '<p class="muted" style="margin-top:8px">Say <b>çok pahalı</b> (too expensive), then <b>son fiyat ne?</b> (what is your best price). Walking away once is the strongest move you have.</p>';
+    });
+
+    /* prayer wiring */
+    const np = nextPrayer();
+    $("#prayerNext").innerHTML =
+      "<span>Next</span><b>" + esc(np.name) + "</b><span>" + esc(np.time) + " · in " + esc(np.inText) + "</span>";
+    $("#prayerList").innerHTML = prayerTimes(new Date()).list.map((p) =>
+      '<div class="prayer' + (p.minor ? " minor" : "") + (p.key === np.name.toLowerCase() ? " is-next" : "") + '">' +
+        "<span>" + esc(p.label) + "</span><b>" + esc(p.time) + "</b></div>").join("");
+  }
+
   /* ================= GUIDE ================= */
   function renderGuide() {
     $("#pane-essentials").innerHTML = '<div class="info">' + ESSENTIALS.map((e) =>
@@ -600,11 +722,16 @@
   $$(".tab").forEach((t) => t.addEventListener("click", () => go(t.getAttribute("data-view"))));
   $$("[data-goto]").forEach((b) => b.addEventListener("click", () => go(b.getAttribute("data-goto"))));
 
-  $$("#guideSeg .seg-btn").forEach((b) => b.addEventListener("click", function () {
+  function showPane(name) {
+    const btn = $('#guideSeg [data-pane="' + name + '"]');
+    if (!btn) return false;
     $$("#guideSeg .seg-btn").forEach((x) => x.classList.remove("is-on"));
-    this.classList.add("is-on");
-    const pane = this.getAttribute("data-pane");
-    $$(".pane").forEach((p) => { p.hidden = p.id !== "pane-" + pane; });
+    btn.classList.add("is-on");
+    $$(".pane").forEach((p) => { p.hidden = p.id !== "pane-" + name; });
+    return true;
+  }
+  $$("#guideSeg .seg-btn").forEach((b) => b.addEventListener("click", function () {
+    showPane(this.getAttribute("data-pane"));
   }));
 
   /* ================= forms ================= */
@@ -646,6 +773,31 @@
   $("#search").addEventListener("input", renderPlaces);
   $("#onlySaved").addEventListener("change", renderPlaces);
   $("#hideVisited").addEventListener("change", renderPlaces);
+  $("#openNow").addEventListener("change", renderPlaces);
+
+  /* ---- near me ---- */
+  $("#nearBtn").addEventListener("click", function () {
+    if (myPos) {                       // tapping again turns it off
+      myPos = null; this.classList.remove("is-on");
+      this.textContent = "📍 Near me"; renderPlaces(); return;
+    }
+    if (!navigator.geolocation) { toast("This browser can't do location"); return; }
+    const btn = this;
+    btn.textContent = "Locating…"; btn.disabled = true;
+    navigator.geolocation.getCurrentPosition(
+      (pos) => {
+        myPos = [pos.coords.latitude, pos.coords.longitude];
+        btn.disabled = false; btn.classList.add("is-on"); btn.textContent = "📍 Near me ✓";
+        renderPlaces();
+        toast("Sorted by how far you'd walk");
+      },
+      (err) => {
+        btn.disabled = false; btn.textContent = "📍 Near me";
+        toast(err.code === 1 ? "Location permission denied" : "Couldn't get your location");
+      },
+      { enableHighAccuracy: false, timeout: 10000, maximumAge: 120000 }
+    );
+  });
 
   $("#resetTicks").addEventListener("click", () => {
     if (!confirm("Clear every ticked item across all eight days?")) return;
@@ -677,14 +829,17 @@
   renderSaved();
   renderGuide();
   renderDocs();
+  renderTools();
 
   // Docs always leads the Guide tab — it either shows your documents or
   // offers to import them.
   $("#pane-docs").hidden = false;
   $("#pane-essentials").hidden = true;
 
-  const start = (location.hash || "").replace("#", "");
-  go(["today", "plan", "places", "saved", "guide"].indexOf(start) > -1 ? start : "today");
+  // Deep links: #places, #guide, and #guide:tools for a specific guide pane
+  const start = (location.hash || "").replace("#", "").split(":");
+  go(["today", "plan", "places", "saved", "guide"].indexOf(start[0]) > -1 ? start[0] : "today");
+  if (start[0] === "guide" && start[1]) showPane(start[1]);
 
   if ("serviceWorker" in navigator) {
     window.addEventListener("load", () => navigator.serviceWorker.register("sw.js").catch(() => {}));
