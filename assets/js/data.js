@@ -1005,6 +1005,226 @@ const TRANSPORT = {
 };
 
 /* ---------------------------------------------------------------------------
+   FADI — the personal tab. Whatever you send me gets sorted into sections
+   here. Add a section by pushing to `sections`; add an item by pushing to
+   that section's `items`.
+
+   item = {
+     t:     title (required)
+     d:     description / your note
+     area:  neighbourhood, if it is a physical place
+     map:   search string — adds an "Open in Maps" button
+     url:   any external link — adds an "Open link" button
+     tag:   short label shown as a pill, e.g. "must do", "Darine's pick"
+     day:   which trip day it belongs to, if any
+   }
+--------------------------------------------------------------------------- */
+const FADI = {
+  title: "Fadi",
+  blurb: "The things you sent me, sorted — with where they are, when they open, and how they fit the week.",
+  sections: [
+
+  /* ===================== BOSPHORUS GARDENS ===================== */
+  { id: "gardens", label: "Bosphorus gardens", icon: "🌳",
+    note: "Twelve waterfront and hilltop parks, nine of them on the Asian shore. All free to walk into. The hillside groves — korular — have gates and close at night; the waterfront parks are open ground you can wander any time. This is the car's best use: the Asian shore ones string together in one drive.",
+    items: [
+
+    { t: "Nakkaştepe Millet Parkı", area: "Kuzguncuk, Üsküdar · Asian side", tag: "24 hours",
+      hours: "Open 24 hours", entry: "Free · free car park",
+      d: "A hilltop İBB park on a former quarry, looking straight down the Bosphorus at the 15 Temmuz bridge. Wide lawns, walking loops, cafés, and enough space that it never feels full. The best of the twelve for simply sitting.",
+      best: "Sunset, then stay for the bridge lighting up.",
+      map: "Nakkaştepe Millet Bahçesi Kuzguncuk Üsküdar" },
+
+    { t: "Otağtepe Fatih Korusu", area: "Kavacık, Beykoz · Asian side", tag: "Gated",
+      hours: "Published hours disagree — some sources say 09:00–19:30, others 10:00–17:30. Go mid-afternoon and you are safe either way.",
+      entry: "Free on foot · parking charged",
+      d: "A hillside grove above the Fatih Sultan Mehmet bridge, terraced with paths and viewpoints. Famous for its erguvan (Judas trees) — that is an April thing, so in September you are coming for the view rather than the colour.",
+      best: "Late afternoon. Closes earliest of any on this list, so do not leave it until evening.",
+      map: "Otağtepe Fatih Korusu Kavacık Beykoz" },
+
+    { t: "Fethipaşa Korusu", area: "Üsküdar · Asian side", tag: "Gated",
+      hours: "08:30 – 23:00 daily", entry: "Free to enter · the café and restaurant inside are paid",
+      d: "A 19th-century Ottoman grove on the hill above Üsküdar, terraced down toward the water with a restored köşk and social facilities. Closest of the Asian groves to the ferry — reachable without the car.",
+      best: "Long opening hours make this the easy evening one. Tea on the terrace at dusk.",
+      map: "Fethi Paşa Korusu Üsküdar" },
+
+    { t: "Mihrabat Korusu", area: "Kanlıca, Beykoz · Asian side", tag: "Open late",
+      hours: "08:00 – 00:00", entry: "Free on foot · around 100 TL to park",
+      d: "The classic Bosphorus grove: pine woods on a bluff with a cleared terrace looking down at the FSM bridge and the Kanlıca shore. There is a café. Widely considered the best viewpoint on the Asian side.",
+      best: "Open until midnight, so this is the one to keep for after dinner.",
+      map: "Mihrabat Korusu Kanlıca Beykoz" },
+
+    { t: "Kandilli Parkı", area: "Kandilli, Üsküdar · Asian side", tag: "Waterfront",
+      hours: "Open ground — no gate", entry: "Free",
+      d: "A small formal garden right at the water at the sharpest bend in the Bosphorus, looking across at Rumeli Hisarı and the FSM bridge. Benches on the railing, boats passing close.",
+      best: "Morning light hits the fortress opposite.",
+      map: "Kandilli Parkı Üsküdar" },
+
+    { t: "Beylerbeyi Parkı", area: "Beylerbeyi, Üsküdar · Asian side", tag: "Waterfront",
+      hours: "Open ground — no gate", entry: "Free",
+      d: "Lawns and flowerbeds on the shore beside Beylerbeyi Palace, directly under the 15 Temmuz bridge. Pair it with the palace itself, which is the Asian-side counterpart to Dolmabahçe and far quieter.",
+      best: "Any time. Combine with the palace visit.",
+      map: "Beylerbeyi Parkı Üsküdar" },
+
+    { t: "Abdullahağa Parkı", area: "Kuzguncuk, Üsküdar · Asian side", tag: "Waterfront",
+      hours: "Open ground — no gate", entry: "Free",
+      d: "A strip of grass and benches on the Kuzguncuk waterfront facing the bridge and the European lights. People bring folding chairs and flasks of tea and stay for hours. Kuzguncuk's painted houses are two streets behind.",
+      best: "After dark, when the bridge is lit.",
+      map: "Abdullahağa Parkı Kuzguncuk Üsküdar" },
+
+    { t: "Karlıtepe Mesire Alanı", area: "Beykoz · Asian side", tag: "Hilltop",
+      hours: "Daylight hours", entry: "Free",
+      d: "A picnic ground high above Beykoz with the whole northern Bosphorus laid out below and the city skyline in the distance. Rougher and less manicured than the others — more forest than garden.",
+      best: "Clear mornings. Needs the car.",
+      map: "Karlıtepe Mesire Alanı Beykoz" },
+
+    { t: "Duatepe", area: "Rumeli Hisarı, Sarıyer · European side", tag: "Hilltop",
+      hours: "Open ground", entry: "Free",
+      d: "Terraced steps and lawns on the hill above Rumeli Hisarı, looking across at the FSM bridge and down onto the fortress. Newer and well kept.",
+      best: "Walk up from the fortress after visiting it — it is already on your Sunday.",
+      map: "Duatepe Parkı Rumeli Hisarı Sarıyer" },
+
+    { t: "Hikmet Bayrak Muhtar Parkı", area: "Sarıyer · European side", tag: "Small",
+      hours: "Open ground", entry: "Free",
+      d: "A small neighbourhood park on the upper European shore, with a clean straight view over the water toward the Asian hills. Local rather than touristic — five minutes, not an afternoon.",
+      best: "A stop on the drive north, not a destination.",
+      map: "Hikmet Bayrak Muhtar Parkı Sarıyer" },
+
+    { t: "Karaköy Sahil Parkı", area: "Haliç / Karaköy · European side", tag: "12 min walk",
+      hours: "Open ground — no gate", entry: "Free",
+      d: "New waterfront park on the Golden Horn with running and cycling lanes, lawns and the whole old-city skyline — Süleymaniye, the Blue Mosque, Yeni Cami — lit up across the water. The closest one to your hotel by a distance.",
+      best: "Blue hour. It is a twelve-minute walk from Zimmer, so it costs you nothing to try.",
+      map: "Karaköy Sahil Parkı Haliç" },
+
+    { t: "Sarayburnu Parkı", area: "Sarayburnu, Fatih · European side", tag: "T1 tram",
+      hours: "Open ground — no gate", entry: "Free",
+      d: "The point where the Golden Horn meets the Bosphorus, below Topkapı. Grass to the water's edge, fishermen, ships going past close enough to read. Gülhane Park is directly behind it.",
+      best: "Tram to Gülhane and walk down. Fits your Wednesday old-city day.",
+      map: "Sarayburnu Parkı Fatih" }
+  ]},
+
+  /* ===================== BOSPHORUS RESTAURANTS ===================== */
+  { id: "restaurants", label: "Bosphorus restaurants", icon: "🍽️",
+    note: "Ten waterfront and terrace places. I have not invented opening hours for these — restaurant hours change constantly and a wrong one costs you an evening. Each opens its Maps listing, which carries the current hours and number. What I have given you instead is where it is, what it is for, and how far it is from Fındıklı.",
+    items: [
+
+    { t: "The Gracee İstanbul", area: "Departs Galataport · 8 min walk", tag: "Closest",
+      d: "A restaurant on a boat that sails from Galataport, so you eat while moving up the Bosphorus rather than looking at it from a fixed table. Breakfast and dinner sailings.",
+      best: "The one that needs no planning — it leaves from the promenade you will already be walking on. Book the sailing, not just the table.",
+      map: "The Gracee Istanbul Galataport" },
+
+    { t: "Mesai İstanbul", area: "Beyoğlu · 15 min", tag: "Walkable",
+      d: "A terrace above Beyoğlu with a long clean view down the Bosphorus to the 15 Temmuz bridge. Modern Turkish, dressed-up rather than formal.",
+      best: "Sunset. The nearest of these to your hotel that is not on a boat.",
+      map: "Mesai Istanbul Beyoğlu" },
+
+    { t: "Huqqabaz", area: "Rumeli Hisarı · European shore, 25 min", tag: "Breakfast",
+      d: "Waterfront terrace directly under the FSM bridge, from the Huqqa group. Big Turkish breakfasts and all-day menu, polished and busy.",
+      best: "Breakfast on your Sunday — it is on the shore road you are already driving, near Rumeli Hisarı and Duatepe.",
+      map: "Huqqabaz Rumeli Hisarı" },
+
+    { t: "Tepe Restoran", area: "Sarıyer · European shore, 35 min", tag: "Night view",
+      d: "A hilltop terrace looking down on the FSM bridge lit up at night, with the whole strait below. The view is the reason to go.",
+      best: "After dark, and only worth it on a clear evening. Needs the car.",
+      map: "Tepe Restoran Sarıyer" },
+
+    { t: "Kuleli Yakamoz", area: "Çengelköy · Asian shore, 25 min", tag: "Breakfast",
+      d: "On the water at Çengelköy with the white towers of the Kuleli military school filling the view. Serpme breakfast is what people come for; fish in the evening.",
+      best: "Breakfast on an Asian-side morning, before the gardens at Fethipaşa or Beylerbeyi.",
+      map: "Kuleli Yakamoz Çengelköy" },
+
+    { t: "Pembe Yalı", area: "Anadolu Hisarı · Asian shore, 35 min", tag: "Breakfast",
+      d: "A pink waterfront mansion at Anadolu Hisarı, tables almost in the water, FSM bridge straight ahead. Famous for breakfast.",
+      best: "Morning. Combine with Mihrabat and Kandilli, which are minutes away.",
+      map: "Pembe Yalı Anadolu Hisarı" },
+
+    { t: "Borsa Kandilli", area: "Kandilli, Üsküdar · Asian shore, 30 min", tag: "Classic",
+      d: "The Kandilli branch of a Turkish restaurant institution going back to 1927. Proper Turkish cooking, white tablecloths, and a terrace at the bend of the Bosphorus.",
+      best: "Lunch with the view, or a dinner where the food matters as much as the terrace.",
+      map: "Borsa Restaurant Kandilli" },
+
+    { t: "Ajia Beykoz", area: "Kanlıca, Beykoz · Asian shore, 35 min", tag: "Splurge",
+      d: "The restaurant of the A'jia boutique hotel, on a restored yalı at the water's edge. Fine dining, candlelit tables a metre from the Bosphorus, European lights opposite.",
+      best: "The special dinner. Book well ahead and ask for a waterside table.",
+      map: "Ajia Hotel Restaurant Kanlıca Beykoz" },
+
+    { t: "Poyraz Balık", area: "Poyrazköy, Beykoz · far north, 1h+", tag: "Far",
+      d: "A fishing village at the Black Sea mouth of the Bosphorus, under the Yavuz Sultan Selim bridge. Simple fish restaurants at the water with a sunset that justifies the drive.",
+      best: "A whole afternoon and evening, not a detour. Only with the car, and only on a clear day.",
+      map: "Poyraz Balık Poyrazköy Beykoz" },
+
+    { t: "Eskibağ Teras", area: "Büyükada · Princes' Islands", tag: "Needs a ferry",
+      d: "A wooden terrace high on Büyükada facing west over the Marmara, built for the sunset.",
+      best: "Only works as part of a full island day, which is not currently in your plan — the ferry from Kabataş takes about 90 minutes each way. Worth swapping a day for if you want it.",
+      map: "Eskibağ Teras Büyükada" }
+  ]},
+
+  /* ===================== THE ASIAN SIDE ===================== */
+  { id: "asian", label: "The Asian side", icon: "🌉",
+    note: "Neighbourhoods rather than single addresses — these are places to walk, not tick off. Almost all of them are within twenty minutes of the Üsküdar or Kadıköy ferry, so this whole section works without the car. Nakkaştepe is up in Gardens; Çamlıca and the Maiden's Tower are also in the main Places tab.",
+    items: [
+
+    { t: "Üsküdar Sahili", area: "Üsküdar · Asian side", tag: "Sunset walk",
+      hours: "Open promenade — any time", entry: "Free",
+      d: "The waterfront path from the ferry pier round to Salacak, with the Maiden's Tower offshore and the whole old-city skyline — Topkapı, Hagia Sophia, the Blue Mosque — laid out across the water. Carpet-and-cushion tea gardens line the rail.",
+      best: "The single best sunset walk in İstanbul, and the ferry from Kabataş takes fifteen minutes. Go an hour before sunset and walk south.",
+      map: "Üsküdar Sahili Salacak" },
+
+    { t: "Kuzguncuk", area: "Üsküdar · Asian side", tag: "Village",
+      hours: "Any time · shops and cafés roughly 10:00–20:00", entry: "Free",
+      d: "A former Jewish, Greek and Armenian village swallowed by the city but still intact — one main street of painted wooden houses, a synagogue, a church and a mosque within a few hundred metres, bookshop cafés, and a market garden behind. Quieter and more lived-in than Balat.",
+      best: "Late morning. Combine with Abdullahağa Parkı on the shore and Nakkaştepe above.",
+      map: "Kuzguncuk Üsküdar" },
+
+    { t: "Kaftan Sokak", area: "Sultantepe, Üsküdar · Asian side", tag: "Photo spot",
+      hours: "Open street", entry: "Free",
+      d: "A painted stepped street dropping toward the Bosphorus, every wall and stair tread in blocks of colour, with the water and the European shore at the bottom of the frame.",
+      best: "Small — ten minutes, not an outing. Fold it into a Kuzguncuk walk. Best light late afternoon looking down toward the water.",
+      map: "Kaftan Sokak Sultantepe Üsküdar" },
+
+    { t: "Çengelköy", area: "Üsküdar · Asian side", tag: "Breakfast",
+      hours: "Any time · breakfast places from about 07:00", entry: "Free",
+      d: "A shore village of wooden houses and moored fishing boats, with the white towers of the Kuleli military school just along the water. Known for its breakfast places and its small cucumbers.",
+      best: "Breakfast at the water, then walk the shore. Kuleli Yakamoz in the restaurant list is here.",
+      map: "Çengelköy Üsküdar" },
+
+    { t: "Beylerbeyi Palace", area: "Beylerbeyi, Üsküdar · Asian side", tag: "Closed Mon",
+      hours: "About 09:00–18:00, closed Mondays — check before you go",
+      entry: "Ticketed",
+      d: "The sultans' summer palace, on the water directly under the 15 Temmuz bridge. Smaller than Dolmabahçe, far less crowded, and with the same marble-and-crystal excess. The garden gate framing the bridge is the shot everyone takes.",
+      best: "Not Monday — that is your Asian-side day in the current plan, so this needs moving or swapping. Beylerbeyi Parkı next door is open regardless.",
+      map: "Beylerbeyi Sarayı Üsküdar" },
+
+    { t: "Moda", area: "Kadıköy · Asian side", tag: "Already planned",
+      hours: "Any time", entry: "Free",
+      d: "Kadıköy's seaside quarter — the red nostalgic tram, bookshops, record shops, a long grassy shore park and the 1917 pier out over the Marmara. Young, unhurried, and the least touristic place on this list.",
+      best: "Already in your Monday, with tea at the Moda pier before sunset.",
+      map: "Moda Kadıköy" },
+
+    { t: "Beykoz", area: "Beykoz · Asian side, far north", tag: "Needs the car",
+      hours: "Any time", entry: "Free",
+      d: "The wooded northern reach of the Asian shore — yalı mansions, small boat harbours, hidden cafés among the trees, and the Beykoz Kasrı pavilion in its park. Where the city finally stops being a city.",
+      best: "A drive, not a walk. Mihrabat, Karlıtepe and the Ajia and Poyraz restaurants are all up here — string them together.",
+      map: "Beykoz İstanbul" },
+
+    { t: "Çamlıca Hill", area: "Üsküdar · Asian side", tag: "Highest point",
+      hours: "Park open into the evening", entry: "Free",
+      d: "The highest point in İstanbul, with the whole city, both bridges and the Marmara below. Turkey's largest mosque sits on the next hilltop, and the TV tower has a paid observation deck and restaurant.",
+      best: "Dusk, for the lights. Also in the main Places tab.",
+      map: "Çamlıca Tepesi Üsküdar" },
+
+    { t: "Kız Kulesi (Maiden's Tower)", area: "Salacak, Üsküdar · Asian side", tag: "Ticketed",
+      hours: "About 09:00–19:00 for the tower · shuttle boat from Salacak or Kabataş",
+      entry: "Ticketed for the tower · free to look at",
+      d: "The tower on its own islet, restored and reopened with a café at the top. Photographed from every angle in the city.",
+      best: "Honestly — the view of it from the Üsküdar shore at sunset beats the view from it. Do the promenade; go out to the tower only if you want the café.",
+      map: "Kız Kulesi Salacak Üsküdar" }
+  ]}
+
+  ]
+};
+
+/* ---------------------------------------------------------------------------
    BEFORE YOU FLY — every outstanding action, in the order it bites.
    `by` is when it stops being possible, not when it would be nice.
 --------------------------------------------------------------------------- */

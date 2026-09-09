@@ -641,6 +641,62 @@
     });
   }
 
+  /* ================= FADI — the personal tab ================= */
+  function renderFadi() {
+    $("#fadiTitle").textContent = FADI.title;
+    $("#fadiBlurb").textContent = FADI.blurb;
+
+    const sections = FADI.sections || [];
+    const count = sections.reduce((a, s) => a + s.items.length, 0);
+
+    if (!count) {
+      $("#fadiBody").innerHTML =
+        '<div class="empty fadi-empty">' +
+          "<b>Nothing here yet</b>" +
+          "<span>Send me places, links, notes, screenshots — anything — and it gets sorted into sections here. " +
+          "Each one can carry a map link, a note and a tag, and lives alongside the rest of the app offline.</span>" +
+        "</div>";
+      return;
+    }
+
+    const done = S.fadi || (S.fadi = []);
+    $("#fadiBody").innerHTML = sections.map((sec, si) =>
+      '<section class="block">' +
+        '<h2 class="block-h">' + (sec.icon ? sec.icon + " " : "") + esc(sec.label) +
+          '<span class="count-pill">' + sec.items.length + "</span></h2>" +
+        (sec.note ? '<p class="sec-note">' + esc(sec.note) + "</p>" : "") +
+        '<div class="placelist">' + sec.items.map((it, ii) => {
+          const id = (sec.id || si) + "-" + ii;
+          const on = done.indexOf(id) > -1;
+          return '<article class="fitem' + (on ? " done" : "") + '">' +
+            '<button class="fitem-tick" data-id="' + esc(id) + '" aria-label="Mark done">' + (on ? "✓" : "") + "</button>" +
+            '<div class="fitem-main">' +
+              '<div class="fitem-top"><b>' + esc(it.t) + "</b>" +
+                (it.tag ? '<span class="fitem-tag">' + esc(it.tag) + "</span>" : "") + "</div>" +
+              (it.area || it.day ? '<div class="fitem-meta">' +
+                [it.area, it.day].filter(Boolean).map(esc).join(" · ") + "</div>" : "") +
+              (it.d ? '<p class="fitem-d">' + esc(it.d) + "</p>" : "") +
+              ((it.hours || it.entry || it.best) ? '<dl class="kv fitem-kv">' +
+                (it.hours ? "<dt>Hours</dt><dd>" + esc(it.hours) + "</dd>" : "") +
+                (it.entry ? "<dt>Entry</dt><dd>" + esc(it.entry) + "</dd>" : "") +
+                (it.best  ? "<dt>Best</dt><dd>"  + esc(it.best)  + "</dd>" : "") +
+              "</dl>" : "") +
+              ((it.map || it.url) ? '<div class="place-actions">' +
+                (it.map ? '<a class="act map" target="_blank" rel="noopener" href="' + mapUrl(it.map) + '">Open in Maps</a>' : "") +
+                (it.url ? '<a class="act" target="_blank" rel="noopener" href="' + esc(it.url) + '">Open link</a>' : "") +
+              "</div>" : "") +
+            "</div>" +
+          "</article>";
+        }).join("") + "</div>" +
+      "</section>").join("");
+
+    $$("#fadiBody .fitem-tick").forEach((b) => b.addEventListener("click", function () {
+      const id = this.getAttribute("data-id"), at = S.fadi.indexOf(id);
+      if (at > -1) S.fadi.splice(at, 1); else S.fadi.push(id);
+      save(); renderFadi();
+    }));
+  }
+
   /* ================= BEFORE YOU FLY ================= */
   function renderPreflight() {
     const done = S.pre || (S.pre = []);
@@ -1097,6 +1153,7 @@
   renderTransport();
   renderPreflight();
   renderWeather();
+  renderFadi();
 
   // Docs always leads the Guide tab — it either shows your documents or
   // offers to import them.
@@ -1105,7 +1162,7 @@
 
   // Deep links: #places, #guide, and #guide:tools for a specific guide pane
   const start = (location.hash || "").replace("#", "").split(":");
-  go(["today", "plan", "places", "saved", "guide"].indexOf(start[0]) > -1 ? start[0] : "today");
+  go(["today", "plan", "places", "saved", "fadi", "guide"].indexOf(start[0]) > -1 ? start[0] : "today");
   if (start[0] === "guide" && start[1]) showPane(start[1]);
 
   if ("serviceWorker" in navigator) {
