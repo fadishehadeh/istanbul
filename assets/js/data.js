@@ -1148,6 +1148,20 @@ const FADI = {
       best: "The special dinner. Book well ahead and ask for a waterside table.",
       map: "Ajia Hotel Restaurant Kanlıca Beykoz" },
 
+    { t: "SoTepe İstanbul", area: "Baltalimanı, Sarıyer · European shore, 30 min", tag: "On your Sunday",
+      hours: "A coffee house — daytime into the evening. Check the listing.",
+      entry: "No entry charge",
+      d: "A specialty coffee terrace on the hill above Baltalimanı, with lawn, string lights and patio heaters, looking down the strait at the bridge lit up. Proper coffee rather than a view-tax café.",
+      best: "This one is almost free to add — Baltalimanı sits between Rumeli Hisarı and Emirgan, both already on your Sunday. Go up at dusk after the shore walk, before you turn back for Ortaköy.",
+      map: "SoTepe Baltalimanı Sarıyer" },
+
+    { t: "Yoros Cafe", area: "Anadolu Kavağı, Beykoz · Black Sea mouth", tag: "Cruise stop",
+      hours: "Daytime — it lives off the ferry crowd, so it thins out after the last boat",
+      entry: "No entry charge",
+      d: "A terrace restaurant below Yoros Castle at the very top of the Bosphorus, where the strait opens into the Black Sea. Fish, and a view straight out to open water.",
+      best: "Here is the connection worth knowing: the Şehir Hatları full-day cruise from Eminönü terminates at Anadolu Kavağı and gives you a couple of hours ashore before the boat back. Walking up to Yoros Castle and eating here IS what that stop is for. If you take that cruise instead of the short one, this is already built in — no separate trip needed. By car it is well over an hour each way.",
+      map: "Yoros Cafe Anadolu Kavağı Beykoz" },
+
     { t: "Beyaz Park", area: "Sarıyer · European shore, 40 min", tag: "Tea garden",
       hours: "A day-into-evening tea garden — check the listing before a late run",
       entry: "No entry charge · you pay for what you order",
@@ -1207,6 +1221,13 @@ const FADI = {
       d: "Kadıköy's seaside quarter — the red nostalgic tram, bookshops, record shops, a long grassy shore park and the 1917 pier out over the Marmara. Young, unhurried, and the least touristic place on this list.",
       best: "Already in your Monday, with tea at the Moda pier before sunset.",
       map: "Moda Kadıköy" },
+
+    { t: "Beykoz Siloları", area: "Çubuklu, Beykoz · Asian side", tag: "Sunset",
+      hours: "Museum inside the silos closes at 18:00 — but the roof terrace and café stay open until 21:00. That gap is the point: go for the roof, not the museum.",
+      entry: "Café is pay-for-what-you-order · museum ticketed separately",
+      d: "Restored concrete grain silos on the Beykoz shore turned into a cultural space, with a rooftop café looking west across the Bosphorus. Because it faces west from the Asian side, the sun sets over the water in front of you rather than behind you — which is why people are calling it the best sunset in the city right now. New enough that it is not yet crowded.",
+      best: "Arrive around 18:00 as the museum shuts and take the roof. Ferry from Eminönü or Üsküdar to the Çubuklu pier, or the 15, 15P or 15T bus from Üsküdar to the Çubuklu stop. By car it is next door to Kanlıca — string it with Mihrabat Korusu and Ajia.",
+      map: "Beykoz Siloları Çubuklu Beykoz" },
 
     { t: "Beykoz", area: "Beykoz · Asian side, far north", tag: "Needs the car",
       hours: "Any time", entry: "Free",
