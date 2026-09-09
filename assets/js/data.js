@@ -1004,6 +1004,72 @@ const TRANSPORT = {
   ]
 };
 
+/* ---------------------------------------------------------------------------
+   BEFORE YOU FLY — every outstanding action, in the order it bites.
+   `by` is when it stops being possible, not when it would be nice.
+--------------------------------------------------------------------------- */
+const PREFLIGHT = [
+  { group: "Before you leave Beirut", items: [
+    { t: "Get an International Driving Permit",
+      d: "Türkiye requires an IDP alongside a licence printed in non-Roman script, and Lebanese licences are Arabic. Most are bilingual Arabic/French which may satisfy it, and Garenta's terms only mention the entry stamp — but you collect the car at 1am with no fallback. The ATCL in Beirut issues them same-day. This is the only item on this list that can leave you without a car.",
+      by: "Before the 11th", hard: true },
+    { t: "Download İstanbul for offline maps",
+      d: "Google Maps → your profile → Offline maps → Select your own map, then drag the box over the whole city and download. Real map tiles are far too big to live inside this app, so this is the honest way to have maps with no signal.",
+      by: "While you have WiFi" },
+    { t: "Activate the eSIM",
+      d: "Airalo or Holafly, installed and activated before you fly. Doing it on airport WiFi at 1am is a bad time to discover a problem.",
+      by: "Before the 11th" },
+    { t: "Check in online for TK827",
+      d: "Opens 24 hours before departure, so from about 22:15 on the 10th. Add the second passenger's Miles&Smiles number while you are in there — that ticket has no account attached and is earning half the miles.",
+      by: "From 22:15 on the 10th" },
+    { t: "Destroy the old insurance policies",
+      d: "The two reissued policies replace the originals, which expired on the 18th and had a wrong date of birth. The risk is quoting an old number to a hospital in a bad moment. Delete the old PDFs, bin the printouts — the current numbers are in Guide → Docs.",
+      by: "Now" },
+    { t: "Ask the Dora where to park",
+      d: "They have no car park and did not answer when you asked about the late arrival. You will arrive in Dolapdere at 2am with a hire car. Same Booking.com thread, or +90 212 233 70 70.",
+      by: "Before the 11th" },
+    { t: "Bring cash to exchange",
+      d: "Euros or dollars. Change only what you need for the taxi at the airport — the rate there is poor — and do the rest at a döviz office in Eminönü or the Grand Bazaar.",
+      by: "Before the 11th" },
+    { t: "Put the app on the second phone",
+      d: "Open the site on the second phone, then Guide → Docs and paste the same import code. It encrypts on that device under its own PIN. Two people carrying the booking references is better than one.",
+      by: "Before the 11th" }
+  ]},
+  { group: "At İstanbul Airport, before you leave arrivals", items: [
+    { t: "Get the passport stamped",
+      d: "Ask the officer at passport control, or request an official Entry Record. The e-gates often do not stamp. Garenta needs it for a foreign licence, and you cannot come back for it once you have left the hall.",
+      by: "00:45 on the 12th", hard: true },
+    { t: "Photograph the car before you drive off",
+      d: "Every existing scratch, all four corners, the wheels, the windscreen, and the fuel gauge. Two minutes now against a deposit dispute later.",
+      by: "At the desk" },
+    { t: "Confirm the HGS toll transponder is fitted",
+      d: "Every bridge and motorway in Türkiye is cashless — there is nothing to pay at the roadside. Ask how they bill the crossings back to you.",
+      by: "At the desk" }
+  ]},
+  { group: "Once you are there", items: [
+    { t: "Buy two İstanbulkarts at Kabataş",
+      d: "Seven minutes from Zimmer. Load 500 TL each. Covers tram, metro, funicular, bus, ferry and the Eyüp cable car all week.",
+      by: "Saturday" }
+  ]}
+];
+
+/* Places worth booking, and how far ahead. No phone numbers invented —
+   each opens its Maps listing, which carries the current number. */
+const RESERVATIONS = [
+  { place: "karakoy-lokantasi", day: "Saturday 12th, dinner",
+    urgency: "now", why: "Saturday night fills. This is the one to do today." },
+  { place: "mikla", day: "Thursday 17th, dinner",
+    urgency: "now", why: "Normally wants two to three weeks. Ring anyway — a Thursday in September is your best chance, and the terrace bar takes walk-ins for a drink if the restaurant is full." },
+  { place: "ulus-29", day: "Tuesday 15th, sunset",
+    urgency: "soon", why: "Ask specifically for a terrace table, or the view is wasted." },
+  { place: "hamdi", day: "Wednesday 16th, dinner",
+    urgency: "soon", why: "Book the TOP-FLOOR terrace explicitly or they seat you downstairs with no view." },
+  { place: "cinili-hamam", day: "Thursday 17th, morning",
+    urgency: "soon", why: "Only if you want an actual bathing session — the museum needs no booking and is free on Thursdays." },
+  { place: "ciya-sofrasi", day: "Monday 14th, lunch",
+    urgency: "none", why: "Takes no reservations. Just arrive before 13:00." }
+];
+
 const PACKING = [
   "Passport, plus a photo of it on your phone",
   "Flight and hotel confirmations saved offline",

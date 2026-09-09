@@ -25,12 +25,12 @@ const ITINERARY = [
     tags: ["Travel day", "Late arrival", "TK827"],
     items: [
       { time: "19:00", title: "Leave for Beirut airport", note: "TK827 departs 22:15 from Rafic Hariri International. Aim to be at the terminal by 19:45 — three hours out for an international departure." },
-      { time: "22:15", title: "TK827 — Beirut → İstanbul", note: "Turkish Airlines, Airbus A350-900, Economy (class U). Flight time 2 hours. Checked baggage 30 kg each, cabin 8 kg. Booking reference WJUTVX." },
+      { time: "22:15", title: "TK827 — Beirut → İstanbul", note: "Turkish Airlines, Airbus A350-900, Economy (class U). Flight time 2 hours. Checked baggage 30 kg each, cabin 8 kg. Booking reference is in Guide → Docs." },
       { time: "00:15", title: "Land at İstanbul Airport (IST)", note: "Now Saturday. Passport control can take 30–45 minutes at this hour." },
       { time: "00:45", title: "GET YOUR PASSPORT STAMPED", note: "Do this before you leave the arrivals hall. Garenta will not release the car on a foreign licence without the entry stamp for your most recent arrival, and İstanbul's e-gates frequently do not stamp. Ask the officer directly, or request an official Entry Record. Everything below depends on it." },
-      { time: "01:15", title: "Collect the hire car — Garenta, ref 0N7C4X", note: "Desk is in the Arrivals Terminal. Bring the credit card in your own name, your licence and ID. They will hold ₺6,000 as a deposit. Check the HGS toll transponder is fitted and ask how they bill crossings. Photograph every existing scratch before you drive off." },
+      { time: "01:15", title: "Collect the hire car — Garenta", note: "Desk is in the Arrivals Terminal. Bring the credit card in your own name, your licence and ID. They will hold ₺6,000 as a deposit. Check the HGS toll transponder is fitted and ask how they bill crossings. Photograph every existing scratch before you drive off." },
       { time: "01:45", title: "Drive to Dolapdere", note: "About 40 minutes on empty roads — the one hour of the day this drive is easy. Roughly 40 km via the O-7. Not Fındıklı tonight: Zimmer does not take you until Saturday afternoon." },
-      { time: "02:15", title: "Check in at İstanbul Dora Hotel", note: "Dolapdere Cad. 33, Şişli. Confirmation 5751.020.465, PIN 1552. The hotel has confirmed 24-hour reception and is holding the room until midday Saturday, so arriving at 2am is fine. Parking is the loose end — they have no car park, so know where you are putting the car before you set off. Then sleep." }
+      { time: "02:15", title: "Check in at İstanbul Dora Hotel", note: "Dolapdere Cad. 33, Şişli. Confirmation and PIN are in Guide → Docs. The hotel has confirmed 24-hour reception and is holding the room until midday Saturday, so arriving at 2am is fine. Parking is the loose end — they have no car park, so know where you are putting the car before you set off. Then sleep." }
     ],
     swap: "Change some money at the airport only if you need taxi cash — the rate is poor. 1,500 TL is plenty to get you to the hotel and through breakfast; do the real exchange in Eminönü later in the week."
   },
@@ -42,7 +42,7 @@ const ITINERARY = [
     tags: ["Hotel move", "Easy", "Walkable"],
     items: [
       { time: "09:30", title: "Breakfast at the Dora", note: "It is included, and you will want it. Check-out is 12:00–12:30, so there is no rush." },
-      { time: "12:15", title: "Check out and drive to Fındıklı", note: "Dolapdere down to the shore is fifteen minutes. Zimmer's confirmation is 1051754682; check-in is 14:00, so drop the bags and go if you are early." },
+      { time: "12:15", title: "Check out and drive to Fındıklı", note: "Dolapdere down to the shore is fifteen minutes. Check-in is 14:00, so drop the bags and go if you are early." },
       { time: "13:00", title: "Late breakfast: Van Kahvaltı Evi", note: "Ten minutes uphill into Cihangir from Zimmer. Eastern-style spread — otlu peynir, kaymak and honey, murtuğa.", place: "van-kahvalti" },
       { time: "14:00", title: "Check in at Zimmer Bosphorus", note: "Meclisi Mebusan Cad. 61. Ask where the car goes for the week while you are at the desk." },
       { time: "14:45", title: "İstanbulkart from Kabataş", note: "Seven minutes down to the pier. Buy two cards, load 500 TL each. Covers tram, metro, funicular, bus, ferry and the Eyüp cable car all week." },
@@ -150,11 +150,11 @@ const ITINERARY = [
     tags: ["Departure", "Tight morning", "TK824"],
     items: [
       { time: "07:00", title: "Breakfast at the hotel", note: "No time for anywhere else. Bags packed and downstairs." },
-      { time: "08:15", title: "Check out", note: "Check-out is today. Confirmation 1051754682. Do a drawer-and-safe sweep — passports, chargers, adapters." },
+      { time: "08:15", title: "Check out", note: "Check-out is today. Do a drawer-and-safe sweep — passports, chargers, adapters." },
       { time: "08:15", title: "Fuel up, then drive to IST", note: "Return it full or they charge a premium. Allow 75 minutes: Friday morning on the coast road is the worst traffic of the week, and you are driving it at the worst hour. Fill up near the airport, not in town." },
       { time: "09:30", title: "Return the car to Garenta", note: "Your booking runs to 18:30, but the flight is 12:25 — hand it back now. Returning early costs nothing. Get the condition check signed off and keep the receipt; the ₺6,000 deposit releases afterwards." },
       { time: "10:00", title: "At the terminal", note: "Aim to be airside by 10:45. Turkish Airlines check-in, then passport control, which is the slow part at IST." },
-      { time: "12:25", title: "TK824 — İstanbul → Beirut", note: "Airbus A321neo, Economy (class U). Flight time 1h 55m. Lands Beirut 14:20. Booking reference WJUTVX." }
+      { time: "12:25", title: "TK824 — İstanbul → Beirut", note: "Airbus A321neo, Economy (class U). Flight time 1h 55m. Lands Beirut 14:20." }
     ],
     swap: "Do NOT plan Hagia Sophia or any mosque this morning — they close to visitors around Friday midday prayer, and you will be at the airport anyway. If you want one last thing, Karaköy Güllüoğlu opens at 07:00 and vacuum-packs baklava for the flight; it is twelve minutes from the hotel."
   }

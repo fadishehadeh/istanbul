@@ -264,6 +264,57 @@ function nextPrayer(now) {
 }
 
 /* ---------------------------------------------------------------------------
+   5. WEATHER — Open-Meteo, no API key. Fetched when there is a signal and
+   cached, so an old forecast still shows offline with its age on it.
+--------------------------------------------------------------------------- */
+const WX_KEY = "ist2026wx";
+
+/* WMO weather codes → something readable */
+const WMO = {
+  0:  ["Clear", "☀️"],            1:  ["Mostly clear", "🌤️"],
+  2:  ["Partly cloudy", "⛅"],    3:  ["Overcast", "☁️"],
+  45: ["Fog", "🌫️"],             48: ["Freezing fog", "🌫️"],
+  51: ["Light drizzle", "🌦️"],   53: ["Drizzle", "🌦️"],
+  55: ["Heavy drizzle", "🌦️"],   61: ["Light rain", "🌧️"],
+  63: ["Rain", "🌧️"],            65: ["Heavy rain", "🌧️"],
+  71: ["Light snow", "🌨️"],      73: ["Snow", "🌨️"],
+  75: ["Heavy snow", "🌨️"],      80: ["Showers", "🌦️"],
+  81: ["Showers", "🌦️"],         82: ["Heavy showers", "⛈️"],
+  95: ["Thunderstorm", "⛈️"],    96: ["Thunderstorm", "⛈️"],
+  99: ["Thunderstorm", "⛈️"]
+};
+const wmo = (c) => WMO[c] || ["—", "•"];
+
+function cachedWeather() {
+  try { return JSON.parse(localStorage.getItem(WX_KEY) || "null"); } catch (e) { return null; }
+}
+
+async function fetchWeather() {
+  const url = "https://api.open-meteo.com/v1/forecast" +
+    "?latitude=41.0082&longitude=28.9784" +
+    "&daily=weather_code,temperature_2m_max,temperature_2m_min,precipitation_probability_max" +
+    "&timezone=Europe%2FIstanbul&forecast_days=16";
+  try {
+    const res = await fetch(url, { cache: "no-store" });
+    if (!res.ok) return cachedWeather();
+    const j = await res.json();
+    if (!j.daily || !j.daily.time) return cachedWeather();
+    const days = j.daily.time.map((d, i) => ({
+      date: d,
+      code: j.daily.weather_code[i],
+      max: Math.round(j.daily.temperature_2m_max[i]),
+      min: Math.round(j.daily.temperature_2m_min[i]),
+      rain: j.daily.precipitation_probability_max[i]
+    }));
+    const out = { days: days, at: Date.now() };
+    try { localStorage.setItem(WX_KEY, JSON.stringify(out)); } catch (e) {}
+    return out;
+  } catch (e) {
+    return cachedWeather();      // offline — show what we have
+  }
+}
+
+/* ---------------------------------------------------------------------------
    4. EXCHANGE RATE — fetched when online, cached, manually overridable.
 --------------------------------------------------------------------------- */
 const RATE_KEY = "ist2026rates";

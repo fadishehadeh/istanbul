@@ -6,7 +6,7 @@
   const KEY = "ist2026";
   const defaults = {
     theme: "light", saved: [], visited: [], ticks: {}, packing: [],
-    spend: [], notes: "", custom: [], cat: "all"
+    spend: [], notes: "", custom: [], cat: "all", pre: []
   };
   let S;
   try { S = Object.assign({}, defaults, JSON.parse(localStorage.getItem(KEY) || "{}")); }
@@ -641,6 +641,91 @@
     });
   }
 
+  /* ================= BEFORE YOU FLY ================= */
+  function renderPreflight() {
+    const done = S.pre || (S.pre = []);
+    let n = 0, total = 0;
+    PREFLIGHT.forEach((g) => { total += g.items.length; });
+    done.forEach(() => n++);
+
+    const daysOut = dayDiff(START, now());
+    const head = daysOut > 0
+      ? "<b>" + daysOut + (daysOut === 1 ? " day" : " days") + "</b> until you fly · " + n + " of " + total + " done"
+      : n + " of " + total + " done";
+
+    $("#pane-preflight").innerHTML = '<div class="info">' +
+      '<div class="info-card"><h3><span>🧾</span>Everything still outstanding</h3>' +
+        '<p class="pre-head">' + head + "</p>" +
+        '<div class="prebar"><i style="width:' + Math.round((n / total) * 100) + '%"></i></div>' +
+      "</div>" +
+
+      PREFLIGHT.map((g, gi) =>
+        '<div class="info-card"><h3><span>' + (gi === 0 ? "🏠" : gi === 1 ? "🛬" : "🇹🇷") + "</span>" + esc(g.group) + "</h3>" +
+        g.items.map((it, ii) => {
+          const id = gi + "-" + ii;
+          const on = done.indexOf(id) > -1;
+          return '<label class="pre' + (on ? " done" : "") + (it.hard ? " hard" : "") + '">' +
+            '<input type="checkbox" data-id="' + id + '"' + (on ? " checked" : "") + ">" +
+            "<span><b>" + esc(it.t) + (it.hard ? ' <em class="pre-hard">can stop the trip</em>' : "") + "</b>" +
+            '<i class="pre-by">' + esc(it.by) + "</i>" +
+            '<span class="pre-d">' + esc(it.d) + "</span></span></label>";
+        }).join("") + "</div>").join("") +
+
+      /* reservations */
+      '<div class="info-card"><h3><span>📞</span>Worth booking</h3>' +
+        RESERVATIONS.map((r) => {
+          const p = findPlace(r.place);
+          if (!p) return "";
+          const cls = r.urgency === "now" ? "now" : r.urgency === "soon" ? "soon" : "none";
+          return '<div class="resv">' +
+            '<div class="resv-top"><b>' + esc(p.name) + "</b>" +
+              '<span class="resv-flag ' + cls + '">' +
+                (r.urgency === "now" ? "Book today" : r.urgency === "soon" ? "Book soon" : "No booking") + "</span></div>" +
+            '<div class="resv-day">' + esc(r.day) + "</div>" +
+            '<div class="stop-note">' + esc(r.why) + "</div>" +
+            '<a class="act map" target="_blank" rel="noopener" href="' + mapUrl(p.name + " " + p.area) + '">Open listing to call</a>' +
+          "</div>";
+        }).join("") +
+        '<p class="muted" style="margin-top:12px">Opens each place in Maps rather than storing phone numbers — restaurant numbers change, and a wrong one is worse than none.</p>' +
+      "</div>" +
+    "</div>";
+
+    $$("#pane-preflight .pre input").forEach((cb) => cb.addEventListener("change", function () {
+      const id = this.getAttribute("data-id"), at = S.pre.indexOf(id);
+      if (this.checked) { if (at === -1) S.pre.push(id); } else if (at > -1) S.pre.splice(at, 1);
+      save(); renderPreflight();
+    }));
+  }
+
+  /* ================= WEATHER ================= */
+  async function renderWeather() {
+    const el = $("#weatherCard");
+    if (!el) return;
+    const wx = await fetchWeather();
+    if (!wx || !wx.days) { el.innerHTML = ""; return; }
+
+    const from = TRIP.start, to = TRIP.end;
+    const trip = wx.days.filter((d) => d.date >= from && d.date <= to);
+    const show = trip.length ? trip : wx.days.slice(0, 8);
+    const ageH = Math.round((Date.now() - wx.at) / 3600000);
+    const age = ageH < 1 ? "just now" : ageH < 24 ? ageH + "h ago" : Math.round(ageH / 24) + "d ago";
+
+    el.innerHTML =
+      '<h2 class="block-h">İstanbul forecast <span class="count-pill">' + esc(age) + "</span></h2>" +
+      '<div class="wx">' + show.map((d) => {
+        const w = wmo(d.code);
+        const dt = toDate(d.date);
+        const label = trip.length ? ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"][dt.getDay()] : fmt(d.date);
+        return '<div class="wx-day' + (d.rain >= 50 ? " wet" : "") + '">' +
+          "<span>" + esc(label) + "</span>" +
+          '<i title="' + esc(w[0]) + '">' + w[1] + "</i>" +
+          "<b>" + d.max + "°</b><u>" + d.min + "°</u>" +
+          (d.rain != null ? '<em>' + d.rain + "%</em>" : "") +
+        "</div>";
+      }).join("") + "</div>" +
+      '<p class="saved-hint">Tap through to Plan if a wet day needs swapping — Wednesday\'s bazaars and Tuesday\'s malls are both mostly indoors.</p>';
+  }
+
   /* ================= TRANSPORT ================= */
   function transitUrl(dest) {
     return "https://www.google.com/maps/dir/?api=1&travelmode=transit" +
@@ -1010,6 +1095,8 @@
   renderDocs();
   renderTools();
   renderTransport();
+  renderPreflight();
+  renderWeather();
 
   // Docs always leads the Guide tab — it either shows your documents or
   // offers to import them.

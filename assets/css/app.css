@@ -603,3 +603,52 @@ html[data-theme="dark"] .dep.next { color: #06222e; }
 .rulelist { margin: 10px 0 0; padding-left: 18px; }
 .rulelist li { font-size: 12.6px; color: var(--ink-2); margin-bottom: 5px; }
 .info-card .line .kv { margin-top: 7px; }
+
+/* before you fly */
+.pre-head { font-size: 13.5px; color: var(--ink-2); }
+.pre-head b { color: var(--ink); font-size: 15px; }
+.prebar { height: 6px; border-radius: 4px; background: var(--line-2); margin-top: 10px; overflow: hidden; }
+.prebar i { display: block; height: 100%; background: var(--good); transition: width .25s; }
+.pre { display: flex; gap: 11px; padding: 12px 0; border-top: 1px solid var(--line-2); align-items: flex-start; }
+.pre:first-of-type { border-top: 0; padding-top: 8px; }
+.pre input { accent-color: var(--good); width: 19px; height: 19px; flex: none; margin-top: 1px; }
+.pre > span { min-width: 0; }
+.pre b { display: block; font-size: 13.8px; font-weight: 650; }
+.pre-by { display: block; font-size: 11px; color: var(--accent); font-style: normal; font-weight: 650; margin: 2px 0 4px; }
+.pre-d { display: block; font-size: 12.6px; color: var(--ink-2); }
+.pre-hard {
+  font-size: 9.5px; font-style: normal; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
+  color: var(--danger); border: 1px solid color-mix(in srgb, var(--danger) 40%, transparent);
+  border-radius: 4px; padding: 1px 5px; vertical-align: middle; margin-left: 4px;
+}
+.pre.done b, .pre.done .pre-d { color: var(--ink-3); }
+.pre.done b { text-decoration: line-through; }
+
+/* reservations */
+.resv { padding: 12px 0; border-top: 1px solid var(--line-2); }
+.resv:first-of-type { border-top: 0; padding-top: 8px; }
+.resv-top { display: flex; align-items: center; justify-content: space-between; gap: 10px; }
+.resv-top b { font-size: 14px; }
+.resv-flag {
+  flex: none; font-size: 10px; font-weight: 700; letter-spacing: .05em; text-transform: uppercase;
+  border-radius: 5px; padding: 2px 7px;
+}
+.resv-flag.now  { color: #fff; background: var(--danger); }
+.resv-flag.soon { color: var(--accent); background: color-mix(in srgb, var(--accent) 14%, transparent); }
+.resv-flag.none { color: var(--ink-3); background: var(--line-2); }
+.resv-day { font-size: 12px; color: var(--ink-3); margin-top: 2px; }
+.resv .act { margin-top: 9px; }
+
+/* weather */
+.wx { display: flex; gap: 6px; overflow-x: auto; scrollbar-width: none; padding-bottom: 2px; }
+.wx::-webkit-scrollbar { display: none; }
+.wx-day {
+  flex: none; min-width: 62px; text-align: center; padding: 10px 6px;
+  background: var(--card); border: 1px solid var(--line); border-radius: var(--r); box-shadow: var(--shadow);
+}
+.wx-day.wet { border-color: color-mix(in srgb, var(--brand) 45%, transparent); }
+.wx-day span { display: block; font-size: 10.5px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: var(--ink-3); }
+.wx-day i { display: block; font-size: 20px; font-style: normal; margin: 4px 0 3px; }
+.wx-day b { font-size: 15px; }
+.wx-day u { font-size: 12px; color: var(--ink-3); text-decoration: none; margin-left: 3px; }
+.wx-day em { display: block; font-size: 10px; font-style: normal; color: var(--brand); margin-top: 2px; }
