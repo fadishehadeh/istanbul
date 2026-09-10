@@ -696,3 +696,25 @@ html[data-theme="dark"] .dep.next { color: #06222e; }
 .fadi-empty b { display: block; font-size: 15px; color: var(--ink); margin-bottom: 6px; }
 
 .act.photos { color: var(--brand); border-color: color-mix(in srgb, var(--brand) 30%, var(--line)); }
+
+
+/* right-to-left */
+.lang-btn { font-size: 14px; font-weight: 700; }
+[dir="rtl"] body { font-family: "Segoe UI", Tahoma, "Noto Naskh Arabic", -apple-system, sans-serif; }
+[dir="rtl"] .notes li { padding-left: 14px; padding-right: 34px; }
+[dir="rtl"] .notes li::before { content: "←"; left: auto; right: 14px; }
+[dir="rtl"] .tl::before { left: auto; right: 8px; }
+[dir="rtl"] .tl li { padding-left: 0; padding-right: 30px; }
+[dir="rtl"] .tl-dot { left: auto; right: 3px; }
+[dir="rtl"] .day-caret { transform: rotate(180deg); }
+[dir="rtl"] .day.is-open .day-caret { transform: rotate(90deg); }
+[dir="rtl"] .frow-body { padding-left: 14px; padding-right: 47px; }
+[dir="rtl"] .detail div { padding-left: 0; padding-right: 24px; }
+[dir="rtl"] .detail .ic { left: auto; right: 0; }
+[dir="rtl"] .rulelist { padding-left: 0; padding-right: 18px; }
+[dir="rtl"] .hero-count { text-align: left; }
+[dir="rtl"] .result-count { margin-left: 0; margin-right: auto; }
+[dir="rtl"] .spend b { margin-left: 0; margin-right: auto; }
+[dir="rtl"] .leg-end.right { text-align: left; margin-left: 0; margin-right: auto; }
+[dir="rtl"] .mono, [dir="rtl"] .tl-time, [dir="rtl"] .wx-day b { direction: ltr; unicode-bidi: embed; }
+.tl-link.photo { margin-inline-start: 6px; }

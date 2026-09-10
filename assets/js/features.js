@@ -137,27 +137,27 @@ function parseHours(str) {
 function openState(place, now) {
   now = now || new Date();
   const h = parseHours(place.hours);
-  if (h.kind === "always") return { state: "open", why: "Open anytime" };
-  if (h.kind === "unknown") return { state: "unknown", why: "" };
+  if (h.kind === "always") return { state: "open", why: "Open anytime", key: "anytime" };
+  if (h.kind === "unknown") return { state: "unknown", why: "", key: "unknown" };
 
   const day = now.getDay();
   if (h.onlyDays && h.onlyDays.indexOf(day) === -1) {
-    return { state: "closed", why: DAY_IDS[h.onlyDays[0]] + " only" };
+    return { state: "closed", why: DAY_IDS[h.onlyDays[0]] + " only", key: "onlyDay", day: h.onlyDays[0] };
   }
-  if (h.closedDay === day) return { state: "closed", why: "Closed " + DAY_IDS[day] + "s" };
-  if (h.kind === "days") return { state: "open", why: "Running today" };
+  if (h.closedDay === day) return { state: "closed", why: "Closed " + DAY_IDS[day] + "s", key: "closedDay", day: day };
+  if (h.kind === "days") return { state: "open", why: "Running today", key: "runningToday" };
 
   const mins = now.getHours() * 60 + now.getMinutes();
   const overnight = h.to <= h.from;
   const isOpen = overnight ? (mins >= h.from || mins < h.to) : (mins >= h.from && mins < h.to);
   if (!isOpen) {
     const opensIn = (h.from - mins + 1440) % 1440;
-    if (opensIn <= 180) return { state: "closed", why: "Opens in " + Math.round(opensIn / 5) * 5 + " min" };
-    return { state: "closed", why: "Closed now" };
+    if (opensIn <= 180) return { state: "closed", why: "Opens in " + Math.round(opensIn / 5) * 5 + " min", key: "opensIn", n: Math.round(opensIn / 5) * 5 };
+    return { state: "closed", why: "Closed now", key: "closedNow" };
   }
   const closesIn = (h.to - mins + 1440) % 1440;
-  if (closesIn <= 60) return { state: "open", why: "Closes in " + closesIn + " min" };
-  return { state: "open", why: "Open now" };
+  if (closesIn <= 60) return { state: "open", why: "Closes in " + closesIn + " min", key: "closesIn", n: closesIn };
+  return { state: "open", why: "Open now", key: "openNow" };
 }
 
 /* ---------------------------------------------------------------------------

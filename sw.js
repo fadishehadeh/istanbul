@@ -1,12 +1,14 @@
 /* İstanbul Trip Companion — service worker
    Precaches the whole app so it works with no signal in Turkey. */
 
-const VERSION = "ist-2026-09-v25";
+const VERSION = "ist-2026-09-v36";
 const ASSETS = [
   "./",
   "./index.html",
   "./manifest.webmanifest",
   "./assets/css/app.css",
+  "./assets/js/lang-ar.js",
+  "./assets/js/lang-ar-places.js",
   "./assets/js/data.js",
   "./assets/js/itinerary.js",
   "./assets/js/features.js",
