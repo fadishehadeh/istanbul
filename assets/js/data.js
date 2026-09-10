@@ -1478,8 +1478,8 @@ const RESERVATIONS = [
     urgency: "soon", why: "Book the TOP-FLOOR terrace explicitly or they seat you downstairs with no view." },
   { place: "cinili-hamam", day: "Thursday 17th, morning",
     urgency: "soon", why: "Only if you want an actual bathing session — the museum needs no booking and is free on Thursdays." },
-  { place: "ciya-sofrasi", day: "Monday 14th, lunch",
-    urgency: "none", why: "Takes no reservations. Just arrive before 13:00." }
+  { place: "ciya-sofrasi", day: "Wednesday 16th, dinner",
+    urgency: "none", why: "Takes no reservations, so nothing to book — but the kitchen stops at 22:00 and you land at 20:20, so go straight there and wander the market lanes afterwards." }
 ];
 
 const PACKING = [
