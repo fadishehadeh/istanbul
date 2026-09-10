@@ -30,7 +30,7 @@ const ITINERARY = [
       { time: "00:45", title: "GET YOUR PASSPORT STAMPED", note: "Do this before you leave the arrivals hall. Garenta will not release the car on a foreign licence without the entry stamp for your most recent arrival, and İstanbul's e-gates frequently do not stamp. Ask the officer directly, or request an official Entry Record. Everything below depends on it." },
       { time: "01:15", title: "Collect the hire car — Garenta", note: "Desk is in the Arrivals Terminal. Bring the credit card in your own name, your licence and ID. They will hold ₺6,000 as a deposit. Check the HGS toll transponder is fitted and ask how they bill crossings. Photograph every existing scratch before you drive off." },
       { time: "01:45", title: "Drive to Dolapdere", note: "About 40 minutes on empty roads — the one hour of the day this drive is easy. Roughly 40 km via the O-7. Not Fındıklı tonight: Zimmer does not take you until Saturday afternoon." },
-      { time: "02:15", title: "Check in at İstanbul Dora Hotel", note: "Dolapdere Cad. 33, Şişli. Confirmation and PIN are in Guide → Docs. The hotel has confirmed 24-hour reception and is holding the room until midday Saturday, so arriving at 2am is fine. Parking is the loose end — they have no car park, so know where you are putting the car before you set off. Then sleep." }
+      { time: "02:15", title: "Check in at İstanbul Dora Hotel", note: "Dolapdere Cad. 33, Şişli. Confirmation and PIN are in Guide → Docs. The hotel has confirmed 24-hour reception and is holding the room until midday Saturday, so arriving at 2am is fine. Parking is the loose end — they have no car park, so know where you are putting the car before you set off. Then sleep — you are up at 07:00, so that is about five hours." }
     ],
     swap: "Change some money at the airport only if you need taxi cash — the rate is poor. 1,500 TL is plenty to get you to the hotel and through breakfast; do the real exchange in Eminönü later in the week."
   },
@@ -38,13 +38,15 @@ const ITINERARY = [
   {
     n: 2, date: "2026-09-12", dow: "Saturday", title: "Move hotels, then run west",
     car: { use: true, text: "Short drive at midday to change hotels, then keep it — Tema World and Fişekhane are both west and neither is worth doing on public transport." },
-    subtitle: "You landed at 2am across town. Move to Fındıklı at midday, then take the coast road west for two of the places you actually came for.",
-    tags: ["Hotel move", "Car", "Your list"],
+    subtitle: "Up at 07:00 on five hours. The Saturday-only market first, İskender for lunch, then the coast road west for two of the places you actually came for.",
+    tags: ["Saturday only", "Car", "Your list"],
     items: [
-      { time: "09:30", title: "Breakfast at the Dora", note: "Included, and you will want it. Check-out is 12:00–12:30, so no rush." },
-      { time: "12:15", title: "Check out, drive down to Fındıklı", note: "Dolapdere to the shore is fifteen minutes. Drop the bags at Zimmer even if the room is not ready — they hold luggage. Ask at the desk where the car lives for the week." },
-      { time: "13:00", title: "Lunch: Hür Süper Mario, Karaköy", note: "Twelve minutes on foot. Plastic chairs at the water by Arap Camii, mackerel straight off the grill, old city across the Horn. Widely argued to be the best fish sandwich in İstanbul and it costs almost nothing.", map: "Hür Süper Mario Emin Usta Fermeneciler Caddesi Karaköy" },
-      { time: "14:30", title: "Back to Zimmer, check in properly", note: "Rooms from 14:00. Unpack, change, and take the car out again — everything after this is west." },
+      { time: "07:30", title: "Breakfast at the Dora", note: "Included, and after five hours' sleep you will want it. Check-out is 12:00–12:30, so the morning is yours." },
+      { time: "08:15", title: "Ulus Pazarı, Beşiktaş", note: "SATURDAYS ONLY, 08:00–17:00, and fifteen minutes from the Dora. Export garment overruns at market-stall prices alongside the food and household stalls — real labels more often than not. Bring cash and dig. Your only other chance is the 19th, when you are already flying.", place: "ulus-pazari" },
+      { time: "11:00", title: "Back to the Dora, pack and check out", note: "Check-out window is 12:00–12:30. Load the car and leave it in Şişli — lunch is five minutes away and you are not going down to Fındıklı yet." },
+      { time: "12:00", title: "Lunch: İskender, Şişli", note: "The family that invented the dish in Bursa in 1867, still trading under the name. Döner over cut pide, hot butter poured at the table, tomato and strained yoghurt. Your call — the best you have ever eaten. Confirm today's hours on the listing before you drive over.", place: "iskender-sisli" },
+      { time: "13:30", title: "Drive down to Fındıklı", note: "Fifteen minutes to the shore. Drop the bags at Zimmer even if the room is not ready — they hold luggage. Ask at the desk where the car lives for the week." },
+      { time: "14:00", title: "Check in at Zimmer", note: "Rooms from 14:00. Unpack, change, and take the car out again — everything after this is west." },
       { time: "15:15", title: "Drive west to Tema World", note: "Küçükçekmece, about 35 minutes on the D100 coast road. Go now rather than later: the rides and the pond are better in daylight and the traffic west is worse after 18:00." },
       { time: "16:00", title: "Tema World, Küçükçekmece", note: "264,000 m² of theme-park rides, an indoor experience centre, a live-performance venue and a 15,000 m² biological pond. Entry and parking are both free, open 10:00–23:00. Give it two hours and do not try to do all of it.", place: "tema-world" },
       { time: "18:30", title: "Drive back east to Fişekhane", note: "Twenty minutes back along the same coast road to Kazlıçeşme. You are heading home, so nothing is backtracked." },
@@ -53,7 +55,7 @@ const ITINERARY = [
       { time: "20:30", title: "Dinner at Fişekhane", note: "Gizia Brasserie and Zennup1844 are the ones people name, but the old halls are full of plainer places too — walk it first and pick by what looks right. Open until midnight." },
       { time: "22:30", title: "Drive home", note: "Twenty minutes back along the shore to Fındıklı, and the road is empty at this hour." }
     ],
-    swap: "If the 2am arrival wins and you want a slow day instead: Yıldız Parkı above Beşiktaş is a hundred hectares of wooded imperial garden with tea on the terrace at Malta Köşkü, twenty minutes from the hotel. Tema World and Fişekhane both keep — Fişekhane runs to midnight every night, and Tema World to 23:00."
+    swap: "If five hours of sleep is not enough after all: Yıldız Parkı above Beşiktaş is a hundred hectares of wooded imperial garden with tea on the terrace at Malta Köşkü, twenty minutes from the hotel. Tema World and Fişekhane both keep — Fişekhane runs to midnight every night, and Tema World to 23:00. Ulus Pazarı does not: it is Saturdays only."
   },
 
   {
@@ -70,7 +72,8 @@ const ITINERARY = [
       { time: "16:00", title: "Beyaz Park, Sarıyer", note: "Back down the shore. A quiet tea garden with tables at the water, local rather than touristic, reasonable prices for a Bosphorus seat. Sit for an hour and watch the tankers come down.", map: "Beyaz Park Sarıyer İstanbul" },
       { time: "17:30", title: "Emirgan Korusu", note: "Forty-seven hectares of woodland climbing from the shore, three restored köşks and a pond. In September it is simply a big quiet wood above the water.", map: "Emirgan Korusu Sarıyer" },
       { time: "18:45", title: "SoTepe, Baltalimanı", note: "A coffee terrace on the hill between Emirgan and Rumeli Hisarı — lawn, string lights, the strait below and the bridge lighting up. Proper coffee, not a view tax.", map: "SoTepe Baltalimanı Sarıyer" },
-      { time: "20:30", title: "Home along the water", note: "Thirty minutes down the shore road to Fındıklı, with the whole strait lit on your left." }
+      { time: "20:30", title: "Home along the water", note: "Thirty minutes down the shore road, with the whole strait lit on your left." },
+      { time: "21:15", title: "Late dinner: Lahmacun Plus, Şişli", note: "Up the hill from the shore rather than straight home. Thin lahmacun off the stone and kaşarlı pide, parsley and lemon, eaten with your hands. Yours, and you rated it 10/10. Lahmacun houses run late but check the listing before you drive up.", place: "lahmacun-plus" }
     ],
     swap: "If the flea market does not appeal, leave at 08:00 instead and add Rumeli Kavağı for a second, cheaper fish stop on the way up — plastic chairs on the quay, a fraction of Bebek prices."
   },
@@ -89,7 +92,8 @@ const ITINERARY = [
       { time: "16:00", title: "Anadolu Hisarı & Göksu", note: "The oldest Ottoman fortress on the strait, where two streams run in — the meadows the Ottomans called the Sweet Waters of Asia. Rowing boats on the creek, tea at the water, genuinely sleepy.", map: "Anadolu Hisarı Göksu Beykoz" },
       { time: "18:00", title: "Beykoz Siloları — the roof", note: "Arrive as the museum inside closes at 18:00; the roof terrace and café stay open until 21:00, which is the whole trick. Restored grain silos facing WEST from the Asian shore, so the sun sets over the water in front of you rather than behind you.", map: "Beykoz Siloları Çubuklu Beykoz" },
       { time: "19:20", title: "Sunset from the silo roof", note: "This is the one people are calling the best sunset in İstanbul right now, and it is new enough not to be crowded." },
-      { time: "21:00", title: "Back over the bridge", note: "Forty minutes home. Nothing you wanted today was closed on a Monday — the palaces and museums were, which is why none are here." }
+      { time: "21:00", title: "Back over the bridge", note: "Forty minutes home. Nothing you wanted today was closed on a Monday — the palaces and museums were, which is why none are here." },
+      { time: "22:00", title: "Late supper: Perlo's Burger, Karaköy", note: "Twelve minutes on foot from the hotel along the shore, so the car stays parked. Smashed patties and the truffle burger you rated the best anywhere, not just here. Only if you are still hungry after a day of eating.", place: "perlos-burger" }
     ],
     swap: "Rain plan: everything today is outdoors. If it turns, swap with Thursday — the Golden Horn day is largely indoor."
   },
@@ -108,7 +112,8 @@ const ITINERARY = [
       { time: "15:30", title: "Fethipaşa Korusu", note: "A 19th-century Ottoman grove on the hill above Üsküdar, terraced down toward the water with a restored köşk. Open 08:30–23:00, free to enter, and the closest of the Asian groves to the ferry.", map: "Fethi Paşa Korusu Üsküdar" },
       { time: "17:45", title: "Üsküdar Sahili — walk south to Salacak", note: "The best sunset walk in İstanbul and it costs nothing. The Maiden's Tower offshore, and the entire old-city skyline — Topkapı, Hagia Sophia, the Blue Mosque — directly across the water in front of you. Carpet-and-cushion tea gardens along the rail.", map: "Üsküdar Sahili Salacak" },
       { time: "19:20", title: "Sunset over the old city", note: "You are facing west from the Asian shore, so the sun goes down behind the minarets. Sit on a cushion with a tea and let it happen." },
-      { time: "21:00", title: "Ferry home", note: "Üsküdar back to Kabataş with the city lit on both sides. Check the last boat when you land in the morning." }
+      { time: "21:00", title: "Ferry home", note: "Üsküdar back to Kabataş with the city lit on both sides. Check the last boat when you land in the morning." },
+      { time: "21:30", title: "Hür Süper Mario, Karaköy", note: "Fifteen minutes on foot from the pier. Plastic chairs at the water by Arap Camii, mackerel straight off the grill, the old city across the Horn. Widely argued to be the best fish sandwich in İstanbul and it costs almost nothing.", map: "Hür Süper Mario Emin Usta Fermeneciler Caddesi Karaköy" }
     ],
     swap: "Beylerbeyi Palace and Küçüksu Kasrı are both open today and both are on this shore — add either if you want one building. Küçüksu is the smaller and stranger of the two."
   },

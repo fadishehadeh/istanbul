@@ -272,6 +272,26 @@ const PLACES = [
     why:"Genuine outlet pricing on Turkish and international brands, on the same tram line as your hotel.",
     tip:"The best-value clothes shopping in the city if you are happy with last season.", hours:"10:00–22:00" },
 
+  { id:"iskender-sisli", must:true, cat:"eat", name:"İskender (1867'den beri)", area:"Şişli / Nişantaşı", price:2,
+    from:"5 min from the Dora by car, or M2 metro to Osmanbey",
+    why:"The family that invented İskender kebab in Bursa in 1867, still trading under the name. Sliced döner over cut pide, hot butter poured at the table, tomato sauce and a spoon of strained yoghurt.",
+    tip:"Yours — you called it the best İskender you have ever eaten. One dish done one way; do not ask for variations. Confirm today's hours on the listing before you set off.", hours:"Lunch into the evening" },
+
+  { id:"lahmacun-plus", must:true, cat:"eat", name:"Lahmacun Plus", area:"Şişli", price:1,
+    from:"5 min from the Dora by car, or M2 metro to Osmanbey",
+    why:"A plain Şişli lahmacun and pide house — thin lahmacun off the stone, kaşarlı pide, parsley and lemon on the side and nothing else going on.",
+    tip:"Yours — you rated it 10/10. Squeeze the lemon, pile on the parsley, roll it and eat with your hands. Cheap, fast, and the kind of place that stays open late. Check the listing before a late run.", hours:"Daytime into the evening — check the listing" },
+
+  { id:"perlos-burger", must:true, cat:"eat", name:"Perlo's Burger & More", area:"Karaköy, Beyoğlu", price:2,
+    from:"12 min walk from the hotel along the shore",
+    why:"A small Karaköy burger counter open since 2021 — smashed patties, melted cheese, and the truffle burger everyone goes for.",
+    tip:"Yours — you called the truffle burger the best anywhere, not just İstanbul. Walking distance from Zimmer, so it works as a late supper on any night the plan ends at home.", hours:"Daytime into the evening — check the listing" },
+
+  { id:"prados-pasta", must:true, cat:"eat", name:"Prado's Pasta", area:"İstanbul — confirm the branch in Maps", price:2,
+    from:"Check the listing for the nearest branch before you set off",
+    why:"Fresh pasta, cooked to order. Yours — you asked for it by name.",
+    tip:"I could not verify a branch, an address or opening hours for this one, so treat everything here as unconfirmed and open it in Maps first. Tell me which branch you meant and I will fill the rest in properly.", hours:"Daytime into the evening — check the listing" },
+
   { id:"fisekhane", must:true, cat:"district", isNew:true, name:"Fişekhane", area:"Kazlıçeşme, Zeytinburnu", price:2,
     from:"T1 tram direct from Fındıklı toward Zeytinburnu (~35 min), or Marmaray to Kazlıçeşme",
     why:"A 19th-century Ottoman ammunition factory restored into one of the city's best food-and-culture complexes — gourmet restaurants, galleries, boutiques, theatre, cinema and concerts inside the old brick halls.",
