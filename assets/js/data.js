@@ -272,6 +272,16 @@ const PLACES = [
     why:"Genuine outlet pricing on Turkish and international brands, on the same tram line as your hotel.",
     tip:"The best-value clothes shopping in the city if you are happy with last season.", hours:"10:00–22:00" },
 
+  { id:"astra-lumina", must:true, cat:"night", isNew:true, name:"Astra Lumina", area:"Ayazağa, Sarıyer", price:2,
+    from:"M2 metro to İTÜ-Ayazağa, or 25 min by car",
+    why:"A 1.1 km walk through forest turned into light, sound and projection — the first European run of the Moment Factory night-walk series. About an hour at a slow pace.",
+    tip:"Book a timed session online before you go — Biletix, Biletinial or Bubilet all sell it, and slots go. Card payment, no cash. Evening only: the first slot is after sunset, around 20:00 in September. Wear shoes for a woodland path in the dark.", hours:"Evening sessions only — it is a night walk, so the first slot is after sunset, around 20:00 in September. Timed entry." },
+
+  { id:"museum-illusions", must:true, cat:"sight", name:"Museum of Illusions", area:"İstiklal, Beyoğlu", price:2,
+    from:"F1 funicular Kabataş → Taksim, then a short walk down İstiklal",
+    why:"Rooms built to break your eyes — an anti-gravity room, an infinity tunnel, a rotating vortex corridor, holograms and forced-perspective sets. Everything is meant to be photographed.",
+    tip:"On İstiklal Caddesi, ten minutes from the hotel by funicular. Ticketed, card accepted. It is an indoor daytime attraction and closes well before the rest of your evenings do — CHECK TODAY'S CLOSING TIME on the listing before you set off, because every day of your week runs past sunset.", hours:"Daytime into the evening — check the listing" },
+
   { id:"iskender-sisli", must:true, cat:"eat", name:"İskender (1867'den beri)", area:"Şişli / Nişantaşı", price:2,
     from:"5 min from the Dora by car, or M2 metro to Osmanbey",
     why:"The family that invented İskender kebab in Bursa in 1867, still trading under the name. Sliced döner over cut pide, hot butter poured at the table, tomato sauce and a spoon of strained yoghurt.",
@@ -662,7 +672,7 @@ const PLACES = [
     why:"Fifteen hundred years old and still the most astonishing interior on earth. Cathedral, then mosque, then museum, now a mosque again.",
     tip:"Visitors use the upper gallery on a paid ticket with its own entrance on the north side. Go at opening or after 16:00; closed to visitors around Friday midday prayer.", hours:"09:00–19:00 (visitor gallery)" },
 
-  { id:"blue-mosque", cat:"sight", name:"Blue Mosque (Sultanahmet Camii)", area:"Sultanahmet", price:0,
+  { id:"blue-mosque", must:true, cat:"sight", name:"Blue Mosque (Sultanahmet Camii)", area:"Sultanahmet", price:0,
     from:"T1 tram to Sultanahmet",
     why:"Six minarets, twenty thousand İznik tiles, and still a working neighbourhood mosque. Free to enter.",
     tip:"Closed to visitors for about 30 minutes around each of the five prayer times. Shoes off, shoulders and knees covered; scarves are provided at the door.", hours:"Outside prayer times" },
