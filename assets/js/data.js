@@ -672,7 +672,7 @@ const PLACES = [
     why:"Fifteen hundred years old and still the most astonishing interior on earth. Cathedral, then mosque, then museum, now a mosque again.",
     tip:"Visitors use the upper gallery on a paid ticket with its own entrance on the north side. Go at opening or after 16:00; closed to visitors around Friday midday prayer.", hours:"09:00–19:00 (visitor gallery)" },
 
-  { id:"blue-mosque", must:true, cat:"sight", name:"Blue Mosque (Sultanahmet Camii)", area:"Sultanahmet", price:0,
+  { id:"blue-mosque", cat:"sight", name:"Blue Mosque (Sultanahmet Camii)", area:"Sultanahmet", price:0,
     from:"T1 tram to Sultanahmet",
     why:"Six minarets, twenty thousand İznik tiles, and still a working neighbourhood mosque. Free to enter.",
     tip:"Closed to visitors for about 30 minutes around each of the five prayer times. Shoes off, shoulders and knees covered; scarves are provided at the door.", hours:"Outside prayer times" },
@@ -732,7 +732,7 @@ const PLACES = [
     why:"The postcard — a small baroque mosque on the water with the Bosphorus Bridge framed directly behind it.",
     tip:"Sunset, from the waterfront square to the left of the mosque, then kumpir afterwards.", hours:"Outside prayer times" },
 
-  { id:"camlica", cat:"sight", name:"Çamlıca Hill & Mosque", area:"Üsküdar, Asian side", price:0,
+  { id:"camlica", must:true, cat:"sight", name:"Çamlıca Hill & Mosque", area:"Üsküdar, Asian side", price:0,
     from:"Ferry to Üsküdar plus a 15 min taxi",
     why:"The highest point in Istanbul: Turkey's largest mosque, and a terrace over the entire city and both bridges.",
     tip:"Go at dusk for the city lights. The Çamlıca TV Tower next door has a paid observation deck and restaurant.", hours:"Anytime" },
