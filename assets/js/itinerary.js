@@ -24,7 +24,7 @@ const ITINERARY = [
     subtitle: "Beirut 22:15, İstanbul 00:15. Nothing happens today except getting there.",
     tags: ["Travel day", "Late arrival", "TK827"],
     items: [
-      { time: "19:00", title: "Leave for Beirut airport", note: "TK827 departs 22:15 from Rafic Hariri International. Aim to be at the terminal by 19:45 — three hours out for an international departure." },
+      { time: "19:00", title: "Leave for Beirut airport", note: "TK827 departs 22:15 from Rafic Hariri International. You are already checked in — seats 25D and 25E, boarding 21:30, gate closes 21:55. So it is bag drop only, but you still have 30 kg each to check: aim to be at the terminal by 19:45. Terminal and gate were blank on the passes, so read the boards when you get there." },
       { time: "22:15", title: "TK827 — Beirut → İstanbul", note: "Turkish Airlines, Airbus A350-900, Economy (class U). Flight time 2 hours. Checked baggage 30 kg each, cabin 8 kg. Booking reference is in Guide → Docs." },
       { time: "00:15", title: "Land at İstanbul Airport (IST)", note: "Now Saturday. Passport control can take 30–45 minutes at this hour." },
       { time: "00:45", title: "GET YOUR PASSPORT STAMPED", note: "Do this before you leave the arrivals hall. Garenta will not release the car on a foreign licence without the entry stamp for your most recent arrival, and İstanbul's e-gates frequently do not stamp. Ask the officer directly, or request an official Entry Record. Everything below depends on it." },
