@@ -287,10 +287,10 @@ const PLACES = [
     why:"A small Karaköy burger counter open since 2021 — smashed patties, melted cheese, and the truffle burger everyone goes for.",
     tip:"Yours — you called the truffle burger the best anywhere, not just İstanbul. Walking distance from Zimmer, so it works as a late supper on any night the plan ends at home.", hours:"Daytime into the evening — check the listing" },
 
-  { id:"prados-pasta", must:true, cat:"eat", name:"Prado's Pasta", area:"İstanbul — confirm the branch in Maps", price:2,
-    from:"Check the listing for the nearest branch before you set off",
-    why:"Fresh pasta, cooked to order. Yours — you asked for it by name.",
-    tip:"I could not verify a branch, an address or opening hours for this one, so treat everything here as unconfirmed and open it in Maps first. Tell me which branch you meant and I will fill the rest in properly.", hours:"Daytime into the evening — check the listing" },
+  { id:"prados-pasta", must:true, cat:"eat", name:"Prado's Pasta", area:"Karaköy, Beyoğlu", price:2,
+    from:"12 min walk from the hotel along the shore",
+    why:"Fresh pasta finished in a hollowed parmesan wheel at the counter — the tagliatelle with meat ragù is the one it is known for.",
+    tip:"Yours. Hoca Tahsin Sok. 25/A, off Necatibey Cad. Tiny — a few tables only, so it suits a quick sit-down or takeaway. Note it CLOSES AT 21:00 every day, earlier than anywhere else on your list. Call ahead on +90 539 317 63 85.", hours:"12:00–21:00" },
 
   { id:"fisekhane", must:true, cat:"district", isNew:true, name:"Fişekhane", area:"Kazlıçeşme, Zeytinburnu", price:2,
     from:"T1 tram direct from Fındıklı toward Zeytinburnu (~35 min), or Marmaray to Kazlıçeşme",
