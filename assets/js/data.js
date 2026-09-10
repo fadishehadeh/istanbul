@@ -327,7 +327,7 @@ const PLACES = [
     why:"An 1892 gasworks rebuilt into a 32,000 m² public campus — climate museum, cartoon museum, a huge library, theatre halls, exhibition space and cafés, wrapped around the original gas tanks.",
     tip:"Free to walk in, and the least touristy 'new Istanbul' thing on the Asian side. Excellent on a Sunday. The café in the old boiler house is the one to sit in.", hours:"08:00–24:00, closed Mon" },
 
-  { id:"vadistanbul", cat:"district", isNew:true, name:"Vadistanbul", area:"Ayazağa, Sarıyer", price:2,
+  { id:"vadistanbul", must:true, cat:"district", isNew:true, name:"Vadistanbul", area:"Ayazağa, Sarıyer", price:2,
     from:"M2 metro to Seyrantepe, then 5 min",
     why:"An open-air boulevard rather than a box — a long pedestrian strip of shops with a proper restaurant row along a stream, backing onto Belgrad Forest.",
     tip:"Much nicer than an enclosed mall on a warm September evening. Pair it with Belgrad Forest in the same trip north.", hours:"10:00–22:00" },
@@ -337,7 +337,7 @@ const PLACES = [
     why:"An open-air complex built around a huge lake with a choreographed dancing-fountain and light show, ringed by restaurants, bars and a cinema.",
     tip:"Go after dark — the whole point is the fountain show on the hour. Very popular with locals, almost no foreign tourists.", hours:"10:00–02:00" },
 
-  { id:"isfanbul", cat:"district", name:"İsfanbul (formerly Vialand)", area:"Eyüpsultan", price:2,
+  { id:"isfanbul", must:true, cat:"district", name:"İsfanbul (formerly Vialand)", area:"Eyüpsultan", price:2,
     from:"Taxi 25 min, or M7 metro plus a short hop",
     why:"Turkey's biggest theme park — proper roller coasters — bolted onto a large mall and an entertainment strip.",
     tip:"The serious ride day out. Buy the park ticket online; the mall side is free to enter. Weekdays are dramatically quieter.", hours:"11:00–22:00" },
@@ -535,10 +535,15 @@ const PLACES = [
     why:"A very large outlet centre with the widest brand list of the western outlets.",
     tip:"The most productive single outlet stop if you only make one. Bring a folding bag.", hours:"10:00–22:00" },
 
-  { id:"viaport-outlet", cat:"mall", name:"Viaport Outlet & Marina", area:"Pendik / Tuzla, Asian side", price:1,
+  { id:"viaport-outlet", must:true, cat:"mall", name:"Viaport Outlet & Marina", area:"Pendik / Tuzla, Asian side", price:1,
     from:"Marmaray east or a 50 min taxi",
     why:"An outlet mall out east with a separate marina complex nearby for waterfront restaurants and a small amusement area.",
     tip:"Only sensible if you are on the Asian side already or heading to Sabiha Gökçen airport — it is close to SAW.", hours:"10:00–22:00" },
+
+  { id:"viaport-venezia", must:true, cat:"mall", name:"Viaport Venezia", area:"Bayrampaşa", price:2,
+    from:"25 min by car, or M1 metro to Sağmalcılar and a short hop",
+    why:"A mall built as a replica Venice — canals with gondolas running through the middle of it, bell tower, painted facades, and a hotel and outlet wing attached.",
+    tip:"Assumed this is the Viaport you meant alongside the marina one — tell me if you meant a different branch. Kitsch on purpose and photographs well after dark when the canal is lit. Bayrampaşa is inland north-west, roughly on the way back from the western run.", hours:"10:00–22:00" },
 
   { id:"torium", cat:"mall", name:"Torium", area:"Esenyurt", price:1,
     from:"Taxi 45 min west",

@@ -55,7 +55,7 @@ const ITINERARY = [
       { time: "20:30", title: "Dinner at Fişekhane", note: "Gizia Brasserie and Zennup1844 are the ones people name, but the old halls are full of plainer places too — walk it first and pick by what looks right. Open until midnight." },
       { time: "22:30", title: "Drive home", note: "Twenty minutes back along the shore to Fındıklı, and the road is empty at this hour." }
     ],
-    swap: "If five hours of sleep is not enough after all: Yıldız Parkı above Beşiktaş is a hundred hectares of wooded imperial garden with tea on the terrace at Malta Köşkü, twenty minutes from the hotel. Tema World and Fişekhane both keep — Fişekhane runs to midnight every night, and Tema World to 23:00. Ulus Pazarı does not: it is Saturdays only."
+    swap: "Viaport Venezia at Bayrampaşa — the replica-Venice mall with gondolas in the canal — is roughly on the way back from Küçükçekmece, so it can be folded into today if you skip Ulus Pazarı. If five hours of sleep is not enough after all: Yıldız Parkı above Beşiktaş is a hundred hectares of wooded imperial garden with tea on the terrace at Malta Köşkü, twenty minutes from the hotel. Tema World and Fişekhane both keep — Fişekhane runs to midnight every night, and Tema World to 23:00. Ulus Pazarı does not: it is Saturdays only."
   },
 
   {
@@ -72,8 +72,9 @@ const ITINERARY = [
       { time: "16:00", title: "Beyaz Park, Sarıyer", note: "Back down the shore. A quiet tea garden with tables at the water, local rather than touristic, reasonable prices for a Bosphorus seat. Sit for an hour and watch the tankers come down.", map: "Beyaz Park Sarıyer İstanbul" },
       { time: "17:30", title: "Emirgan Korusu", note: "Forty-seven hectares of woodland climbing from the shore, three restored köşks and a pond. In September it is simply a big quiet wood above the water.", map: "Emirgan Korusu Sarıyer" },
       { time: "18:45", title: "SoTepe, Baltalimanı", note: "A coffee terrace on the hill between Emirgan and Rumeli Hisarı — lawn, string lights, the strait below and the bridge lighting up. Proper coffee, not a view tax.", map: "SoTepe Baltalimanı Sarıyer" },
-      { time: "20:30", title: "Home along the water", note: "Thirty minutes down the shore road, with the whole strait lit on your left." },
-      { time: "21:15", title: "Late dinner: Lahmacun Plus, Şişli", note: "Up the hill from the shore rather than straight home. Thin lahmacun off the stone and kaşarlı pide, parsley and lemon, eaten with your hands. Yours, and you rated it 10/10. Lahmacun houses run late but check the listing before you drive up.", place: "lahmacun-plus" }
+      { time: "19:30", title: "Vadistanbul, Ayazağa", note: "Ten minutes inland from Baltalimanı. Not a box mall — an open-air boulevard with a restaurant row along a stream, backing onto Belgrad Forest. Much better than an enclosed mall on a warm September evening. Open until 22:00.", place: "vadistanbul" },
+      { time: "21:00", title: "Home along the water", note: "Thirty minutes down the shore road, with the whole strait lit on your left." },
+      { time: "21:30", title: "Late dinner: Lahmacun Plus, Şişli", note: "Up the hill from the shore rather than straight home. Thin lahmacun off the stone and kaşarlı pide, parsley and lemon, eaten with your hands. Yours, and you rated it 10/10. Lahmacun houses run late but check the listing before you drive up.", place: "lahmacun-plus" }
     ],
     swap: "If the flea market does not appeal, leave at 08:00 instead and add Rumeli Kavağı for a second, cheaper fish stop on the way up — plastic chairs on the quay, a fraction of Bebek prices."
   },
@@ -96,7 +97,7 @@ const ITINERARY = [
       { time: "20:45", title: "Astra Lumina, Ayazağa", note: "A 1.1 km walk through forest turned into light, sound and projection — the first European run of the Moment Factory night walks. About an hour at a slow pace. BOOK THE TIMED SLOT ONLINE FIRST — Biletix, Biletinial or Bubilet — because sessions sell out and there is no door sale worth relying on. Card only. Shoes for a woodland path in the dark.", place: "astra-lumina" },
       { time: "22:30", title: "Late supper: Perlo's Burger, Karaköy", note: "Twelve minutes on foot from the hotel along the shore, so the car stays parked. Smashed patties and the truffle burger you rated the best anywhere, not just here. Only if the light walk left you hungry.", place: "perlos-burger" }
     ],
-    swap: "Rain plan: everything today is outdoors. If it turns, swap with Thursday — the Golden Horn day is largely indoor."
+    swap: "Viaport Marina at Pendik/Tuzla is the one thing on your list with no slot: it is a good hour east of Beykoz, at the far other end of the Asian side, and today runs north. It suits a morning of its own, or the Sabiha Gökçen side of the city. Rain plan: everything today is outdoors, so if it turns, swap the day with Thursday — the Golden Horn is mostly indoors."
   },
 
   {
@@ -150,7 +151,7 @@ const ITINERARY = [
       { time: "11:00", title: "Balat & Fener", note: "Kiremit Caddesi and Merdivenli Yokuş for the painted houses and staircase streets. Late-morning light is the good light.", place: "balat-fener" },
       { time: "13:00", title: "Lunch in Balat", note: "Courtyard cafés on Vodina Caddesi. Unhurried and cheap." },
       { time: "14:30", title: "DDM — Dijital Deneyim Merkezi, Sütlüce", note: "The city's 2,000 m² digital museum: rooms of immersive projection and interactive work. Open 10:00–18:00, closed Mondays. NO CASH — card or İstanbulkart only. Indoors, so it is your rain cover if the 47% forecast lands.", map: "Dijital Deneyim Merkezi Sütlüce İstanbul" },
-      { time: "16:00", title: "santralistanbul", note: "A 1914 power station on the Horn turned into an energy museum — turbine halls, control rooms and switchgear you walk straight through. Industrial, strange, and almost empty.", map: "santralistanbul Eyüpsultan" },
+      { time: "16:00", title: "İsfanbul (Vialand), Eyüpsultan", note: "Five minutes on from Sütlüce. Türkiye's biggest theme park — proper roller coasters — bolted onto a mall and an entertainment strip. Buy the park ticket ONLINE before you go; the mall side is free to walk into. A Thursday is dramatically quieter than a weekend. Give it two hours; you cannot do it all and the rest of the day is still ahead.", place: "isfanbul" },
       { time: "17:30", title: "Eyüp teleferik up to Pierre Loti", note: "A cable car over a hillside Ottoman cemetery to a tea terrace above the entire Golden Horn. Pay with the İstanbulkart. The ride is half the point.", place: "eyup-teleferik" },
       { time: "18:15", title: "Tea at Pierre Loti", note: "Sit on the terrace with the Horn below you and the old city stretching away. Last proper view of the trip.", place: "pierre-loti" },
       { time: "19:45", title: "Tersane İstanbul (Haliç Port)", note: "Back down the Horn toward home and it is directly on the way. The Ottoman Imperial Shipyard rebuilt as a 242,000 m² waterfront district — a Foster + Partners open-air avenue, a marina, museums and a long lit promenade along the water. Still opening in phases, so expect some hoardings.", place: "tersane-istanbul" },
