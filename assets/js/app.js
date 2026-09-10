@@ -6,7 +6,8 @@
   const KEY = "ist2026";
   const defaults = {
     theme: "light", saved: [], visited: [], ticks: {}, packing: [],
-    spend: [], notes: "", custom: [], cat: "all", pre: [], fadiCat: "all", lang: "en"
+    spend: [], notes: "", custom: [], cat: "all", pre: [], fadiCat: "all", lang: "en",
+    plan: {}
   };
   let S;
   try { S = Object.assign({}, defaults, JSON.parse(localStorage.getItem(KEY) || "{}")); }
@@ -219,6 +220,7 @@
         '<div class="today-body">' + timelineHtml(day) + "</div>" +
       "</div>";
     wireTimeline(block);
+    wirePlanTools(block);
 
     const notes = $("#hotelNotes");
     notes.innerHTML = TRIP.hotel.notes.map((n, i) => "<li>" + esc((isAr() && AR.hotelNotes && AR.hotelNotes[i]) || n) + "</li>").join("");
@@ -232,17 +234,66 @@
   }
 
   /* ================= PLAN ================= */
+  /* ---- editable plan ----------------------------------------------------
+     S.plan[dayNumber] = { del: [key], edit: { key: {time,title,note} },
+                           add: [ {key,time,title,note,map} ] }
+     Anything absent falls through to the built-in itinerary. */
+  function itemKey(n, i) { return "d" + n + "-" + i; }
+  function planFor(n) {
+    const p = S.plan || (S.plan = {});
+    return p[n] || (p[n] = { del: [], edit: {}, add: [] });
+  }
+  function planEdited(n) {
+    const e = S.plan && S.plan[n];
+    return !!(e && ((e.del && e.del.length) || (e.add && e.add.length) ||
+                    (e.edit && Object.keys(e.edit).length)));
+  }
+
+  /* stops for a day, with his changes folded in and sorted by clock time */
+  function dayItems(day) {
+    const e = (S.plan && S.plan[day.n]) || {};
+    const del = e.del || [], ed = e.edit || {}, add = e.add || [];
+    const tr = arDay(day.n);
+    const base = day.items.map((it, i) => {
+      const a = tr && tr.items && tr.items[i];
+      return Object.assign({}, it, {
+        key: itemKey(day.n, i),
+        title: (a && a.title) || it.title,
+        note: (a && a.note) || it.note
+      });
+    });
+    return base.concat(add.map((x) => Object.assign({ mine: true }, x)))
+      .filter((x) => del.indexOf(x.key) === -1)
+      .map((x) => (ed[x.key] ? Object.assign({}, x, ed[x.key]) : x))
+      .sort((a, b) => String(a.time || "").localeCompare(String(b.time || "")));
+  }
+
+  /* ticks were numeric indices before the plan could be edited */
+  function migrateTicks() {
+    let touched = false;
+    Object.keys(S.ticks || {}).forEach((n) => {
+      const arr = S.ticks[n];
+      if (!Array.isArray(arr)) return;
+      const next = arr.map((v) => (typeof v === "number" ? itemKey(n, v) : v));
+      if (next.some((v, i) => v !== arr[i])) { S.ticks[n] = next; touched = true; }
+    });
+    if (touched) save();
+  }
+
   function timelineHtml(day) {
     const ticks = S.ticks[day.n] || [];
-    const tr = arDay(day.n);
-    return '<ul class="tl">' + day.items.map((it, i) => {
-      const done = ticks.indexOf(i) > -1;
+    return '<ul class="tl">' + dayItems(day).map((it) => {
+      const done = ticks.indexOf(it.key) > -1;
       const p = it.place ? findPlace(it.place) : null;
-      return '<li class="' + (done ? "done" : "") + '" data-day="' + day.n + '" data-i="' + i + '">' +
+      return '<li class="' + (done ? "done" : "") + (it.mine ? " mine" : "") + '" data-day="' + day.n + '" data-k="' + esc(it.key) + '">' +
         '<button class="tl-dot" aria-label="Mark done"></button>' +
         '<div class="tl-time">' + esc(it.time) + "</div>" +
-        '<div class="tl-t">' + esc((tr && tr.items && tr.items[i] && tr.items[i].title) || it.title) + "</div>" +
-        '<div class="tl-n">' + esc((tr && tr.items && tr.items[i] && tr.items[i].note) || it.note) + "</div>" +
+        '<div class="tl-t">' + esc(it.title) + "</div>" +
+        '<div class="tl-n">' + esc(it.note || "") + "</div>" +
+        '<div class="tl-edit">' +
+          '<button class="tl-eb" data-act="edit">\u270e ' + esc(TX("editStop", "Edit")) + "</button>" +
+          '<button class="tl-eb danger" data-act="del">\u2715 ' + esc(TX("removeStop", "Remove")) + "</button>" +
+        "</div>" +
         (function () {
           const q = p ? (p.name + " " + p.area) : (it.map || "");
           if (!q) return "";
@@ -257,7 +308,7 @@
     $$(".tl-dot", root).forEach((btn) => {
       btn.addEventListener("click", function () {
         const li = this.closest("li");
-        const dn = li.getAttribute("data-day"), i = +li.getAttribute("data-i");
+        const dn = li.getAttribute("data-day"), i = li.getAttribute("data-k");
         const arr = S.ticks[dn] || (S.ticks[dn] = []);
         const at = arr.indexOf(i);
         if (at > -1) arr.splice(at, 1); else arr.push(i);
@@ -269,8 +320,96 @@
     });
   }
 
+  /* the add/edit form, opened inline under the day it belongs to */
+  function stopForm(n, item) {
+    const v = item || { time: "", title: "", note: "", map: "" };
+    return '<form class="stop-form" data-day="' + n + '"' + (item ? ' data-k="' + esc(item.key) + '"' : "") + ">" +
+      '<input name="time" value="' + esc(v.time || "") + '" placeholder="' + esc(TX("stopTime", "Time, e.g. 14:30")) + '" required>' +
+      '<input name="title" value="' + esc(v.title || "") + '" placeholder="' + esc(TX("stopTitle", "What is it?")) + '" required>' +
+      '<textarea name="note" rows="2" placeholder="' + esc(TX("stopNote", "Notes \u2014 anything you want to remember")) + '">' + esc(v.note || "") + "</textarea>" +
+      '<input name="map" value="' + esc(v.map || "") + '" placeholder="' + esc(TX("stopMap", "Search Maps for\u2026 (optional)")) + '">' +
+      '<div class="stop-form-row">' +
+        '<button type="submit" class="primary-btn">' + esc(TX("saveStop", "Save")) + "</button>" +
+        '<button type="button" class="ghost-btn" data-act="cancel">' + esc(TX("cancelStop", "Cancel")) + "</button>" +
+      "</div>" +
+    "</form>";
+  }
+
+  function closeForms(root) { $$(".stop-form", root).forEach((f) => f.remove()); }
+
+  function wirePlanTools(root) {
+    $$("[data-act]", root).forEach((b) => {
+      if (b.tagName !== "BUTTON") return;
+      const act = b.getAttribute("data-act");
+      if (act === "editmode") b.addEventListener("click", function () {
+        const art = this.closest(".day");
+        art.classList.toggle("is-editing");
+        this.textContent = art.classList.contains("is-editing")
+          ? TX("doneEditing", "Done editing") : "\u270e " + TX("editDay", "Edit stops");
+      });
+      if (act === "add") b.addEventListener("click", function () {
+        const n = +this.getAttribute("data-day");
+        const tools = this.closest(".day-tools");
+        if ($(".stop-form", this.closest(".day-panel"))) { closeForms(this.closest(".day-panel")); return; }
+        tools.insertAdjacentHTML("afterend", stopForm(n, null));
+        wireStopForm($(".stop-form", this.closest(".day-panel")));
+      });
+      if (act === "resetday") b.addEventListener("click", function () {
+        const n = +this.getAttribute("data-day");
+        if (!confirm(TX("confirmResetDay", "Put this day back the way it started? Anything you added to it is lost."))) return;
+        delete S.plan[n]; save(); renderPlan(); renderToday(); toast(TX("dayRestored", "Day restored"));
+      });
+      if (act === "del") b.addEventListener("click", function () {
+        const li = this.closest("li");
+        const n = +li.getAttribute("data-day"), k = li.getAttribute("data-k");
+        if (!confirm(TX("confirmRemoveStop", "Remove this stop?"))) return;
+        const p = planFor(n);
+        const at = (p.add || []).findIndex((x) => x.key === k);
+        if (at > -1) p.add.splice(at, 1); else if (p.del.indexOf(k) === -1) p.del.push(k);
+        if (p.edit[k]) delete p.edit[k];
+        const t = S.ticks[n]; if (t) S.ticks[n] = t.filter((x) => x !== k);
+        save(); renderPlan(); renderToday(); toast(TX("stopRemoved", "Stop removed"));
+      });
+      if (act === "edit") b.addEventListener("click", function () {
+        const li = this.closest("li");
+        const n = +li.getAttribute("data-day"), k = li.getAttribute("data-k");
+        const it = dayItems(ITINERARY[n - 1]).filter((x) => x.key === k)[0];
+        if (!it) return;
+        const panel = li.closest(".day-panel");
+        if ($(".stop-form", panel)) { closeForms(panel); return; }
+        li.insertAdjacentHTML("afterend", stopForm(n, it));
+        wireStopForm($(".stop-form", panel));
+      });
+    });
+  }
+
+  function wireStopForm(form) {
+    if (!form) return;
+    form.scrollIntoView({ block: "center", behavior: "smooth" });
+    const t = form.querySelector('[name="time"]'); if (t) t.focus();
+    $('[data-act="cancel"]', form).addEventListener("click", () => form.remove());
+    form.addEventListener("submit", function (e) {
+      e.preventDefault();
+      const n = +this.getAttribute("data-day"), k = this.getAttribute("data-k");
+      const g = (name) => (this.querySelector('[name="' + name + '"]').value || "").trim();
+      const time = g("time"), title = g("title");
+      if (!time || !title) return;
+      const p = planFor(n);
+      if (k) {
+        const own = (p.add || []).filter((x) => x.key === k)[0];
+        if (own) { own.time = time; own.title = title; own.note = g("note"); own.map = g("map"); }
+        else p.edit[k] = { time: time, title: title, note: g("note"), map: g("map") };
+      } else {
+        p.add.push({ key: "d" + n + "-c" + Date.now().toString(36), time: time,
+                     title: title, note: g("note"), map: g("map") });
+      }
+      save(); renderPlan(); renderToday();
+      toast(k ? TX("stopSaved", "Stop saved") : TX("stopAdded", "Stop added"));
+    });
+  }
+
   function updateProgress(dayEl, n) {
-    const total = ITINERARY[+n - 1].items.length;
+    const total = dayItems(ITINERARY[+n - 1]).length;
     const done = (S.ticks[n] || []).length;
     const el = $(".prog", dayEl);
     if (el) el.textContent = done ? done + " of " + total + " done" : total + " stops";
@@ -280,6 +419,7 @@
     const idx = tripDayIndex();
     $("#dayList").innerHTML = ITINERARY.map((day, i) => {
       const done = (S.ticks[day.n] || []).length;
+      const n2 = dayItems(day).length;
       const cls = ["day"];
       if (idx !== null && i === idx) cls.push("is-today", "is-open");
       if (idx !== null && i < idx) cls.push("is-past");
@@ -289,7 +429,7 @@
           '<span class="day-meta">' +
             '<span class="dow">' + esc(dowOf(day.dow)) + " · " + fmt(day.date) + "</span>" +
             "<h3>" + esc((arDay(day.n) || {}).title || day.title) + "</h3>" +
-            '<span class="prog">' + (done ? done + " " + TX("doneOf", "of") + " " + day.items.length + " " + TX("done", "done") : arCount(day.items.length, TX("stops", "stop"), TX("stopsPlural", "stops"))) + "</span>" +
+            '<span class="prog">' + (done ? done + " " + TX("doneOf", "of") + " " + n2 + " " + TX("done", "done") : arCount(n2, TX("stops", "stop"), TX("stopsPlural", "stops"))) + "</span>" +
           "</span>" +
           '<span class="day-caret">▶</span>' +
         "</button>" +
@@ -299,6 +439,11 @@
           carHtml(day) +
           timelineHtml(day) +
           '<div class="swap"><b>' + TX("swapLabel", "Swap / backup") + "</b>" + esc((arDay(day.n) || {}).swap || day.swap) + "</div>" +
+          '<div class="day-tools">' +
+            '<button class="mini-btn" data-act="add" data-day="' + day.n + '">+ ' + esc(TX("addStop", "Add a stop")) + "</button>" +
+            '<button class="mini-btn" data-act="editmode" data-day="' + day.n + '">\u270e ' + esc(TX("editDay", "Edit stops")) + "</button>" +
+            (planEdited(day.n) ? '<button class="mini-btn danger" data-act="resetday" data-day="' + day.n + '">' + esc(TX("resetDay", "Restore original day")) + "</button>" : "") +
+          "</div>" +
         "</div>" +
       "</article>";
     }).join("");
@@ -307,6 +452,7 @@
       h.addEventListener("click", () => h.parentNode.classList.toggle("is-open"));
     });
     wireTimeline($("#dayList"));
+    wirePlanTools($("#dayList"));
   }
 
   /* ================= PLACES ================= */
@@ -1449,6 +1595,7 @@
   window.addEventListener("appinstalled", () => { $("#installBtn").hidden = true; toast(TX("installed", "Installed 🎉")); });
 
   /* ================= boot ================= */
+  migrateTicks();
   paintChrome();
   renderToday();
   renderPlan();

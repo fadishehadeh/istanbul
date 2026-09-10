@@ -104,6 +104,15 @@ const AR = {
     confirmResetPack: "تعيد ضبط قائمة الحقيبة؟", reset: "أُعيد الضبط",
     addedByYou: "من إضافتك",
     inMinutes: "بعد", hourShort: "س", minShort: "د", minuteWord: "دقيقة", tomorrow: "غداً",
+    editDay: "عدّل المحطات", doneEditing: "انتهيت",
+    addStop: "أضف محطة", editStop: "عدّل", removeStop: "احذف",
+    resetDay: "أعد اليوم كما كان", confirmResetDay: "تعيد هذا اليوم كما بدأ؟ كل ما أضفته إليه سيضيع.",
+    dayRestored: "أُعيد اليوم",
+    confirmRemoveStop: "تحذف هذه المحطة؟", stopRemoved: "حُذفت المحطة",
+    stopSaved: "حُفظت المحطة", stopAdded: "أُضيفت المحطة",
+    stopTime: "الوقت، مثلاً ١٤:٣٠", stopTitle: "ما هي؟",
+    stopNote: "ملاحظات — أي شيء تريد تذكّره", stopMap: "ابحث في الخرائط عن… (اختياري)",
+    saveStop: "احفظ", cancelStop: "إلغاء",
     langLabel: "AR"
   },
 

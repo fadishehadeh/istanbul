@@ -723,3 +723,30 @@ html[data-theme="dark"] .dep.next { color: #06222e; }
 [dir="rtl"] .leg-end.right { text-align: left; margin-left: 0; margin-right: auto; }
 [dir="rtl"] .mono, [dir="rtl"] .tl-time, [dir="rtl"] .wx-day b { direction: ltr; unicode-bidi: embed; }
 .tl-link.photo { margin-inline-start: 6px; }
+
+/* ---- editing the plan from the phone ---- */
+.tl-edit { display: none; gap: 8px; margin-top: 8px; }
+.day.is-editing .tl-edit,
+.today-card.is-editing .tl-edit { display: flex; }
+.tl-eb {
+  font: inherit; font-size: 12px; font-weight: 600; cursor: pointer;
+  padding: 5px 10px; border-radius: 8px;
+  border: 1px solid var(--line); background: var(--card); color: var(--ink-2);
+}
+.tl-eb.danger { color: var(--bad); border-color: color-mix(in srgb, var(--bad) 35%, transparent); }
+.tl .mine .tl-t::after {
+  content: "•"; margin-inline-start: 6px; color: var(--brand); font-weight: 800;
+}
+.day-tools { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 14px; }
+.stop-form {
+  display: grid; gap: 8px; margin: 12px 0 4px;
+  padding: 14px; border-radius: var(--r-lg);
+  border: 1px solid var(--line); background: var(--bg-2);
+}
+.stop-form input, .stop-form textarea {
+  font: inherit; width: 100%; padding: 11px 12px; border-radius: 10px;
+  border: 1px solid var(--line); background: var(--card); color: var(--ink);
+}
+.stop-form textarea { resize: vertical; }
+.stop-form-row { display: flex; gap: 8px; }
+.stop-form-row button { flex: 1; }
