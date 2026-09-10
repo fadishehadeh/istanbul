@@ -272,17 +272,17 @@ const PLACES = [
     why:"Genuine outlet pricing on Turkish and international brands, on the same tram line as your hotel.",
     tip:"The best-value clothes shopping in the city if you are happy with last season.", hours:"10:00–22:00" },
 
-  { id:"fisekhane", cat:"district", isNew:true, name:"Fişekhane", area:"Kazlıçeşme, Zeytinburnu", price:2,
+  { id:"fisekhane", must:true, cat:"district", isNew:true, name:"Fişekhane", area:"Kazlıçeşme, Zeytinburnu", price:2,
     from:"T1 tram direct from Fındıklı toward Zeytinburnu (~35 min), or Marmaray to Kazlıçeşme",
     why:"A 19th-century Ottoman ammunition factory restored into one of the city's best food-and-culture complexes — gourmet restaurants, galleries, boutiques, theatre, cinema and concerts inside the old brick halls.",
     tip:"Check fisekhane.com for what's on the night you go — it's a live venue as much as a dining spot. Gizia Brasserie and Zennup1844 are the standout restaurants. A footbridge takes you over the road to the seafront for a walk afterwards.", hours:"10:00–24:00" },
 
-  { id:"tersane-istanbul", cat:"district", isNew:true, name:"Tersane İstanbul (Haliç Port)", area:"Golden Horn, Beyoğlu", price:3,
+  { id:"tersane-istanbul", must:true, cat:"district", isNew:true, name:"Tersane İstanbul (Haliç Port)", area:"Golden Horn, Beyoğlu", price:3,
     from:"Taxi 15–20 min around the Golden Horn, or a Haliç ferry to Kasımpaşa/Hasköy",
     why:"The Ottoman Imperial Shipyard turned into a 242,000 m² waterfront district: a Foster + Partners open-air 'Fashion Avenue', four luxury hotels, museums, a marina and a long shoreline promenade.",
     tip:"Newest thing in the city and still opening in phases, so expect some hoardings. Bardot Bleu on the water and Josephine's terrace at Rixos are the ones to book. Best at sunset with the Golden Horn in front of you.", hours:"10:00–24:00" },
 
-  { id:"tema-world", cat:"district", isNew:true, name:"Tema World", area:"Küçükçekmece", price:2,
+  { id:"tema-world", must:true, cat:"district", isNew:true, name:"Tema World", area:"Küçükçekmece", price:2,
     from:"Taxi ~40 min west, or Marmaray/M1 plus a short taxi",
     why:"A 264,000 m² entertainment and lifestyle centre — proper theme-park rides, an indoor experience centre, a live-performance venue, a 15,000 m² biological pond, plus shops and a big food line-up.",
     tip:"Entry and parking are both free, open 10:00–23:00 daily. It's 20 minutes from İstanbul Airport, so it works beautifully as the last stop on your departure day if your flight is in the evening.", hours:"10:00–23:00, free entry" },
@@ -362,7 +362,7 @@ const PLACES = [
     why:"A superyacht marina with a waterfront strip of restaurants and cafés looking out at the Marmara and the old city skyline.",
     tip:"Sunset dinner with boats rather than bridges. Pairs naturally with Fişekhane and Galleria on the same western run.", hours:"09:00–01:00" },
 
-  { id:"kuzguncuk", cat:"district", name:"Kuzguncuk (İcadiye Caddesi)", area:"Üsküdar, Asian side", price:1,
+  { id:"kuzguncuk", must:true, cat:"district", name:"Kuzguncuk (İcadiye Caddesi)", area:"Üsküdar, Asian side", price:1,
     from:"Ferry to Üsküdar then a 10 min taxi or a 25 min shore walk",
     why:"A single pastel-coloured street of wooden houses, bakeries, bookshops and small cafés, with a synagogue, a church and a mosque within a few hundred metres of each other.",
     tip:"An hour, maximum, and worth every minute. Best late morning. The market garden (bostan) halfway up is a nice pause.", hours:"Anytime" },
@@ -682,7 +682,7 @@ const PLACES = [
     why:"A Renzo Piano building on the water — Turkish modern art plus a rooftop terrace and reflecting pool facing the old city.",
     tip:"The roof terrace café is worth the ticket on its own. The best rainy-day option, and it is next door to you.", hours:"10:00–18:00, closed Mon" },
 
-  { id:"balat-fener", cat:"sight", name:"Balat & Fener", area:"Golden Horn, Fatih", price:0,
+  { id:"balat-fener", must:true, cat:"sight", name:"Balat & Fener", area:"Golden Horn, Fatih", price:0,
     from:"Ferry to the Fener/Balat pier, or a 20 min taxi",
     why:"Rainbow houses, Greek and Jewish heritage, antique shops, and the most photographed staircase streets in Istanbul.",
     tip:"Kiremit Caddesi and Merdivenli Yokuş for the colour. Best in late-morning light.", hours:"Anytime" },

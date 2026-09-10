@@ -337,6 +337,7 @@
             '<span class="dot-sep">' + priceStr(p.price) + "</span>" +
             (dist ? '<span class="badge-dist">' + esc(dist) + "</span>" : "") +
             (st.state !== "unknown" ? '<span class="badge-open ' + st.state + '">' + esc(openLabel(st)) + "</span>" : "") +
+            (p.must ? '<span class="badge-must">★ ' + esc(TX("mustSee", "on your list")) + "</span>" : "") +
             (p.isNew ? '<span class="badge-new">' + esc(TX("recentlyOpened", "recently opened")) + "</span>" : "") +
             (p.alcohol ? '<span class="badge-alc">' + esc(TX("servesAlcohol", "serves alcohol")) + "</span>" : "") +
             (p.mine ? '<span class="badge-mine">' + esc(TX("yours", "yours")) + "</span>" : "") +

@@ -336,6 +336,11 @@ html[data-theme="dark"] .act.map { color: #06222e; }
   color: #fff; background: var(--brand); border-radius: 5px; padding: 1px 6px;
 }
 html[data-theme="dark"] .badge-new { color: #06222e; }
+.badge-must {
+  font-size: 10px; font-weight: 800; letter-spacing: .06em; text-transform: uppercase;
+  color: #7a3b00; background: #ffd79a; border-radius: 5px; padding: 1px 6px;
+}
+html[data-theme="dark"] .badge-must { color: #2a1600; background: #f0b860; }
 .badge-mine {
   font-size: 10px; font-weight: 700; letter-spacing: .06em; text-transform: uppercase;
   color: var(--good); border: 1px solid color-mix(in srgb, var(--good) 40%, transparent);

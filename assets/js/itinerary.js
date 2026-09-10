@@ -36,21 +36,24 @@ const ITINERARY = [
   },
 
   {
-    n: 2, date: "2026-09-12", dow: "Saturday", title: "Move hotels, then your own doorstep",
-    car: { use: false, text: "One short drive at midday to change hotels, then park it. Everything after that is on foot." },
-    subtitle: "You landed at 2am across town. Move to Fındıklı at midday and spend the rest of the day within walking distance.",
-    tags: ["Hotel move", "Walkable", "Easy"],
+    n: 2, date: "2026-09-12", dow: "Saturday", title: "Move hotels, then run west",
+    car: { use: true, text: "Short drive at midday to change hotels, then keep it — Tema World and Fişekhane are both west and neither is worth doing on public transport." },
+    subtitle: "You landed at 2am across town. Move to Fındıklı at midday, then take the coast road west for two of the places you actually came for.",
+    tags: ["Hotel move", "Car", "Your list"],
     items: [
       { time: "09:30", title: "Breakfast at the Dora", note: "Included, and you will want it. Check-out is 12:00–12:30, so no rush." },
-      { time: "12:15", title: "Check out, drive down to Fındıklı", note: "Dolapdere to the shore is fifteen minutes. Zimmer takes you at 14:00 — drop the bags and go if you are early. Ask at the desk where the car lives for the week." },
-      { time: "14:30", title: "Lunch: Hür Süper Mario, Karaköy", note: "Twelve minutes on foot. Plastic chairs at the water by Arap Camii, mackerel straight off the grill, old city across the Horn. Widely argued to be the best fish sandwich in İstanbul and it costs almost nothing.", map: "Hür Süper Mario Emin Usta Fermeneciler Caddesi Karaköy" },
-      { time: "15:30", title: "Karaköy Sahil Parkı", note: "New waterfront park on the Golden Horn — lawns, a promenade, and the whole old-city skyline opposite. Nobody had this a few years ago.", map: "Karaköy Sahil Parkı Haliç" },
-      { time: "16:30", title: "Drive up to Yıldız Parkı", note: "Twenty minutes north. A hundred hectares of wooded imperial garden above Beşiktaş — streams, ponds, and steep paths under old trees. The closest real forest to your hotel and almost nobody knows to come.", map: "Yıldız Parkı Beşiktaş" },
-      { time: "17:30", title: "Tea at Malta Köşkü", note: "An Ottoman pavilion inside the park, tables on the terrace under the trees. Tea and something sweet, an hour of doing nothing.", map: "Malta Köşkü Yıldız Parkı Beşiktaş" },
-      { time: "19:15", title: "Sunset from the Beşiktaş shore", note: "Walk down out of the park to the water. Sunset is about 19:20 all week." },
-      { time: "20:30", title: "Dinner in Karaköy", note: "Back near the hotel. Karaköy Lokantası if you want a proper sit-down, or stay plain and walk the backstreets until something looks right." }
+      { time: "12:15", title: "Check out, drive down to Fındıklı", note: "Dolapdere to the shore is fifteen minutes. Drop the bags at Zimmer even if the room is not ready — they hold luggage. Ask at the desk where the car lives for the week." },
+      { time: "13:00", title: "Lunch: Hür Süper Mario, Karaköy", note: "Twelve minutes on foot. Plastic chairs at the water by Arap Camii, mackerel straight off the grill, old city across the Horn. Widely argued to be the best fish sandwich in İstanbul and it costs almost nothing.", map: "Hür Süper Mario Emin Usta Fermeneciler Caddesi Karaköy" },
+      { time: "14:30", title: "Back to Zimmer, check in properly", note: "Rooms from 14:00. Unpack, change, and take the car out again — everything after this is west." },
+      { time: "15:15", title: "Drive west to Tema World", note: "Küçükçekmece, about 35 minutes on the D100 coast road. Go now rather than later: the rides and the pond are better in daylight and the traffic west is worse after 18:00." },
+      { time: "16:00", title: "Tema World, Küçükçekmece", note: "264,000 m² of theme-park rides, an indoor experience centre, a live-performance venue and a 15,000 m² biological pond. Entry and parking are both free, open 10:00–23:00. Give it two hours and do not try to do all of it.", place: "tema-world" },
+      { time: "18:30", title: "Drive back east to Fişekhane", note: "Twenty minutes back along the same coast road to Kazlıçeşme. You are heading home, so nothing is backtracked." },
+      { time: "19:00", title: "Fişekhane, Kazlıçeşme", note: "A 19th-century Ottoman ammunition factory rebuilt into brick halls of restaurants, galleries, boutiques, theatre and concerts. Check fisekhane.com for what is on tonight — it is a live venue as much as a place to eat.", place: "fisekhane" },
+      { time: "19:20", title: "Sunset on the Kazlıçeşme seafront", note: "A footbridge takes you over the road from Fişekhane straight to the Marmara shore. You are facing west here, so the sun goes down over the water rather than behind the city. Sunset is about 19:20 all week.", map: "Kazlıçeşme Sahil Parkı Zeytinburnu" },
+      { time: "20:30", title: "Dinner at Fişekhane", note: "Gizia Brasserie and Zennup1844 are the ones people name, but the old halls are full of plainer places too — walk it first and pick by what looks right. Open until midnight." },
+      { time: "22:30", title: "Drive home", note: "Twenty minutes back along the shore to Fındıklı, and the road is empty at this hour." }
     ],
-    swap: "If you wake early despite the 2am arrival: Ulus Pazarı in Beşiktaş runs Saturdays only, 08:00–17:00, and is a genuine local market rather than a tourist one."
+    swap: "If the 2am arrival wins and you want a slow day instead: Yıldız Parkı above Beşiktaş is a hundred hectares of wooded imperial garden with tea on the terrace at Malta Köşkü, twenty minutes from the hotel. Tema World and Fişekhane both keep — Fişekhane runs to midnight every night, and Tema World to 23:00."
   },
 
   {
@@ -142,10 +145,11 @@ const ITINERARY = [
       { time: "16:00", title: "santralistanbul", note: "A 1914 power station on the Horn turned into an energy museum — turbine halls, control rooms and switchgear you walk straight through. Industrial, strange, and almost empty.", map: "santralistanbul Eyüpsultan" },
       { time: "17:30", title: "Eyüp teleferik up to Pierre Loti", note: "A cable car over a hillside Ottoman cemetery to a tea terrace above the entire Golden Horn. Pay with the İstanbulkart. The ride is half the point.", place: "eyup-teleferik" },
       { time: "18:15", title: "Tea at Pierre Loti", note: "Sit on the terrace with the Horn below you and the old city stretching away. Last proper view of the trip.", place: "pierre-loti" },
-      { time: "20:00", title: "Dinner: back down to Karaköy", note: "Twenty-five minutes home. Keep it plain — you fly tomorrow morning and the good version of this trip does not end in a tasting menu." },
-      { time: "22:00", title: "Pack tonight", note: "Check-out is 08:15 and the drive to IST is the worst traffic of the week. Do not leave it to the morning." }
+      { time: "19:45", title: "Tersane İstanbul (Haliç Port)", note: "Back down the Horn toward home and it is directly on the way. The Ottoman Imperial Shipyard rebuilt as a 242,000 m² waterfront district — a Foster + Partners open-air avenue, a marina, museums and a long lit promenade along the water. Still opening in phases, so expect some hoardings.", place: "tersane-istanbul" },
+      { time: "20:45", title: "Dinner at Tersane, on the water", note: "Bardot Bleu on the waterfront and Josephine's terrace at Rixos are the ones to book, but the promenade has plainer places too and you fly in the morning. Walk the shoreline first and decide there." },
+      { time: "22:15", title: "Pack tonight", note: "Fifteen minutes home around the Horn. Check-out is 08:15 and the drive to IST is the worst traffic of the week — do not leave the packing to the morning." }
     ],
-    swap: "If the rain holds off, Tersane İstanbul is on the same stretch of water — the Ottoman Imperial Shipyard rebuilt as a waterfront district, and worth an hour at sunset instead of Pierre Loti."
+    swap: "If it rains hard: skip the teleferik and Pierre Loti, and give the time to Tersane instead — the avenue and the halls are covered, and it is the one stop today that works wet."
   },
 
   {
